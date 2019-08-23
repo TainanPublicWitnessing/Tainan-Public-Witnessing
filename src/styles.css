@@ -1,1 +1,14 @@
-/* You can add global styles to this file, and also import other style files */
+.my-page-container{
+  width:1024px;
+  margin:auto;
+}
+
+.my-form-group{
+  width:256px;
+  margin:auto;
+  margin-top:32px;
+}
+
+.my-form-control{
+  margin:8px;
+}

@@ -1,0 +1,28 @@
+<!-- banner -->
+<h1 class="bg-light my-banner" routerLink="index">台南市都市公眾場所特別見證</h1>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-md bg-light navbar-light d-flex">
+
+  <!-- Navbar links -->
+  <div class="button-group">
+    <button *ngFor="let x of navService.nav_links" routerLink={{x.link}} class="btn btn-light">{{x.name}}</button>
+  </div>
+  
+  <!-- login/logout button -->
+  <div class="ml-auto">
+  
+    <!-- if does not login-->
+    <div *ngIf="!userService.user.name">
+      <button routerLink="login" class="btn btn-light ml-auto">登入</button>
+    </div>
+    
+    <!-- else -->
+    <div *ngIf="userService.user.name">
+      <span class="small">{{userService.user.congregation}}會眾，{{userService.user.name}}，歡迎！</span>
+      <button (click)="onLogout()" class="btn btn-light ">登出</button>
+    </div>
+    
+  </div>
+  
+</nav> 

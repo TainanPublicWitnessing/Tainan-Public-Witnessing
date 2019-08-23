@@ -1,0 +1,56 @@
+<form class="form-group my-form-group"
+  [formGroup]="login_form">
+
+  <select class="custom-select my-form-control"
+    formControlName="congregation" 
+    (change)="onChangeCongregation()">
+    
+    <option value="" disabled>會眾</option>
+    <option 
+      *ngFor="let x of congregationService.congregations" 
+      [value]="x.name">
+      {{x.name}}
+    </option>
+    
+  </select>
+  <p class="small text-danger"
+    *ngIf="!is_legal.congregation">
+    請選擇會眾
+  </p>
+  
+  <select class="custom-select my-form-control"
+    type="text" 
+    formControlName="name"
+    (change)="onChangeName()">
+    
+    <option value="" disabled>姓名</option>
+    <option 
+      *ngFor="let x of names" 
+      [value]="x.name">
+      {{x.name}}
+    </option>
+    
+  </select>
+  <p class="small text-danger"
+    *ngIf="!is_legal.name">
+    請選擇姓名
+  </p>
+  
+  <input class="form-control my-form-control"
+    type="password" 
+    formControlName="password" 
+    placeholder="密碼"
+    (change)="onChangePassword()">
+  <p class="small text-danger"
+    *ngIf="!is_legal.password">
+    請輸入正確密碼
+  </p>
+  
+  <div class="d-flex">
+    <button class="btn btn-success ml-auto"
+      (click)="onSubmit()">
+      登入
+    </button>
+  </div>
+  
+</form>
