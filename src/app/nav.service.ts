@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import {Observable, pipe, of} from 'rxjs';
-import {map, tap, filter} from 'rxjs/operators'; 
+import {map} from 'rxjs/operators'; 
 
-import { AngularFirestore } from '@angular/fire/firestore';
+import {AngularFirestore} from '@angular/fire/firestore';
 
 @Injectable({
   providedIn: 'root'
 })
-export class NavService {
+export class NavService{
 
   constructor(
     private firestore: AngularFirestore

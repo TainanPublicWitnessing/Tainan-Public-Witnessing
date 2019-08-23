@@ -55,4 +55,44 @@ export class UserService{
   logout(){
     this.user = new User();
   }
+  
+  importData(){
+    let collect = this.firestore.collection("User");
+    
+    let bigstrings = "";
+
+    let midstrings = bigstrings.split("|");
+    let smallstrings = [];
+    let data = [];
+    
+    let length = midstrings.length;
+    for(let i=0;i<length;i++){
+      smallstrings[i] = midstrings[i].split(",");
+      let l = smallstrings.length;
+      for(let j=0;j<l;j++){
+        if(smallstrings[i] == undefined) smallstrings[i] = "";
+      }
+      data[i] = {
+        name:smallstrings[i][0],
+        sex:smallstrings[i][1],
+        position:smallstrings[i][2],
+        congregation:smallstrings[i][3],
+        identity:smallstrings[i][4],
+        marriage:smallstrings[i][5],
+        email:smallstrings[i][6],
+        cellphone:smallstrings[i][7],
+        phone:smallstrings[i][8],
+        address:smallstrings[i][9],
+        birth_date:smallstrings[i][10],
+        baptize_date:smallstrings[i][11],
+        language:smallstrings[i][12],
+        note:smallstrings[i][13],
+        authority:smallstrings[i][14],
+        password:smallstrings[i][15]
+      };
+    }
+    for(let i=0;i<length;i++){
+      collect.doc(sha256(data[i].name)).set(data[i]);
+    }
+  }
 }

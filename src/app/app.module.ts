@@ -13,6 +13,7 @@ import {AppComponent} from "./app.component";
 import {NavBarComponent} from "./nav-bar/nav-bar.component";
 import {IndexComponent} from "./index/index.component";
 import {LoginComponent} from "./login/login.component";
+import {PersonalShiftComponent} from './personal-shift/personal-shift.component';
 
 /* root module */
 @NgModule({
@@ -20,7 +21,8 @@ import {LoginComponent} from "./login/login.component";
     AppComponent,
     NavBarComponent,
     IndexComponent,
-    LoginComponent
+    LoginComponent,
+    PersonalShiftComponent
   ],
   imports: [
     BrowserModule,
