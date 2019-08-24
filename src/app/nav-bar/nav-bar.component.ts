@@ -11,7 +11,7 @@ import {User} from "../User";
   templateUrl: "./nav-bar.component.html",
   styleUrls: ["./nav-bar.component.css"]
 })
-export class NavBarComponent implements OnInit {
+export class NavBarComponent implements OnInit{
   
   constructor(
     private router:Router,

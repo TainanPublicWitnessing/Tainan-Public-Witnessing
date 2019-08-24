@@ -14,6 +14,5 @@ export class AppComponent{
   constructor(
     public navService:NavService
   ){}
-  
 
 }

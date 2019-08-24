@@ -69,10 +69,6 @@ export class UserService{
     let length = midstrings.length;
     for(let i=0;i<length;i++){
       smallstrings[i] = midstrings[i].split(",");
-      let l = smallstrings.length;
-      for(let j=0;j<l;j++){
-        if(smallstrings[i] == undefined) smallstrings[i] = "";
-      }
       data[i] = {
         name:smallstrings[i][0],
         sex:smallstrings[i][1],
