@@ -56,6 +56,7 @@ export class UserService{
     this.user = new User();
   }
   
+  //匯入使用者資料
   importData(){
     let collect = this.firestore.collection("User");
     
