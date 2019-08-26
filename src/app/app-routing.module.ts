@@ -5,13 +5,15 @@ import {Routes,RouterModule} from "@angular/router";
 import {IndexComponent} from "./index/index.component";
 import {LoginComponent} from "./login/login.component";
 import {PersonalShiftComponent} from './personal-shift/personal-shift.component';
+import {MonthlyShiftComponent} from './monthly-shift/monthly-shift.component';
 
 /* routings */
 const routes:Routes = [
   {path:"",redirectTo:"index",pathMatch:"full"},
   {path:"index",component:IndexComponent},
   {path:"login",component:LoginComponent},
-  {path:"personal_shift",component:PersonalShiftComponent}
+  {path:"personal_shift",component:PersonalShiftComponent},
+  {path:"monthly_shift",component:MonthlyShiftComponent}
 ];
 
 /* export routing module */

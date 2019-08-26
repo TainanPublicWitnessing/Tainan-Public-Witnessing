@@ -25,6 +25,7 @@
     "firebase": "^6.3.5",
     "jquery": "^3.4.1",
     "js-sha256": "^0.9.0",
+    "ngx-bootstrap": "^5.1.1",
     "popper": "^1.0.1",
     "popper.js": "^1.15.0",
     "rxjs": "~6.4.0",

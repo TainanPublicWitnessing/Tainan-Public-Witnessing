@@ -1,5 +1,7 @@
 import {Component,OnInit} from "@angular/core";
 import {Router} from "@angular/router"
+import * as $ from 'jquery';
+import Popper, {PopperOptions} from 'popper.js';
 
 /* services */
 import {NavService} from "../nav.service";
@@ -18,11 +20,13 @@ export class NavBarComponent implements OnInit{
     public navService: NavService,
     public userService: UserService
   ){}
+  
+  public popper: Popper;
 
   /* events */
 
   ngOnInit(){
-    this.navService.getNavLinkByAuthority("");
+    this.navService.getNavLinkByAuthority("administrator");
   }
   
   onLogout(){
