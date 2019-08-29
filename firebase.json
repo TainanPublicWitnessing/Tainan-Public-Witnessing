@@ -1,0 +1,17 @@
+{
+  "hosting": {
+    "site": "tainan-public-witnessing-ionic",
+    "public": "www",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
+}
