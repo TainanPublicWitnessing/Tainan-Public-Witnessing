@@ -10,35 +10,53 @@
 </ion-header>
 
 <ion-content>
+    <!-- 歡迎卡片 -->
     <ion-card class="welcome-card">
-      <img src="/assets/shapes.svg" alt="" />
-      <ion-card-header>
-        <ion-card-subtitle>Get Started</ion-card-subtitle>
-        <ion-card-title>Welcome to Ionic</ion-card-title>
+      <img src="/assets/Home_Card_Picture.jpg" alt="" />
+      <ion-card-header>     
+        <ion-card-title>歡迎！</ion-card-title>
       </ion-card-header>
       <ion-card-content>
-        <p>Now that your app has been created, you'll want to start building out features and components. Check out some of the resources below for next steps.</p>
+        <p>你好！歡迎進入「台南市都市公眾場所特別見證」資訊系統！</p>
       </ion-card-content>
     </ion-card>
-    <ion-list lines="none">
-      <ion-list-header>
-        <ion-label>Resources</ion-label>
-      </ion-list-header>
-      <ion-item href="https://ionicframework.com/docs/">
-        <ion-icon slot="start" color="medium" name="book"></ion-icon>
-        <ion-label>Ionic Documentation</ion-label>
-      </ion-item>
-      <ion-item href="https://ionicframework.com/docs/building/scaffolding">
-        <ion-icon slot="start" color="medium" name="build"></ion-icon>
-        <ion-label>Scaffold Out Your App</ion-label>
-      </ion-item>
-      <ion-item href="https://ionicframework.com/docs/layout/structure">
-        <ion-icon slot="start" color="medium" name="grid"></ion-icon>
-        <ion-label>Change Your App Layout</ion-label>
-      </ion-item>
-      <ion-item href="https://ionicframework.com/docs/theming/basics">
-        <ion-icon slot="start" color="medium" name="color-fill"></ion-icon>
-        <ion-label>Theme Your App</ion-label>
-      </ion-item>
-    </ion-list>
+    <!-- 登入卡片 -->
+    <ion-card class="welcome-card">  
+
+      <ion-card-header>     
+        <ion-card-title>請先登入!</ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content>
+        <ion-list>
+          <ion-item>  
+              <ion-label>會眾</ion-label>            
+              <ion-select [interfaceOptions]="customActionSheetOptions" interface="action-sheet" placeholder="選擇會眾">
+                <ion-select-option value="East">東區東區</ion-select-option>
+                <ion-select-option value="North">北區北區</ion-select-option>
+                <ion-select-option value="South">南區南區</ion-select-option>
+                <ion-select-option value="what">仁德仁德</ion-select-option>
+              </ion-select>
+          </ion-item>
+
+          <ion-item>  
+              <ion-label>姓名</ion-label>            
+              <ion-select [interfaceOptions]="customActionSheetOptions" interface="action-sheet" placeholder="選擇姓名">
+                <ion-select-option value="East">蔡元泓</ion-select-option>
+                <ion-select-option value="North">蔡元勳</ion-select-option>
+                <ion-select-option value="South">黃啟禎</ion-select-option>
+              </ion-select>
+          </ion-item>
+
+          <!-- 輸入密碼 -->
+          <ion-item> 
+            <ion-input type="passwrod" placeholder="請輸入密碼"></ion-input>
+          </ion-item>
+
+          <ion-button color="primary" expand="block">登入</ion-button>
+        </ion-list>
+      </ion-card-content>
+
+    </ion-card>
+
 </ion-content>
