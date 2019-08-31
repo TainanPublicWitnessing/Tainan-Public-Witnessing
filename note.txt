@@ -1,2 +1,3 @@
 npm install angularfire2 firebase --save
 npm i @ionic/lab
+npm i js-sha256

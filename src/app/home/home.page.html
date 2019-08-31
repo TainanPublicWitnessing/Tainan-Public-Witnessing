@@ -21,42 +21,6 @@
       </ion-card-content>
     </ion-card>
     <!-- 登入卡片 -->
-    <ion-card class="welcome-card">
-
-      <ion-card-header>     
-        <ion-card-title>請先登入!</ion-card-title>
-      </ion-card-header>
-
-      <ion-card-content>
-        <ion-list>
-          <ion-item>  
-              <ion-label>會眾</ion-label>            
-              <ion-select [interfaceOptions]="customActionSheetOptions" interface="action-sheet" placeholder="選擇會眾">
-                <ion-select-option value="East">東區東區</ion-select-option>
-                <ion-select-option value="North">北區北區</ion-select-option>
-                <ion-select-option value="South">南區南區</ion-select-option>
-                <ion-select-option value="what">仁德仁德</ion-select-option>
-              </ion-select>
-          </ion-item>
-
-          <ion-item>  
-              <ion-label>姓名</ion-label>            
-              <ion-select [interfaceOptions]="customActionSheetOptions" interface="action-sheet" placeholder="選擇姓名">
-                <ion-select-option value="East">蔡元泓</ion-select-option>
-                <ion-select-option value="North">蔡元勳</ion-select-option>
-                <ion-select-option value="South">黃啟禎</ion-select-option>
-              </ion-select>
-          </ion-item>
-
-          <!-- 輸入密碼 -->
-          <ion-item> 
-            <ion-input type="passwrod" placeholder="請輸入密碼"></ion-input>
-          </ion-item>
-
-          <ion-button color="tertiary" expand="block">登入</ion-button>
-        </ion-list>
-      </ion-card-content>
-
-    </ion-card>
+    <app-login-card></app-login-card>
 
 </ion-content>

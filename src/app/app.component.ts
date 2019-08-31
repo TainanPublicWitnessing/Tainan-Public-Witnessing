@@ -12,25 +12,7 @@ import {NavService} from "./service/nav.service";
   styleUrls: ["app.component.scss"]
 })
 
-export class AppComponent {
-  public appPages = [
-    {
-      title: '首頁',
-      url: '/home',
-      icon: 'home'
-    },
-    {
-      title: 'list',
-      url: '/list',
-      icon: 'list'
-    },
-    {
-      title: '查詢班表',
-      url: '/search-shift',
-      icon: 'md-search'
-    }
-  ];
-
+export class AppComponent implements OnInit{
 
   constructor(
     private platform: Platform,
@@ -43,6 +25,7 @@ export class AppComponent {
   
   ngOnInit(){
     this.navService.getNavLinkByAuthority("administrator");
+    //this.navService.importData();
   }
 
   initializeApp() {

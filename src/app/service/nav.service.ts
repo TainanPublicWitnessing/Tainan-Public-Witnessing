@@ -4,33 +4,20 @@ import {map} from "rxjs/operators";
 
 import {AngularFirestore} from "@angular/fire/firestore";
 
+import {sha256} from "js-sha256/src/sha256.js";
+
 @Injectable({
   providedIn: "root"
 })
-export class NavService {
+export class NavService{
 
   constructor(
-    private firestore: AngularFirestore
+    private firestore:AngularFirestore
   ){}
-  
-  public appPages = [
-    {
-      title: "Home",
-      url: "/home",
-      icon: "home"
-    },
-    {
-      title: "List",
-      url: "/list",
-      icon: "list"
-    }
-  ];
   
   /* variables */
   
   nav_links:Array<any>;
-  
-  current_page:String;
   
   /* requests */
   
@@ -50,6 +37,6 @@ export class NavService {
       })
     ).subscribe(response=>{
       this.nav_links = response;
-    });;
+    });
   }
 }
