@@ -5,7 +5,6 @@ import { SplashScreen } from "@ionic-native/splash-screen/ngx";
 import { StatusBar } from "@ionic-native/status-bar/ngx";
 
 import {NavService} from "./service/nav.service";
-import {NavComponent} from "./nav/nav.component";
 
 @Component({
   selector: "app-root",
