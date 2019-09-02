@@ -20,26 +20,86 @@ export class LoginCardComponent implements OnInit{
   
   names: Array<any> = [];
     
-  login_form = new FormGroup({
-    congregation: new FormControl(""),
-    name: new FormControl(""),
-    password: new FormControl("")
-  });
+  login_form = {
+    congregation:"",
+    name:"",
+    password:""
+  };
+  
+  is_legal = {
+    congregation:true,
+    name:true,
+    password:true
+  };
+  
+  /* checking functions */
+  
+  checkCongregation(){
+    if(this.login_form.congregation){
+      this.is_legal.congregation = true;
+    }else{
+      this.is_legal.congregation = false;
+    }
+  }
+  
+  checkName(){
+    if(this.login_form.name){
+      this.is_legal.name = true;
+    }else{
+      this.is_legal.name = false;
+    }
+  }
+  
+  checkPassword(){
+    if(this.login_form.password){
+      this.is_legal.password = true;
+    }else{
+      this.is_legal.password = false;
+    }
+  }
+  
+  checkAll(){
+    let result = true;
+    for(let index in this.is_legal){
+      result = result && this.is_legal[index];
+    }
+    return result;
+  }
+
+  /* events */
 
   ngOnInit(){
     this.congregationsService.getCongregations();
   }
   
   onChangeCongregation(){
-    //this.checkCongregation();
+    this.checkCongregation();
     this.getUsersByCongregation();
+  }
+  
+  onChangeName(){
+    this.checkName();
+  }
+  
+  onChangePassword(){
+    this.checkPassword();
+  }
+  
+  onSubmit(){
+    this.checkCongregation();
+    this.checkName();
+    this.checkPassword();
+    if(this.checkAll()){ 
+      //this.login();
+    }
   }
   
   /* requests */
     
   getUsersByCongregation(): void{
-    this.userService.getUsersByCongregation(this.login_form.value.congregation).subscribe(response => {
-      this.names = response
+    console.log(this.login_form.congregation);
+    this.userService.getUsersByCongregation(this.login_form.congregation).subscribe(response => {
+      this.names = response;
     });
   }
 

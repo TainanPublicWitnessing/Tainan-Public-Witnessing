@@ -5,7 +5,7 @@ import {map} from "rxjs/operators";
 import {AngularFirestore} from "@angular/fire/firestore";
 
 import {sha256} from "js-sha256/src/sha256.js";
-import {User} from "./structores/User";
+import {User} from "../structures/User";
 
 @Injectable({
   providedIn:"root"
@@ -24,13 +24,13 @@ export class UserService{
   
   getUsersByCongregation(congregation:String){
     return this.firestore.collection("User",query => {
-      return query.where("congregation","==",congregation);
+      return query.where("congregation","==","東區東區");
     }).get().pipe(
       map(data=>{
         let result = [];
         let length = data.docs.length;
         for(let i=0;i<length;i++){
-          result[i] = data.docs[i].data();
+          result[i] = data.docs[i].data().name;
         }
         return result;
       })

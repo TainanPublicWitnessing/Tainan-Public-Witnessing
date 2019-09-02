@@ -5,14 +5,16 @@
   </ion-card-header>
 
   <ion-card-content>
-    <!--<ion-list>-->
-    <form>
+    <ion-list>
     
       <ion-item>  
         <ion-label>會眾</ion-label>            
         <ion-select 
           [interfaceOptions]="customActionSheetOptions" 
           interface="action-sheet" 
+          [(ngModel)]="login_form.congregation" 
+          (ionChange)="onChangeCongregation()"
+          name="congregation"
           placeholder="選擇會眾">
         
           <ion-select-option *ngFor="let congregation of congregationsService.congregations">
@@ -21,14 +23,22 @@
           
         </ion-select>
       </ion-item>
-
+      
       <ion-item>  
-          <ion-label>姓名</ion-label>            
-          <ion-select [interfaceOptions]="customActionSheetOptions" interface="action-sheet" placeholder="選擇姓名">
-            <ion-select-option value="East">蔡元泓</ion-select-option>
-            <ion-select-option value="North">蔡元勳</ion-select-option>
-            <ion-select-option value="South">黃啟禎</ion-select-option>
-          </ion-select>
+        <ion-label>姓名</ion-label>            
+        <ion-select 
+          [interfaceOptions]="customActionSheetOptions" 
+          interface="action-sheet" 
+          [(ngModel)]="login_form.name" 
+          (ionChange)="onChangeName()"
+          name="name"
+          placeholder="選擇姓名">
+          
+          <ion-select-option *ngFor="let name of namse">
+            {{name}}
+          </ion-select-option>
+          
+        </ion-select>
       </ion-item>
 
       <!-- 輸入密碼 -->
@@ -36,10 +46,9 @@
         <ion-input type="passwrod" placeholder="請輸入密碼"></ion-input>
       </ion-item>
 
-      <ion-button color="tertiary" expand="block">登入</ion-button>
+      <ion-button type="submit" color="tertiary" expand="block">登入</ion-button>
     
-    </form>
-    <!--</ion-list>-->
+    </ion-list>
   </ion-card-content>
 
 </ion-card>
