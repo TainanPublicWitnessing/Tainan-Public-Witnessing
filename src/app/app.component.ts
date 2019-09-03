@@ -24,8 +24,8 @@ export class AppComponent implements OnInit{
   }
   
   ngOnInit(){
-    this.navService.getNavLinkByAuthority("administrator");
-    //this.navService.importData();
+    //this.navService.getNavLinkByAuthority("administrator");
+    this.navService.getNavLinkByAuthority("anyone");
   }
 
   initializeApp() {

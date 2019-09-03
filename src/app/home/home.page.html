@@ -17,10 +17,10 @@
         <ion-card-title>歡迎！</ion-card-title>
       </ion-card-header>
       <ion-card-content>
-        <p>你好！歡迎進入「台南市都市公眾場所特別見證」資訊系統！</p>
+        <p><span *ngIf="userService.user.name">{{userService.user.name}}，</span>你好！歡迎進入「台南市都市公眾場所特別見證」資訊系統！</p>
       </ion-card-content>
     </ion-card>
     <!-- 登入卡片 -->
-    <app-login-card></app-login-card>
+    <app-login-card *ngIf="!userService.user.name"></app-login-card>
 
 </ion-content>

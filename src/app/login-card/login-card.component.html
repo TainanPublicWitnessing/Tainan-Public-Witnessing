@@ -7,46 +7,77 @@
   <ion-card-content>
     <ion-list>
     
-      <ion-item>  
-        <ion-label>會眾</ion-label>            
+      <!-- congregation -->
+      
+      <div>
+        
         <ion-select 
-          [interfaceOptions]="customActionSheetOptions" 
+          [interfaceOptions]="'customActionSheetOptions'" 
           interface="action-sheet" 
           [(ngModel)]="login_form.congregation" 
           (ionChange)="onChangeCongregation()"
           name="congregation"
-          placeholder="選擇會眾">
+          placeholder="請選擇會眾"
+          class="my-input">
         
-          <ion-select-option *ngFor="let congregation of congregationsService.congregations">
+          <ion-select-option 
+            *ngFor="let congregation of congregationsService.congregations"
+            [value]="congregation.name">
             {{congregation.name}}
           </ion-select-option>
           
         </ion-select>
-      </ion-item>
+        
+        <p *ngIf="!is_legal.congregation" class="my-illegal-text">不可空白！</p>
+        
+      </div>
       
-      <ion-item>  
-        <ion-label>姓名</ion-label>            
+      <!-- name -->
+      <div>
+        
         <ion-select 
-          [interfaceOptions]="customActionSheetOptions" 
+          [interfaceOptions]="'customActionSheetOptions'" 
           interface="action-sheet" 
           [(ngModel)]="login_form.name" 
           (ionChange)="onChangeName()"
           name="name"
-          placeholder="選擇姓名">
+          placeholder="請選擇姓名"
+          class="my-input">
           
-          <ion-select-option *ngFor="let name of namse">
+          <ion-select-option 
+            *ngFor="let name of names"
+            [value]="name">
             {{name}}
           </ion-select-option>
           
         </ion-select>
-      </ion-item>
+        
+        <p *ngIf="!is_legal.name" class="my-illegal-text">不可空白！</p>
+        
+      </div>
 
-      <!-- 輸入密碼 -->
-      <ion-item> 
-        <ion-input type="passwrod" placeholder="請輸入密碼"></ion-input>
-      </ion-item>
+      <!-- password -->
+      <div>
+      
+        <ion-input 
+          type="password"
+          [(ngModel)]="login_form.password" 
+          (ionChange)="onChangePassword()"
+          placeholder="請輸入密碼"
+          class="my-input">
+        </ion-input>
+        
+        <p *ngIf="!is_legal.password" class="my-illegal-text">密碼有誤！</p>
+        
+      </div>
 
-      <ion-button type="submit" color="tertiary" expand="block">登入</ion-button>
+      <!-- submit -->
+      <ion-button 
+        color="tertiary" 
+        expand="block"
+        (click)="onSubmit()">
+        登入
+      </ion-button>
     
     </ion-list>
   </ion-card-content>

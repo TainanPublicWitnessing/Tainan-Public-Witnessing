@@ -1,6 +1,6 @@
 import {Component,OnInit} from "@angular/core";
 
-import {CongregationsService} from "../service/congregations.service";
+import {UserService} from "../service/user.service";
 
 @Component({
   selector:"app-home",
@@ -9,7 +9,9 @@ import {CongregationsService} from "../service/congregations.service";
 })
 export class HomePage implements OnInit{
 
-  constructor(){}
+  constructor(
+    public userService:UserService
+  ){}
   
   ngOnInit(){}
 

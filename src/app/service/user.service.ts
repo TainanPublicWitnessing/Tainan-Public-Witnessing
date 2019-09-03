@@ -24,7 +24,7 @@ export class UserService{
   
   getUsersByCongregation(congregation:String){
     return this.firestore.collection("User",query => {
-      return query.where("congregation","==","東區東區");
+      return query.where("congregation","==",congregation);
     }).get().pipe(
       map(data=>{
         let result = [];

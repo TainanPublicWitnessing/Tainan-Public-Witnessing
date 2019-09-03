@@ -3,6 +3,7 @@ import {FormGroup,FormControl} from "@angular/forms";
 
 import {CongregationsService} from "../service/congregations.service";
 import {UserService} from "../service/user.service";
+import {NavService} from "../service/nav.service";
 
 @Component({
   selector: "app-login-card",
@@ -13,7 +14,8 @@ export class LoginCardComponent implements OnInit{
 
   constructor(
     public congregationsService:CongregationsService,
-    public userService:UserService
+    public userService:UserService,
+    public navService:NavService
   ){}
   
   /* variables */
@@ -90,16 +92,27 @@ export class LoginCardComponent implements OnInit{
     this.checkName();
     this.checkPassword();
     if(this.checkAll()){ 
-      //this.login();
+      this.login();
     }
   }
   
   /* requests */
     
   getUsersByCongregation(): void{
-    console.log(this.login_form.congregation);
     this.userService.getUsersByCongregation(this.login_form.congregation).subscribe(response => {
       this.names = response;
+    });
+  }
+  
+  login(){
+    this.userService.login(this.login_form.name,this.login_form.password).subscribe(response=>{
+      if(response){  //success
+        this.navService.getNavLinkByAuthority(this.userService.user.authority);
+        //this.router.navigate(["index"]);
+      }else{  //fail
+        this.login_form.password = "";
+        this.is_legal.password = false;
+      }
     });
   }
 
