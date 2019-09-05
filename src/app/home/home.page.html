@@ -11,16 +11,21 @@
 
 <ion-content>
     <!-- 歡迎卡片 -->
-    <ion-card class="welcome-card">
+    <ion-card *ngIf="!userService.user.name" class="welcome-card">
       <img src="/assets/Home_Card_Picture.jpg" alt="" />
-      <ion-card-header>     
+      <ion-card-header> 
         <ion-card-title>歡迎！</ion-card-title>
       </ion-card-header>
       <ion-card-content>
-        <p><span *ngIf="userService.user.name">{{userService.user.name}}，</span>你好！歡迎進入「台南市都市公眾場所特別見證」資訊系統！</p>
+        <p>你好！歡迎進入「台南市都市公眾場所特別見證」資訊系統！</p>
       </ion-card-content>
     </ion-card>
     <!-- 登入卡片 -->
     <app-login-card *ngIf="!userService.user.name"></app-login-card>
+
+    <!-- 登入後資訊 -->
+    <ion-card *ngIf="userService.user.name">
+      
+    </ion-card>
 
 </ion-content>
