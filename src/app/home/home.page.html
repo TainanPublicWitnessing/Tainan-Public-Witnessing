@@ -24,8 +24,22 @@
     <app-login-card *ngIf="!userService.user.name"></app-login-card>
 
     <!-- 登入後資訊 -->
-    <ion-card *ngIf="userService.user.name">
-      
-    </ion-card>
+    <p *ngIf="userService.user.name">
+      <!-- 登入歡迎卡片 -->
+      <ion-card>
+        <!-- <img src="/assets/Home_Login_Welcome.jpg" alt="" /> --> 
+        <ion-card-header> 
+          <ion-card-title>{{userService.user.name}}，你好!</ion-card-title>
+        </ion-card-header>         
+      </ion-card>
+
+      <!-- 教學卡片 -->
+      <ion-card>
+        <img src="/assets/Home_Tutorial_Image.jpg" alt="" />        
+        <ion-card-content>
+          <p>可以點選左上目錄開始瀏覽喔!</p>
+        </ion-card-content>
+      </ion-card>
+    </p>
 
 </ion-content>
