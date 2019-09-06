@@ -29,6 +29,7 @@ export class NavService{
         let result = [];
         let length = data.docs.length;
         for(let i=0;i<length;i++){
+          console.log(data.docs[i].data().name);
           if(data.docs[i].data().authority.split("|").includes(authority)){
             result.push(data.docs[i].data());
           }

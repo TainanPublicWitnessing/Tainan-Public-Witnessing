@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-toolbar color="tertiary">
+    <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      成員管理
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-select 
+    [interfaceOptions]="'customActionSheetOptions'" 
+    interface="action-sheet" 
+    mode="md"
+    [(ngModel)]="congregation" 
+    (ionChange)="onChangeCongregation()"
+    name="congregation"
+    placeholder="請選擇會眾"
+    class="my-input">
+  
+    <ion-select-option 
+      *ngFor="let congregation of congregationsService.congregations"
+      [value]="congregation.name">
+      {{congregation.name}}
+    </ion-select-option>
+    
+  </ion-select>
+
+  <ion-list>
+    <ion-item *ngFor="let user of Users">
+      <ion-icon *ngIf="user.sex=='弟兄'" name="md-man" color="tertiary"></ion-icon>
+      <ion-icon *ngIf="user.sex=='姊妹'" name="md-woman" color="danger"></ion-icon>
+      <ion-label>
+        <h2>{{user.name}}</h2>
+        <p>{{ user.cellphone }}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+</ion-content>
