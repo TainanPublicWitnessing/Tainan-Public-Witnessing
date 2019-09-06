@@ -1,6 +1,7 @@
 import {Component,OnInit} from "@angular/core";
 
 import {UserService} from "../service/user.service";
+import {ShiftService} from "../service/shift.service";
 
 @Component({
   selector:"app-home",
@@ -9,10 +10,21 @@ import {UserService} from "../service/user.service";
 })
 export class HomePage implements OnInit{
 
+
   constructor(
-    public userService:UserService
+    public userService:UserService,
+    public shiftService:ShiftService
   ){}
   
-  ngOnInit(){}
+  ngOnInit(){
+
+    
+    
+  }
+
+  /*ImportData(){  
+    this.shiftService.ShiftTextProcess();
+    console.log("test");
+  }*/
 
 }
