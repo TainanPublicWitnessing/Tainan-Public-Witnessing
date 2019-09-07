@@ -7,16 +7,16 @@ import {CongregationsService} from "../service/congregations.service";
   templateUrl: './member-management.page.html',
   styleUrls: ['./member-management.page.scss'],
 })
-export class MemberManagementPage implements OnInit {
+
+export class MemberManagementPage implements OnInit { 
 
   constructor(
     public congregationsService:CongregationsService,
-    public userService:UserService
+    public userService:UserService,
   ) { }
 
   public congregation;
   public Users:Array<any> = [];
-
 
   /* events */
 
@@ -32,8 +32,7 @@ export class MemberManagementPage implements OnInit {
     
   getUsersByCongregation(): void{
     this.userService.getUsersDataByCongregation(this.congregation).subscribe(response => {
-      this.Users = response;
-      console.log(this.Users);
+      this.Users = response;      
     });
   }
 

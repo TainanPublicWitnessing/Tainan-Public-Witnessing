@@ -51,6 +51,21 @@ export class UserService{
       })
     );
   }
+
+  getUsersDataByName(name:String){
+    return this.firestore.collection("User",query => {
+      return query.where("name","==",name);
+    }).get().pipe(
+      map(data=>{
+        let result = [];
+        let length = data.docs.length;
+        for(let i=0;i<length;i++){
+          result.push(data.docs[i].data());
+        }
+        return result;
+      })
+    );
+  }
   
   login(id,password){
     return this.firestore.collection("User").doc(sha256(id)).get().pipe(

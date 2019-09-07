@@ -1,0 +1,19 @@
+<ion-header>
+  <ion-toolbar color="tertiary">
+      <ion-buttons slot="start">
+          <ion-back-button defaultHref="/menber-management"></ion-back-button>
+        </ion-buttons>
+    <ion-title>個人資料</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>    
+    <form onsubmit="">
+      <ion-list lines="full" class="ion-no-margin ion-no-padding">
+        <ion-item *ngFor="let data of User | keyvalue">
+          <ion-label position="stacked">{{ data.key }}</ion-label>
+          <ion-input required type="text" oninput="" value="{{ data.value }}"></ion-input>
+        </ion-item>
+      </ion-list>
+    </form>
+</ion-content>
