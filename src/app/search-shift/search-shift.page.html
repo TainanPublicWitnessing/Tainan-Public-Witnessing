@@ -14,10 +14,10 @@
             <ion-icon name="md-person" color="light"></ion-icon>
             <ion-label color="light">我的班表</ion-label>
         </ion-segment-button>
-        <ion-segment-button value="calendar" color="light">
+        <!--<ion-segment-button value="calendar" color="light">
             <ion-icon name="md-calendar" color="light"></ion-icon>
             <ion-label color="light">周次</ion-label>
-        </ion-segment-button>
+        </ion-segment-button>-->
         <ion-segment-button value="date" color="light">
             <ion-icon name="md-time" color="light"></ion-icon>
             <ion-label color="light">日期</ion-label>
@@ -70,8 +70,12 @@
   <!-- "日期"內容 --> 
   <div *ngIf="ShiftDisplay=='date'">
       <ion-item>
-          <ion-label>查詢班表時間</ion-label>
-          <ion-datetime displayFormat="YYYY/MM/DD" [(ngModel)]="myDate"></ion-datetime>
+        <ion-label>查詢班表時間</ion-label>
+        <ion-datetime 
+            displayFormat="YYYY/MM/DD" 
+            [(ngModel)]="myDate" 
+            (ionChange)="onSelectDate()">
+        </ion-datetime>
       </ion-item>
   
       <ion-item-divider>

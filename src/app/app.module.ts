@@ -14,6 +14,7 @@ import {environment} from "../environments/environment";  //Firebase 環境設�
 
 import {AppComponent} from "./app.component";
 import {AppRoutingModule} from "./app-routing.module";
+import { DatePipe } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import {AppRoutingModule} from "./app-routing.module";
   providers: [
     StatusBar,
     SplashScreen,
+    DatePipe,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]

@@ -18,8 +18,10 @@ export class SearchShiftPage implements OnInit {
   public myMonth = new Date("YYYY/MM");
   //查詢月份班表
   public myMonthShift:Array<any>;
-
-  myDate: Date;
+  //查詢日期斑表
+  public myDate;
+  //日期班表
+  public myDateShift:Array<any>;
 
   constructor(
     public shiftService:ShiftService,
@@ -49,6 +51,13 @@ export class SearchShiftPage implements OnInit {
       console.log(this.myMonthShift);
     });
       
+  }
+
+  onSelectDate(){    
+    this.shiftService.getShiftByDate(this.myDate).subscribe(response=>{
+      this.myDateShift = response;
+      console.log(this.myDateShift);
+    })
   }
 
 }

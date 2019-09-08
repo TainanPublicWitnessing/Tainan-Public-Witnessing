@@ -5,6 +5,7 @@ import {map} from "rxjs/operators";
 import {AngularFirestore} from "@angular/fire/firestore";
 import { stringify } from '@angular/compiler/src/util';
 import { templateJitUrl } from '@angular/compiler';
+import { DatePipe } from '@angular/common';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,8 @@ import { templateJitUrl } from '@angular/compiler';
 export class ShiftService {
 
   constructor(
-    private firestore: AngularFirestore
+    private firestore: AngularFirestore,
+    private datepipe: DatePipe
   ) { }
 
   /* variables */
@@ -38,7 +40,6 @@ export class ShiftService {
     );
   }
 
-  /* function */
   //獲取使用者此月班表
   getMonthlyShiftByUser(user, month){
     //獲取此月班表
@@ -51,14 +52,34 @@ export class ShiftService {
         let result = [];
         let length = data.docs.length;
         for(let i=0;i<length;i++){          
-          result.push(data.docs[i].data());   
+          result.push(data.docs[i].data());
         }
         return result;
       })
     );
-
   }
 
+  //獲取使用者此月班表
+  getShiftByDate(date){
+    let month = this.datepipe.transform(date, "yyyyMM");
+    let _date = this.datepipe.transform(date, "yyyy-MM-dd");
+    console.log(month, _date);
+    //獲取此月班表
+    return this.firestore.collection("MonthlyData")
+    .doc(month)
+    .collection("shift",query=>{
+      return query.where("date","==",_date);
+    }).get().pipe(
+      map(data=>{
+        let result = [];
+        let length = data.docs.length;
+        for(let i=0;i<length;i++){          
+          result.push(data.docs[i].data());
+        }
+        return result;
+      })
+    );
+  }
 
 
   /* 匯入班表 */

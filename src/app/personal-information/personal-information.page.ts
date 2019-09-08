@@ -24,6 +24,15 @@ export class PersonalInformationPage implements OnInit {
     this.getUsersById();
   }
 
+  /* Events */
+  onsubmit(){
+    console.log(this.User);
+
+  }
+
+  OnChange(key, info){
+    this.User[key] = info;
+  }
 
   /* requests */
     
