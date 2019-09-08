@@ -35,7 +35,13 @@
     <!-- 個人班表月份-->
     <ion-item>
         <ion-label>選擇月份</ion-label>
-        <ion-datetime displayFormat="YYYY/MM" value="2019/9"></ion-datetime>
+        <ion-datetime 
+            placeholder ="選擇月份"
+            displayFormat="YYYY/MM" 
+            value="{{ myMonth }}"
+            [(ngModel)]="myMonth"
+            (ionChange)="onSelectMonth()">
+        </ion-datetime>
     </ion-item>
 
     <ion-list>
@@ -43,20 +49,20 @@
             班表
         </ion-list-header>
 
-        <ion-item>            
-            <ion-label>2019 年 9 月 12 日 (周四)</ion-label>
+        <ion-item *ngFor="let data of myMonthShift">            
+            <ion-label>{{ data.date }} ( {{ data.day }} ) {{ data.shift_title }}</ion-label>
             <ion-chip color="tertiary" outline=true>
                 <ion-icon name="pin"></ion-icon>
-                <ion-label>成大醫院</ion-label>                
+                <ion-label>{{ data.site }}</ion-label>
             </ion-chip>
         </ion-item>
-        <ion-item>            
+        <!--<ion-item>            
             <ion-label>2019 年 9 月 14 日 (周六)</ion-label>
             <ion-chip color="tertiary" outline=true>
                 <ion-icon name="pin"></ion-icon>
                 <ion-label>安平樹屋停車場</ion-label>                
             </ion-chip>
-        </ion-item>        
+        </ion-item>  -->      
     </ion-list>
 
   </div>

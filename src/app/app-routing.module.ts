@@ -17,7 +17,7 @@ const routes: Routes = [
   },
   { path: 'search-shift', loadChildren: './search-shift/search-shift.module#SearchShiftPageModule' },
   { path: 'member-management', loadChildren: './member-management/member-management.module#MemberManagementPageModule' },
-  { path: 'personal-information/:name', loadChildren: './personal-information/personal-information.module#PersonalInformationPageModule' }
+  { path: 'personal-information/:id', loadChildren: './personal-information/personal-information.module#PersonalInformationPageModule' }
 
 ];
 

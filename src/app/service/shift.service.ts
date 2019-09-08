@@ -35,33 +35,39 @@ export class ShiftService {
         }
         return result;
       })
-    ).subscribe(response=>{
-      this.monthly_shift = response;
-      console.log(response);
-    });
+    );
   }
 
   /* function */
   //獲取使用者此月班表
   getMonthlyShiftByUser(user, month){
     //獲取此月班表
-    let monthlyShift = {};
-    monthlyShift = this.monthly_shift;
-    //回傳資料
-    let result = {};
-
-    for(let _shift in monthlyShift){
-      
-    }
+    return this.firestore.collection("MonthlyData")
+    .doc(month)
+    .collection("shift",query=>{
+      return query.where("members","array-contains",user);
+    }).get().pipe(
+      map(data=>{
+        let result = [];
+        let length = data.docs.length;
+        for(let i=0;i<length;i++){          
+          result.push(data.docs[i].data());   
+        }
+        return result;
+      })
+    );
 
   }
 
+
+
+  /* 匯入班表 */
   middleSHift:Array<any>;
   SmallSHift:Array<any>;
   //SHiftArray:Array<any>;
   bigShiftString:string;
 
-  /* 匯入班表 */
+  
   ShiftTextProcess(){
     class shift{
       date:string;

@@ -45,26 +45,22 @@ export class UserService{
         let result = [];
         let length = data.docs.length;
         for(let i=0;i<length;i++){
-          result.push(data.docs[i].data());
+          let _user = data.docs[i].data();
+          _user.id = data.docs[i].id;
+          result.push(_user);          
         }
         return result;
       })
     );
   }
 
-  getUsersDataByName(name:String){
-    return this.firestore.collection("User",query => {
-      return query.where("name","==",name);
-    }).get().pipe(
+  getUsersDataById(id){
+    return this.firestore.doc("User/"+id).snapshotChanges().pipe(
       map(data=>{
-        let result = [];
-        let length = data.docs.length;
-        for(let i=0;i<length;i++){
-          result.push(data.docs[i].data());
-        }
-        return result;
+        return data.payload.data();
       })
     );
+
   }
   
   login(id,password){

@@ -9,9 +9,9 @@ import {UserService} from "../service/user.service";
 })
 export class PersonalInformationPage implements OnInit {
 
-  name = null;
+  id = null;
 
-  public User:Array<any> = [];
+  public User;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -19,18 +19,17 @@ export class PersonalInformationPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.name = this.activatedRoute.snapshot.paramMap.get('name');
+    this.id = this.activatedRoute.snapshot.paramMap.get('id');
 
-    this.getUsersByName();
+    this.getUsersById();
   }
 
 
   /* requests */
     
-  getUsersByName(): void{
-    this.userService.getUsersDataByName(this.name).subscribe(response => {
-      this.User = response[0];
-      console.log(this.User);
+  getUsersById(): void{
+    this.userService.getUsersDataById(this.id).subscribe(response => {
+      this.User = response;
     });
   }
 

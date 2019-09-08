@@ -29,7 +29,7 @@
   </ion-select>
 
   <ion-list>
-    <ion-item *ngFor="let user of Users" routerLink="/personal-information/{{user.name}}" routerDirection="forward">
+    <ion-item *ngFor="let user of Users" routerLink="/personal-information/{{user.id}}" routerDirection="forward">
       <ion-icon *ngIf="user.sex=='弟兄'" name="md-man" color="tertiary"></ion-icon>
       <ion-icon *ngIf="user.sex=='姊妹'" name="md-woman" color="danger"></ion-icon>
       <ion-label>
