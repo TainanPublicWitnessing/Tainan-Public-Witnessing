@@ -29,7 +29,6 @@
 </ion-header>
 
 <ion-content>
-
   <!-- "我的班表"內容 -->
   <div *ngIf="ShiftDisplay=='person'">
     <!-- 個人班表月份-->
@@ -77,52 +76,30 @@
             (ionChange)="onSelectDate()">
         </ion-datetime>
       </ion-item>
-  
-      <ion-item-divider>
-          <ion-chip color="tertiary" outline=true>
-              <ion-icon name="pin"></ion-icon>
-              <ion-label>成大醫院</ion-label>                
-          </ion-chip>
-      </ion-item-divider>
-      <ion-item>
-          <ion-chip color="primary" outline=true>
-              <ion-label>早上</ion-label>
-          </ion-chip>        
-          <ion-grid>
-              <ion-row>
-                <ion-col>鄭炳文</ion-col>
-                <ion-col>鄭瑋珠</ion-col>
-                <ion-col>呂嘉蓉</ion-col>
-                <ion-col>謝秀鸞</ion-col>
-              </ion-row>
-          </ion-grid>        
-      </ion-item>
-      <ion-item>
-          <ion-chip color="warning" outline=true>
-              <ion-label>中午</ion-label>
-          </ion-chip>        
-          <ion-grid>
-              <ion-row>
-                <ion-col>林麗芳</ion-col>
-                <ion-col>李品函</ion-col>
-                <ion-col>劉淑惠</ion-col>
-                <ion-col>葉美月</ion-col>
-              </ion-row>
-          </ion-grid> 
-      </ion-item>
-      <ion-item>
-          <ion-chip color="danger" outline=true>
-              <ion-label>下午</ion-label>
-          </ion-chip>        
-          <ion-grid>
-              <ion-row>
-                <ion-col><font size="2">田頭隼人</font></ion-col>
-                <ion-col><font size="2">田頭思潔</font></ion-col>
-                <ion-col>李淑慧</ion-col>
-                <ion-col>謝玫秀</ion-col>
-              </ion-row>
-          </ion-grid>           
-      </ion-item>
+      
+    <ion-list *ngFor="let site of myDateShift; let i = index">
+        
+        <ion-item-divider>
+            <ion-chip color="tertiary" outline=true>
+                <ion-icon name="pin"></ion-icon>
+                <ion-label>{{ Site[i] }}</ion-label>           
+            </ion-chip>
+        </ion-item-divider>
+
+        <ion-list *ngFor="let data of site">
+            <ion-item *ngIf="data!=null">
+                <ion-chip color="primary" outline=true>
+                    <ion-label>{{ data.shift_title }}</ion-label>
+                </ion-chip>        
+                <ion-grid>
+                    <ion-row>
+                        <ion-col *ngFor="let name of data.members">{{ name }}</ion-col>
+                    </ion-row>
+                </ion-grid>        
+            </ion-item>
+        </ion-list>
+    </ion-list>
+
   </div>
 
 </ion-content>
