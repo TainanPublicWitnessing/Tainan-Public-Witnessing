@@ -16,15 +16,19 @@ export class HomePage implements OnInit{
     public shiftService:ShiftService
   ){}
   
-  ngOnInit(){
+  ngOnInit(){}
 
-    
-    
+  openSideMenu(){
+    console.log("open");
+    document.querySelector('ion-menu-controller')
+      .open();
   }
 
   /*ImportData(){  
     this.shiftService.ShiftTextProcess();
     console.log("test");
   }*/
+
+  
 
 }

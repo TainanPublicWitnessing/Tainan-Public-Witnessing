@@ -32,7 +32,7 @@ export class MemberManagementPage implements OnInit {
     
   getUsersByCongregation(): void{
     this.userService.getUsersDataByCongregation(this.congregation).subscribe(response => {
-      this.Users = response;      
+      this.Users = response;
     });
   }
 

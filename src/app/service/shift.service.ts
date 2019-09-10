@@ -118,7 +118,6 @@ export class ShiftService {
     let SHiftArray = new Array<Object>();
   
     this.middleSHift = this.bigShiftString.split("|");
-
     for(let _shift of this.middleSHift){
       
       this.SmallSHift = _shift.split(",");    
@@ -153,4 +152,37 @@ export class ShiftService {
 
   }
 
+  //temp chagne monthlyShift date
+  changeShiftDate(){
+    let data;
+
+    this.firestore.collection("MonthlyData").doc("201910")
+    .collection("shift")
+    .get().pipe(map(data=>{
+        let result = [];
+        let length = data.docs.length;
+        for(let i=0;i<length;i++){          
+          result.push(data.docs[i].data());
+        }
+        return result;
+    })).subscribe(response=>{
+      data = response;
+      console.log(data);
+      this.updateDate(data);
+    })
+    
+
+  }
+
+  updateDate(data){
+    for(let shift of data){
+      let str:string = shift.date;
+      shift.date = str.split('/').join('-');
+    }
+    console.log(data);
+
+    /*this.firestore.collection("MonthlyData").doc("201910")
+    .collection("shift");*/
+    
+  }
 }

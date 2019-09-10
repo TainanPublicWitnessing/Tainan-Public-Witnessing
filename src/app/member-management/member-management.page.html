@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-toolbar color="tertiary">
+  <ion-toolbar color="primary">
     <ion-buttons slot="start">
         <ion-menu-button></ion-menu-button>
     </ion-buttons>
@@ -28,9 +28,20 @@
     
   </ion-select>
 
-  <ion-list>
+  <ion-list *ngIf="userService.user.authority == 'Manager' || userService.user.authority == 'administrator'">
     <ion-item *ngFor="let user of Users" routerLink="/personal-information/{{user.id}}" routerDirection="forward">
-      <ion-icon *ngIf="user.sex=='弟兄'" name="md-man" color="tertiary"></ion-icon>
+      <ion-icon *ngIf="user.sex=='弟兄'" name="md-man" color="primary"></ion-icon>
+      <ion-icon *ngIf="user.sex=='姊妹'" name="md-woman" color="danger"></ion-icon>
+      <ion-label>
+        <h2>{{user.name}}</h2>
+        <p>{{ user.cellphone }}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+  <ion-list *ngIf="userService.user.authority != 'Manager' && userService.user.authority != 'administrator'">
+    <ion-item *ngFor="let user of Users">
+      <ion-icon *ngIf="user.sex=='弟兄'" name="md-man" color="primary"></ion-icon>
       <ion-icon *ngIf="user.sex=='姊妹'" name="md-woman" color="danger"></ion-icon>
       <ion-label>
         <h2>{{user.name}}</h2>
