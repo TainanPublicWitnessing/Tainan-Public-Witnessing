@@ -33,7 +33,7 @@
   <div *ngIf="ShiftDisplay=='person'">
     <!-- 個人班表月份-->
     <ion-item>
-        <ion-label>選擇月份</ion-label>
+        <!--<ion-label>選擇月份</ion-label>-->
         <ion-datetime 
             placeholder ="選擇月份"
             displayFormat="YYYY/MM" 
@@ -69,8 +69,9 @@
   <!-- "日期"內容 --> 
   <div *ngIf="ShiftDisplay=='date'">
       <ion-item>
-        <ion-label>查詢班表時間</ion-label>
-        <ion-datetime 
+        <!--<ion-label>查詢班表時間</ion-label>-->
+        <ion-datetime
+            placeholder="查詢班表時間"
             displayFormat="YYYY/MM/DD" 
             [(ngModel)]="myDate" 
             (ionChange)="onSelectDate()">

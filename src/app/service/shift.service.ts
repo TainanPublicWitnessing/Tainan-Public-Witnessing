@@ -77,7 +77,7 @@ export class ShiftService {
   //獲取使用者此月班表
   getShiftByDate(date){
     let month = this.datepipe.transform(date, "yyyyMM");
-    let _date = this.datepipe.transform(date, "yyyy-MM-dd");
+    let _date = this.datepipe.transform(date, "yyyy/MM/dd");
     console.log(month, _date);
     //獲取此月班表
     return this.firestore.collection("MonthlyData")
@@ -113,7 +113,7 @@ export class ShiftService {
       site:string;
     }    
 
-    this.bigShiftString = "2019/10/10,週四,中午,任宥澤,任亦彤,張惠真,吳美醇|2019/10/10,週四,下午,郭朝彬,劉麗琴,許麗玉,高雨婷|2019/10/11,週五,中午,胡家銘,林懷睦,黃稻珍,黃富貴|2019/10/11,週五,下午,柯麗郁,蔡麗珍,劉麗華,";
+    this.bigShiftString = "";
     
     let SHiftArray = new Array<Object>();
   
@@ -124,14 +124,14 @@ export class ShiftService {
       
       let tempShift ={
         date:this.SmallSHift[0],
-        day:this.SmallSHift[1],
+        day:this.SmallSHift[3],
         shift_title:this.SmallSHift[2],
-        site:"樹屋停車場",
-        member:[
-          this.SmallSHift[3],
+        site:this.SmallSHift[1],
+        members:[
           this.SmallSHift[4],
           this.SmallSHift[5],
-          this.SmallSHift[6]
+          this.SmallSHift[6],
+          this.SmallSHift[7]
         ]
       }      
       console.log(tempShift);
@@ -143,7 +143,7 @@ export class ShiftService {
     //add to firestore
     for(let _shift of SHiftArray){
       this.firestore.collection("MonthlyData")
-      .doc("201910")
+      .doc("201909")
       .collection("shift")
       .add(_shift);
     }
@@ -153,7 +153,7 @@ export class ShiftService {
   //轉換月班表到個人班表
   resetShift(){
     
-    this.firestore.collection("MonthlyData").doc("201909").collection("shift").get().pipe(
+    this.firestore.collection("MonthlyData").doc("201910").collection("shift").get().pipe(
       map(data=>{
         let result = [];
         let length = data.docs.length;
@@ -189,7 +189,7 @@ export class ShiftService {
         });
         console.log(result[name]);
         
-        db.doc(sha256(name)).collection("MonthlyData").doc("201909").set({personal_shift:result[name]});
+        db.doc(sha256(name)).collection("MonthlyData").doc("201910").set({personal_shift:result[name]});
       }
     });
   }
