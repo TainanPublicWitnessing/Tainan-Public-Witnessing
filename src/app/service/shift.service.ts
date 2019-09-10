@@ -45,6 +45,18 @@ export class ShiftService {
   //獲取使用者此月班表
   getMonthlyShiftByUser(user, month){
     //獲取此月班表
+    return this.firestore
+      .collection("User")
+      .doc(sha256(user))
+      .collection("MonthlyData")
+      .doc(month)
+      .get().pipe(
+        map(data=>{
+          console.log(data);
+          return data.get("personal_shift");
+        })
+      );
+    /*
     return this.firestore.collection("MonthlyData")
     .doc(month)
     .collection("shift",query=>{
@@ -59,6 +71,7 @@ export class ShiftService {
         return result;
       })
     );
+    */
   }
 
   //獲取使用者此月班表
@@ -151,6 +164,7 @@ export class ShiftService {
     }*/
   }
 
+  //轉換月班表到個人班表
   resetShift(){
     
     this.firestore.collection("MonthlyData").doc("201909").collection("shift").get().pipe(
@@ -174,6 +188,7 @@ export class ShiftService {
             if( !result[ response[i].members[j] ] ) result[ response[i].members[j] ] = [];
             result[ response[i].members[j] ].push({
               date:response[i].date,
+              day:response[i].day,
               site:response[i].site,
               shift_title:response[i].shift_title
             });
@@ -183,10 +198,13 @@ export class ShiftService {
       
       let name;
       for(name in result){
-        db.doc()
+        result[name].sort(function(a,b){
+          return a.date.localeCompare(b.date);
+        });
+        console.log(result[name]);
+        
+        db.doc(sha256(name)).collection("MonthlyData").doc("201909").set({personal_shift:result[name]});
       }
     });
   }
-
-
 }
