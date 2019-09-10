@@ -33,7 +33,6 @@ export class SearchShiftPage implements OnInit {
 
   ngOnInit() {
     //this.shiftService.getShiftByMonth("201909");
-    this.shiftService.changeShiftDate();
   }
 
 /* requests */
