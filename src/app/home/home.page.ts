@@ -24,10 +24,10 @@ export class HomePage implements OnInit{
       .open();
   }
 
-  /*ImportData(){  
+  ImportData(){  
     this.shiftService.ShiftTextProcess();
     console.log("test");
-  }*/
+  }
 
   
 

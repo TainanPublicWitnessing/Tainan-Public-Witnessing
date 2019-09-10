@@ -36,6 +36,10 @@ export class SearchShiftPage implements OnInit {
     //this.shiftService.resetShift();
   }
 
+  improtshift(){
+    this.shiftService.ShiftTextProcess();
+  }
+
 /* requests */
 
   //"個人班表"選擇月份
