@@ -1,7 +1,7 @@
 import { NgModule } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
 import { RouteReuseStrategy } from "@angular/router";
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+//import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { IonicModule, IonicRouteStrategy } from "@ionic/angular";
 import { SplashScreen } from "@ionic-native/splash-screen/ngx";
@@ -26,8 +26,8 @@ import { DatePipe } from '@angular/common';
     IonicModule.forRoot(),
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),  //import firebase settings
-    AngularFirestoreModule,
-    BrowserAnimationsModule
+    AngularFirestoreModule
+    //BrowserAnimationsModule
   ],
   providers: [
     StatusBar,

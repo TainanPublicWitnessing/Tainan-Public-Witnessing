@@ -7,6 +7,8 @@ import { stringify } from '@angular/compiler/src/util';
 import { templateJitUrl } from '@angular/compiler';
 import { DatePipe } from '@angular/common';
 
+import {sha256} from "js-sha256/src/sha256.js";
+
 @Injectable({
   providedIn: 'root'
 })
@@ -46,7 +48,7 @@ export class ShiftService {
     return this.firestore.collection("MonthlyData")
     .doc(month)
     .collection("shift",query=>{
-      return query.where("members","array-contains",user);
+      return query.orderBy("date").where("members","array-contains",user);
     }).get().pipe(
       map(data=>{
         let result = [];
@@ -147,9 +149,43 @@ export class ShiftService {
       .collection("shift")
       .add(_shift);
     }*/
+  }
 
-
-
+  resetShift(){
+    
+    this.firestore.collection("MonthlyData").doc("201909").collection("shift").get().pipe(
+      map(data=>{
+        let result = [];
+        let length = data.docs.length;
+        for(let i=0;i<length;i++){          
+          result.push(data.docs[i].data());
+        }
+        return result;
+      })
+    ).subscribe(response=>{
+      let result = {};
+      
+      let db = this.firestore.collection("User");
+      
+      let length = response.length;
+      for(let i=0;i<length;i++){
+        for(let j=0;j<4;j++){
+          if(response[i].members[j] != ""){
+            if( !result[ response[i].members[j] ] ) result[ response[i].members[j] ] = [];
+            result[ response[i].members[j] ].push({
+              date:response[i].date,
+              site:response[i].site,
+              shift_title:response[i].shift_title
+            });
+          }
+        }
+      }
+      
+      let name;
+      for(name in result){
+        db.doc()
+      }
+    });
   }
 
 
