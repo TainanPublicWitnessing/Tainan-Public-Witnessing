@@ -6,3 +6,8 @@
 .my-input{
   text-align:center;
 }
+
+ion-button{
+  --background: linear-gradient(to right, #FF9800, rgb(248, 178, 73));
+  --background-hover: linear-gradient(to right, rgb(248, 178, 73), #FF9800);
+}

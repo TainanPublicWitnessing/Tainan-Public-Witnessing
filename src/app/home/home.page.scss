@@ -5,3 +5,12 @@
   max-height: 35vh;
   overflow: hidden;
 }
+
+ion-button{
+	--background: linear-gradient(to right, #FF9800, rgb(248, 178, 73));
+	--background-hover: linear-gradient(to right, rgb(248, 178, 73), #FF9800);
+}
+
+ion-content{
+    --background: linear-gradient(to right, rgb(201, 201, 201), rgb(240, 240, 240));
+}

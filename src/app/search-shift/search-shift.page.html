@@ -45,7 +45,7 @@
 
     <ion-list>
         <ion-list-header>
-            班表
+            <ion-title>班表</ion-title>
         </ion-list-header>
 
         <ion-item *ngFor="let data of myMonthShift">            
@@ -76,6 +76,7 @@
             [(ngModel)]="myDate" 
             (ionChange)="onSelectDate()">
         </ion-datetime>
+        <ion-label>{{ myDay }}</ion-label>
       </ion-item>
       
     <ion-list *ngFor="let site of myDateShift; let i = index">

@@ -20,6 +20,8 @@ export class SearchShiftPage implements OnInit {
   public myMonthShift:Array<any>;
   //查詢日期斑表
   public myDate;
+  //查詢日期-星期幾
+  public myDay;
   //日期班表
   public myDateShift:Array<any>;
   //此日期的所有地點
@@ -33,7 +35,7 @@ export class SearchShiftPage implements OnInit {
 
   ngOnInit() {
     //this.shiftService.getShiftByMonth("201909");
-    this.shiftService.resetShift();
+    //this.shiftService.resetShift();
   }
 
   improtshift(){
@@ -58,7 +60,12 @@ export class SearchShiftPage implements OnInit {
       
   }
 
-  onSelectDate(){    
+  onSelectDate(){
+    //處理星期幾
+    this.myDay = '星期'+'日一二三四五六'.charAt(new Date(this.myDate).getDay());
+    console.log(this.myDay);
+    
+
     this.shiftService.getShiftByDate(this.myDate).subscribe(response=>{
       this.myDateShift = response;
       console.log(this.myDateShift);
@@ -69,7 +76,6 @@ export class SearchShiftPage implements OnInit {
   
   sortDateShift(_shifts){
     let result = [];
-
     this.Site = [];
     //抓取不同地點
     for(let data of _shifts){
