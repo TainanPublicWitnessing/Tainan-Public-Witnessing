@@ -77,4 +77,38 @@ export class UserService{
       })
     );
   }
+  
+  /* 以下為臨時用 */
+  
+  addUser(){
+    this.firestore.collection("User").doc(sha256("黃柔溦")).set({
+      name:"黃柔溦",
+      sex:"姊妹",
+      position:"---",
+      congregation:"安平區南部",
+      identity:"傳道員",
+      marriage:"獨身",
+      email:"do3450503@gm.tut.edu.tw",
+      cellphone:"0938-561-758",
+      phone:"(06)297-7558",
+      address:"台南市永華二街41巷50號7樓之3",
+      birth_date:"1995-9-12",
+      baptize_date:"2013-12-13",
+      language:"中文/閩南語",
+      note:"",
+      authority:"user",
+      password:"fff8c56f0291ea5539fa5dcd185676153700582554d6135d8e00288a9747ebc8"
+    });
+  }
+  
+  transUser(){
+    this.firestore.collection("User").doc(sha256("吳素碧")).collection("MonthlyData").doc("201910").get().pipe(
+      map(data=>{
+        return data.data().personal_shift;
+      })
+    ).subscribe(response=>{
+      console.log(response);
+      this.firestore.collection("User").doc(sha256("何素碧")).collection("MonthlyData").doc("201910").set({personal_shift:response});
+    });
+  }
 }
