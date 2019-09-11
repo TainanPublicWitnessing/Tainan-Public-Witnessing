@@ -20,7 +20,9 @@ export class CongregationsService{
   /* requests */
   
   getCongregations(){
-    this.firestore.collection("Congregations").get().pipe(
+    this.firestore.collection("Congregations",query=>{
+      return query.orderBy("name");
+    }).get().pipe(
       map(data=>{
         let result = [];
         let length = data.docs.length;
