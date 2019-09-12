@@ -79,28 +79,26 @@
         <ion-label>{{ myDay }}</ion-label>
       </ion-item>
       
-    <ion-list *ngFor="let site of myDateShift; let i = index">
-        <ion-card>
-            <ion-item-divider>
-                <ion-chip color="primary" outline=true>
-                    <ion-icon name="pin"></ion-icon>
-                    <ion-label>{{ Site[i] }}</ion-label>   
-                </ion-chip>
-            </ion-item-divider>
+    <ion-list *ngFor="let site of myDateShift; let i = index">        
+        <ion-item-divider>
+            <ion-chip color="primary" outline=true>
+                <ion-icon name="pin"></ion-icon>
+                <ion-label>{{ Site[i] }}</ion-label>   
+            </ion-chip>
+        </ion-item-divider>
 
-            <ion-list *ngFor="let data of site">
-                <ion-item *ngIf="data!=null">
-                    <ion-chip color="primary" outline=true>
-                        <ion-label>{{ data.shift_title }}</ion-label>
-                    </ion-chip>        
-                    <ion-grid>
-                        <ion-row>
-                            <ion-col *ngFor="let name of data.members">{{ name }}</ion-col>
-                        </ion-row>
-                    </ion-grid>        
-                </ion-item>
-            </ion-list>
-        </ion-card> 
+        <ion-list *ngFor="let data of site">
+            <ion-item *ngIf="data!=null">
+                <ion-chip color="primary" outline=true>
+                    <ion-label>{{ data.shift_title }}</ion-label>
+                </ion-chip>        
+                <ion-grid>
+                    <ion-row>
+                        <ion-col *ngFor="let name of data.members">{{ name }}</ion-col>
+                    </ion-row>
+                </ion-grid>        
+            </ion-item>
+        </ion-list>        
     </ion-list>
 
   </div>
