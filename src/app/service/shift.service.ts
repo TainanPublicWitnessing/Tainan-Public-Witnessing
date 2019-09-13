@@ -152,8 +152,9 @@ export class ShiftService {
 
   //轉換月班表到個人班表
   resetShift(){
+    let month = "201910";
     
-    this.firestore.collection("MonthlyData").doc("201910").collection("shift").get().pipe(
+    this.firestore.collection("MonthlyData").doc(month).collection("shift").get().pipe(
       map(data=>{
         let result = [];
         let length = data.docs.length;
@@ -187,9 +188,9 @@ export class ShiftService {
         result[name].sort(function(a,b){
           return a.date.localeCompare(b.date);
         });
-        console.log(result[name]);
+        console.log(name,result[name]);
         
-        db.doc(sha256(name)).collection("MonthlyData").doc("201910").set({personal_shift:result[name]});
+        db.doc(sha256(name)).collection("MonthlyData").doc(month).update({personal_shift:result[name]});
       }
     });
   }

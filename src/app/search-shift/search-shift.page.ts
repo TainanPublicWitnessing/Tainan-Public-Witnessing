@@ -33,7 +33,9 @@ export class SearchShiftPage implements OnInit {
     private datePipe: DatePipe
   ) { }
 
-  ngOnInit(){}
+  ngOnInit(){
+    //this.shiftService.resetShift();
+  }
 
   improtshift(){
     this.shiftService.ShiftTextProcess();
@@ -43,6 +45,7 @@ export class SearchShiftPage implements OnInit {
 
   //"個人班表"選擇月份
   onSelectMonth(){
+    this.myMonthShift = [];
     console.log(this.userService.user.name);
     console.log(this.myMonth.toString().replace('-',''));
     /*this.shiftService.getShiftByMonth(this.myMonth.toString().replace('-','')).subscribe(response=>{

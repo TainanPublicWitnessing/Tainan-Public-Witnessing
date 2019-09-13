@@ -48,7 +48,19 @@
             <ion-title>班表</ion-title>
         </ion-list-header>
 
-        <ion-item *ngFor="let data of myMonthShift">            
+        <ion-spinner
+            *ngIf="myMonthShift != undefined && myMonthShift.length == 0"
+            name="lines">
+        </ion-spinner>
+        
+        <!--<ion-item *ngIf="myMonthShift.length > 0">
+            myMonthSHift.length >0
+        </ion-item>
+        <ion-item *ngIf="myMonthShift.length == 0">
+            myMonthSHift.length ==0
+        </ion-item>-->
+
+        <ion-item *ngFor="let data of myMonthShift">       
             <ion-label>{{ data.date }} ( {{ data.day }} ) {{ data.shift_title }}</ion-label>
             <ion-chip color="primary" outline=true>
                 <ion-icon name="pin"></ion-icon>
@@ -72,7 +84,7 @@
         <!--<ion-label>查詢班表時間</ion-label>-->
         <ion-datetime
             placeholder="查詢班表時間"
-            displayFormat="YYYY/MM/DD" 
+            displayFormat="YYYY/MM/DD"
             [(ngModel)]="myDate" 
             (ionChange)="onSelectDate()">
         </ion-datetime>
