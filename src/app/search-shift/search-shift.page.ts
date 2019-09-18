@@ -15,14 +15,28 @@ export class SearchShiftPage implements OnInit {
   
   //工具欄，初始顯示"個人班表"
   public ShiftDisplay = "person";
-  //"個人班表查詢日期"
+  /** 個人班表 */
+  //查詢月份
   public myMonth = new Date("YYYY/MM");
   //查詢月份班表
   public myMonthShift:Array<any>;
+
+  /**週次 */
+  //查詢月份
+  public seMonth = new Date;
+  //查詢週次
+  public Day:Array<any> = ['週一','週二','週三','週四','週五','週六','週日',];
+  public myDay;
+  //星期班表
+  public myDayShift:Array<any>;
+  //此月星期己的所有地點
+  public daySite:Array<any>;
+
+  /** 日期 */
   //查詢日期斑表
   public myDate;
   //查詢日期-星期幾
-  public myDay;
+  public displayDay;
   //日期班表
   public myDateShift:Array<any>;
   //此日期的所有地點
@@ -66,10 +80,21 @@ export class SearchShiftPage implements OnInit {
       
   }
 
+  onSelectDay(){
+    if(this.seMonth != undefined && this.myDay != undefined){
+      this.shiftService.getMonthlyShiftByDay(this.seMonth, this.myDay).subscribe(response=>{
+        this.myDayShift = response;
+        console.log(this.myDayShift);
+      })
+
+    }
+   
+  }
+
   onSelectDate(){
     //處理星期幾
-    this.myDay = '星期'+'日一二三四五六'.charAt(new Date(this.myDate).getDay());
-    console.log(this.myDay);
+    this.displayDay = '星期'+'日一二三四五六'.charAt(new Date(this.myDate).getDay());
+    console.log(this.displayDay);
     
 
     this.shiftService.getShiftByDate(this.myDate).subscribe(response=>{

@@ -34,8 +34,11 @@ export class ShiftService {
       map(data=>{
         let result = [];
         let length = data.docs.length;
-        for(let i=0;i<length;i++){          
-          result.push(data.docs[i].data());   
+        for(let i=0;i<length;i++){
+          let info = [];
+          info.push(data.docs[i].data());
+          info.push(data.docs[i].id);   
+          result.push(info);
         }
         return result;
       })
@@ -56,11 +59,17 @@ export class ShiftService {
           return data.get("personal_shift");
         })
       );
-    /*
-    return this.firestore.collection("MonthlyData")
-    .doc(month)
-    .collection("shift",query=>{
-      return query.orderBy("date").where("members","array-contains",user);
+  }
+
+  getMonthlyShiftByDay(month, day){
+    
+    //處理月份格式
+    let sMonth = this.datepipe.transform(month, "yyyyMM");
+    console.log(sMonth,day);
+    //獲取此月此星期班表
+    return this.firestore.collection("MonthlyData").doc(sMonth)
+    .collection("shift",query =>{
+      return query.where("day","==",day)
     }).get().pipe(
       map(data=>{
         let result = [];
@@ -70,8 +79,7 @@ export class ShiftService {
         }
         return result;
       })
-    );
-    */
+    )
   }
 
   //獲取使用者此月班表
