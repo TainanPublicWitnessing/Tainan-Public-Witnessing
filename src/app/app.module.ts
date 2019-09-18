@@ -23,7 +23,10 @@ import { DatePipe } from '@angular/common';
   entryComponents: [],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(),
+    IonicModule.forRoot({
+      mode: 'md',
+      backButtonText: "返回"
+    }),
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),  //import firebase settings
     AngularFirestoreModule

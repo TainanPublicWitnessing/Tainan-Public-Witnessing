@@ -14,10 +14,10 @@
             <ion-icon name="md-person" color="light"></ion-icon>
             <ion-label color="light">我的班表</ion-label>
         </ion-segment-button>
-        <ion-segment-button value="calendar" color="light">
+        <!--<ion-segment-button value="calendar" color="light">
             <ion-icon name="md-calendar" color="light"></ion-icon>
             <ion-label color="light">星期</ion-label>
-        </ion-segment-button>
+        </ion-segment-button>-->
         <ion-segment-button value="date" color="light">
             <ion-icon name="md-time" color="light"></ion-icon>
             <ion-label color="light">日期</ion-label>
@@ -34,15 +34,17 @@
       "我的班表"內容 
     -->
   <div *ngIf="ShiftDisplay=='person'">
-    <!-- 個人班表月份-->
+    
     <ion-item>
-        <!--<ion-label>選擇月份</ion-label>-->
+        
         <ion-datetime 
             placeholder ="選擇月份"
             displayFormat="YYYY/MM" 
             value="{{ myMonth }}"
             [(ngModel)]="myMonth"
-            (ionChange)="onSelectMonth()">
+            (ionChange)="onSelectMonth()"
+            cancelText="取消"
+            doneText="确定">
         </ion-datetime>
     </ion-item>
 
@@ -56,7 +58,7 @@
             name="lines">
         </ion-spinner>
 
-        <ion-item *ngFor="let data of myMonthShift">       
+        <ion-item *ngFor="let data of myMonthShift">
 
             <ion-label>{{ data.date }} ( {{ data.day }} ) {{ data.shift_title }}</ion-label>
             <ion-chip color="primary" outline=true>
@@ -71,17 +73,20 @@
   <!--
     "星期"內容
   -->
+  <!--
   <div *ngIf="ShiftDisplay=='calendar'">
-    <!--查詢月份-->
+    
     <ion-item>
         <ion-datetime
             placeholder="查詢班表月份"
             displayFormat="YYYY/MM"
             [(ngModel)]="seMonth" 
-            (ionChange)="onSelectDay()">
+            (ionChange)="onSelectDay()"
+            cancelText="取消"
+            okText="确定">
         </ion-datetime>
     </ion-item>
-    <!-- 查詢星期-->
+   
     <ion-item>
         <ion-select 
         [interfaceOptions]="'customActionSheetOptions'" 
@@ -91,7 +96,8 @@
         (ionChange)="onSelectDay()"
         name="Day"
         placeholder="請選擇星期"
-        class="my-input">
+        class="my-input"
+        cancelText="取消">
         
             <ion-select-option 
                 *ngFor="let _day of Day"
@@ -101,7 +107,7 @@
         </ion-select>
     </ion-item>
 
-  </div>
+  </div>-->
 
   <!--
        "日期"內容 
@@ -113,7 +119,9 @@
             placeholder="查詢班表時間"
             displayFormat="YYYY/MM/DD"
             [(ngModel)]="myDate" 
-            (ionChange)="onSelectDate()">
+            (ionChange)="onSelectDate()"
+            cancelText="取消"
+            doneText="确定">
         </ion-datetime>
         <ion-label>&nbsp;&nbsp;{{ displayDay }}</ion-label>
       </ion-item>
@@ -126,18 +134,24 @@
             </ion-chip>
         </ion-item-divider>
 
-        <ion-list *ngFor="let data of site">
+        <ion-item-group *ngFor="let data of site">
             <ion-item *ngIf="data!=null" >
-                <ion-chip color="primary" outline=true>
+                <ion-chip *ngIf="data.shift_title == '早上'" color="tertiary" outline=true>
                     <ion-label>{{ data.shift_title }}</ion-label>
-                </ion-chip>        
+                </ion-chip>
+                <ion-chip *ngIf="data.shift_title == '中午'" color="secondary" outline=true>
+                    <ion-label>{{ data.shift_title }}</ion-label>
+                </ion-chip> 
+                <ion-chip *ngIf="data.shift_title == '下午'" color="primary" outline=true>
+                    <ion-label>{{ data.shift_title }}</ion-label>
+                </ion-chip>   
                 <ion-grid>
                     <ion-row>
                         <ion-col *ngFor="let name of data.members">{{ name }}</ion-col>
                     </ion-row>
                 </ion-grid>        
             </ion-item>
-        </ion-list>        
+        </ion-item-group>            
     </ion-list>
 
   </div>

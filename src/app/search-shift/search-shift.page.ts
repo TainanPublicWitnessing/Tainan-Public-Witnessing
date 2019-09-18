@@ -84,6 +84,7 @@ export class SearchShiftPage implements OnInit {
     if(this.seMonth != undefined && this.myDay != undefined){
       this.shiftService.getMonthlyShiftByDay(this.seMonth, this.myDay).subscribe(response=>{
         this.myDayShift = response;
+        this.myDayShift.sort( (a , b) => (a.date > b.date)?1 : (b.date >a.date)?-1 : 0 );
         console.log(this.myDayShift);
       })
 
