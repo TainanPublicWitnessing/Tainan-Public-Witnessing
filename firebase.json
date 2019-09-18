@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "site": "tainan-public-witnessing-ionic",
+    "site": "tainan-public-witnessing",
     "public": "www",
     "ignore": [
       "firebase.json",

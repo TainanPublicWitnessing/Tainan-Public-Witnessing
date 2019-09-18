@@ -3,6 +3,7 @@ import { DatePipe } from '@angular/common';
 
 import {UserService} from "../service/user.service";
 import {ShiftService} from "../service/shift.service";
+import { repeat } from 'rxjs/operators';
 
 @Component({
   selector: 'app-search-shift',
@@ -47,14 +48,19 @@ export class SearchShiftPage implements OnInit {
   onSelectMonth(){
     this.myMonthShift = [];
     console.log(this.userService.user.name);
-    console.log(this.myMonth.toString().replace('-',''));
+    //處理日期格式
+    let newMonth = new Date(this.myMonth);
+    let myMonthString = this.datePipe.transform(newMonth,"yyyyMM");
+    console.log(myMonthString);
+
     /*this.shiftService.getShiftByMonth(this.myMonth.toString().replace('-','')).subscribe(response=>{
       this.myMonthShift = response;
       console.log(this,this.myMonthShift);
     });*/
 
-    this.shiftService.getMonthlyShiftByUser(this.userService.user.name, this.myMonth.toString().replace('-','')).subscribe(response=>{
+    this.shiftService.getMonthlyShiftByUser(this.userService.user.name, myMonthString).subscribe(response=>{
       this.myMonthShift = response;
+      this.myMonthShift.sort( (a , b) => (a.date > b.date)?1 : (b.date >a.date)?-1 : 0 );
       console.log(this.myMonthShift);
     });
       

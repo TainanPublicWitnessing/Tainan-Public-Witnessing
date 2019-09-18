@@ -52,16 +52,6 @@
             *ngIf="myMonthShift != undefined && myMonthShift.length == 0"
             name="lines">
         </ion-spinner>
-        
-        <!--<ion-item *ngIf="myMonthShift.length > 0">
-            myMonthSHift.length >0
-        </ion-item>
-        <ion-item *ngIf="myMonthShift.length == 0">
-            myMonthSHift.length ==0
-        </ion-item>-->
-        <ion-item>
-            {{ myMonthShift }}
-        </ion-item>
 
         <ion-item *ngFor="let data of myMonthShift">       
             <ion-label>{{ data.date }} ( {{ data.day }} ) {{ data.shift_title }}</ion-label>
