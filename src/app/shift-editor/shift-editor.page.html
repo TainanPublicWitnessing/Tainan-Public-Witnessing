@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      修改班表
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item>
+    {{date}} {{shift_title}} {{site}} 
+  </ion-item>
+  
+  <ion-list>
+    <ion-item *ngFor="let member of members;let index = index;">
+      <ion-input [(ngModel)]="members[index]"></ion-input>
+    </ion-item>
+  </ion-list>
+  
+</ion-content>
