@@ -111,4 +111,21 @@ export class UserService{
       this.firestore.collection("User").doc(sha256("何素碧")).collection("MonthlyData").doc("201910").set({personal_shift:response});
     });
   }
+  
+  getAllUser(){
+    this.firestore.collection("User").get().pipe(
+      map(data=>{
+        let result = [];
+        let length = data.docs.length;
+        for(let i=0;i<length;i++){
+          result.push(data.docs[i].data().name);          
+        }
+        return result;
+      })
+    ).subscribe(response=>{
+      response.sort();
+      console.log(response);
+      this.firestore.collection("User").doc("metadata").set({primary_keys:response});
+    });
+  }
 }

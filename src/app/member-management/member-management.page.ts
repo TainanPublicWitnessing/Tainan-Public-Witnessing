@@ -35,5 +35,4 @@ export class MemberManagementPage implements OnInit {
       this.Users = response;
     });
   }
-
 }
