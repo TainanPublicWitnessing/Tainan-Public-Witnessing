@@ -28,7 +28,7 @@ export class SearchShiftPage implements OnInit {
   public Day:Array<any> = ['週一','週二','週三','週四','週五','週六','週日',];
   public myDay;
   //星期班表
-  public myDayShift:Array<any>;
+  public myDayShift;
   //此月星期己的所有地點
   public daySite:Array<any>;
 
@@ -49,7 +49,7 @@ export class SearchShiftPage implements OnInit {
   ) { }
 
   ngOnInit(){
-    //this.shiftService.resetShift();
+    this.shiftService.resetShift();
   }
 
   improtshift(){
@@ -83,14 +83,48 @@ export class SearchShiftPage implements OnInit {
   onSelectDay(){
     if(this.seMonth != undefined && this.myDay != undefined){
       this.shiftService.getMonthlyShiftByDay(this.seMonth, this.myDay).subscribe(response=>{
-        this.myDayShift = response;
-        this.myDayShift.sort( (a , b) => (a.date > b.date)?1 : (b.date >a.date)?-1 : 0 );
+        response.sort( (a , b) => (a.date > b.date)?1 : (b.date >a.date)?-1 : 0 )
+        console.log(response);
+        //整理資料
+        let result = {};
+        let curSite = "";
+        for(let _shift of response){
+          //地點
+          if(!result.hasOwnProperty(_shift.site)){
+            result[_shift.site] = {};
+          }
+          //時間
+          if(!result[_shift.site].hasOwnProperty(_shift.date)){
+            result[_shift.site][_shift.date] = {};
+          }
+          //時段
+          if(!result[_shift.site][_shift.date].hasOwnProperty(_shift.shift_title)){
+            result[_shift.site][_shift.date][_shift.shift_title]
+              = _shift.members;
+          }
+        }
+
+       /* for(let site in result){
+          for(let date in result[site]){
+            let temp = {
+              "早上":result[site][date]["早上"],
+              "中午":result[site][date]["中午"],
+              "下午":result[site][date]["下午"],
+            };
+
+            result[site][date] = temp;
+          }
+        }*/
+
+        console.log(result);
+        this.myDayShift = result;
         console.log(this.myDayShift);
       })
 
     }
    
   }
+
 
   onSelectDate(){
     //處理星期幾
