@@ -18,6 +18,7 @@ export class UserService{
   
   /* variables */
   
+  all_users_name = [];
   user:User = new User();
   
   /* requests */
@@ -60,7 +61,14 @@ export class UserService{
         return data.payload.data();
       })
     );
-
+  }
+  
+  getAllUsersName(){
+    return this.firestore.collection("User").doc("metadata").get().pipe(
+      map(data=>{
+        return data.data().primary_keys;
+      })
+    );
   }
   
   login(id,password){
