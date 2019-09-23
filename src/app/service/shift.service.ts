@@ -135,9 +135,9 @@ export class ShiftService {
     }    
 
 
-    this.bigShiftString = "2019/10/26 ,安平西門國小,早上,週六,陳東君,陳美瑩,陳錦蘭,吳怜瑩|2019/10/26 ,安平西門國小,中午,週六,田頭隼人,田頭思潔,柯麗郁,黃稻珍|2019/10/26 ,安平西門國小,下午,週六,任宥澤,任亦彤,張惠真,康珍妮|2019/10/26 ,安平樹屋停車場,中午,週六,李信寬,林延清,謝亞美,劉青芳|2019/10/26 ,安平樹屋停車場,下午,週六,王雪玲,譚金桂,陳淑珍(東區東區),林建成";
+    this.bigShiftString = "2019/10/26,安平西門國小,早上,週六,陳東君,陳美瑩,陳錦蘭,吳怜瑩|2019/10/26,安平西門國小,中午,週六,田頭隼人,田頭思潔,柯麗郁,黃稻珍|2019/10/26,安平西門國小,下午,週六,任宥澤,任亦彤,張惠真,康珍妮|2019/10/26,安平樹屋停車場,中午,週六,李信寬,林延清,謝亞美,劉青芳|2019/10/26,安平樹屋停車場,下午,週六,王雪玲,譚金桂,陳淑珍(東區東區),林建成";
     
-    let SHiftArray = new Array<Object>();
+    let SHiftArray = [];
   
     this.middleSHift = this.bigShiftString.split("|");
     for(let _shift of this.middleSHift){
@@ -160,16 +160,17 @@ export class ShiftService {
       SHiftArray.push(tempShift);
     }
     console.log(SHiftArray);
-
+    
 
     //add to firestore
-    /*
-    for(let _shift of SHiftArray){
-      this.firestore.collection("MonthlyData")
+    
+    for(let shift of SHiftArray){
+      console.log();
+     this.firestore.collection("MonthlyData")
       .doc("201910")
       .collection("shift")
-      .doc(sha256(_shift.date + _shift.shift_title + _shift.site)).set(_shift);
-    }*/
+      .doc(sha256(shift.date + shift.shift_title + shift.site)).set(shift);
+    }
 
   }
 
