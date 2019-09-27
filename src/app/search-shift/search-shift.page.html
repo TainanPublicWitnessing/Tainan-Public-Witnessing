@@ -108,7 +108,8 @@
     </ion-item>
 
     <!-- 顯示查詢內容 -->
-    <ion-list *ngFor="let site of myDayShift | keyvalue">        
+    <ion-list *ngFor="let site of myDayShift | keyvalue">
+        <ion-card>
             <ion-item-divider>
                 <ion-chip color="primary" outline=true>
                     <ion-icon name="pin"></ion-icon>
@@ -117,8 +118,8 @@
             </ion-item-divider>
     
             <ion-item-group *ngFor="let date of site.value | keyvalue">
-                <ion-item>
-                    {{ date.key }}
+                <ion-item >
+                    {{ date.key | date:'yyyy年MM月dd日'}}
                 </ion-item>
                 <ion-item *ngIf="date.value['早上'] != undefined">
                     <ion-chip color="tertiary" outline=true>
@@ -151,7 +152,8 @@
                     </ion-grid>
                 </ion-item>
                 
-            </ion-item-group>         
+                </ion-item-group>
+            </ion-card>        
         </ion-list>
   </div>
 

@@ -143,7 +143,7 @@ export class ShiftService {
     for(let _shift of this.middleSHift){
       
       this.SmallSHift = _shift.split(",");    
-      
+
       let tempShift ={
         date:this.SmallSHift[0].replace(new RegExp('/', 'g'),"-"),//this.datepipe.transform(new Date(this.SmallSHift[0]), "yyyy-MM-dd"),
         day:this.SmallSHift[3],

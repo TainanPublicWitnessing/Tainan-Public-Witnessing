@@ -49,7 +49,7 @@ export class SearchShiftPage implements OnInit {
   ) { }
 
   ngOnInit(){
-    this.shiftService.resetShift();
+    //this.shiftService.resetShift();
   }
 
   improtshift(){
@@ -95,6 +95,7 @@ export class SearchShiftPage implements OnInit {
           }
           //時間
           if(!result[_shift.site].hasOwnProperty(_shift.date)){
+            //_shift.date = this.datePipe.transform(_shift.date, "yyyy年MM月dd日");
             result[_shift.site][_shift.date] = {};
           }
           //時段
