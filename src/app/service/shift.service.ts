@@ -13,7 +13,7 @@ import {sha256} from "js-sha256/src/sha256.js";
   providedIn: 'root'
 })
 
-export class ShiftService {
+export class ShiftService{
 
   constructor(
     private firestore: AngularFirestore,

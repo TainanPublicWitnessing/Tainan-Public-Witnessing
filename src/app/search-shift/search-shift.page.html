@@ -35,38 +35,42 @@
     -->
   <div *ngIf="ShiftDisplay=='person'">
     
-    <ion-item>
-        
-        <ion-datetime 
-            placeholder ="選擇月份"
-            displayFormat="YYYY/MM" 
-            value="{{ myMonth }}"
-            [(ngModel)]="myMonth"
-            (ionChange)="onSelectMonth()"
-            cancelText="取消"
-            doneText="确定">
-        </ion-datetime>
-    </ion-item>
+    <!-- 登入卡片 -->
+    <app-login-card *ngIf="!userService.user.name"></app-login-card>
 
-    <ion-list>
-        <ion-list-header>
-            <ion-title>班表</ion-title>
-        </ion-list-header>
+    <div *ngIf="userService.user.name">
+        <ion-item>
+            <ion-datetime 
+                placeholder ="選擇月份"
+                displayFormat="YYYY/MM" 
+                value="{{ myMonth }}"
+                [(ngModel)]="myMonth"
+                (ionChange)="onSelectMonth()"
+                cancelText="取消"
+                doneText="确定">
+            </ion-datetime>
+        </ion-item>
 
-        <ion-spinner
-            *ngIf="myMonthShift != undefined && myMonthShift.length == 0"
-            name="lines">
-        </ion-spinner>
+        <ion-list>
+            <ion-list-header>
+                <ion-title>班表</ion-title>
+            </ion-list-header>
 
-        <ion-item *ngFor="let data of myMonthShift">
+            <ion-spinner
+                *ngIf="myMonthShift != undefined && myMonthShift.length == 0"
+                name="lines">
+            </ion-spinner>
 
-            <ion-label>{{ data.date }} ( {{ data.day }} ) {{ data.shift_title }}</ion-label>
-            <ion-chip color="primary" outline=true>
-                <ion-icon name="pin"></ion-icon>
-                <ion-label>{{ data.site }}</ion-label>
-            </ion-chip>
-        </ion-item>     
-    </ion-list>
+            <ion-item *ngFor="let data of myMonthShift">
+
+                <ion-label>{{ data.date }} ( {{ data.day }} ) {{ data.shift_title }}</ion-label>
+                <ion-chip color="primary" outline=true>
+                    <ion-icon name="pin"></ion-icon>
+                    <ion-label>{{ data.site }}</ion-label>
+                </ion-chip>
+            </ion-item>     
+        </ion-list>
+    </div>
 
   </div>
 
