@@ -1,6 +1,6 @@
 import {Injectable} from "@angular/core";
-import {Observable,pipe} from "rxjs";
-import {map} from "rxjs/operators"; 
+import {Observable,Subject } from "rxjs";
+import {map} from "rxjs/operators";
 
 import {AngularFirestore} from "@angular/fire/firestore";
 
@@ -18,9 +18,11 @@ export class UserService{
   
   /* variables */
   
+
   all_users_name = [];
   user:User = new User();
-  
+  public mess = new Subject<User>();
+
   /* requests */
   
   getUsersByCongregation(congregation:String){
@@ -78,6 +80,7 @@ export class UserService{
           this.user.name = data.data().name;
           this.user.congregation = data.data().congregation;
           this.user.authority = data.data().authority;
+          this.mess.next(this.user);
           return true;
         }else{
           return false;
@@ -85,7 +88,12 @@ export class UserService{
       })
     );
   }
-  
+
+  getUser():Observable<User>{
+    return this.mess.asObservable();
+  }
+
+
   /* 以下為臨時用 */
   
   addUser(){

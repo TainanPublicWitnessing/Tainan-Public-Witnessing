@@ -47,12 +47,14 @@ export class ShiftService{
 
   //獲取使用者此月班表
   getMonthlyShiftByUser(user, month){
+    let sMonth = this.datepipe.transform(month, "yyyyMM");
+    console.log(sMonth);
     //獲取此月班表
     return this.firestore
       .collection("User")
       .doc(sha256(user))
       .collection("MonthlyData")
-      .doc(month)
+      .doc(sMonth)
       .get().pipe(
         map(data=>{
           console.log(data);
@@ -90,19 +92,19 @@ export class ShiftService{
     console.log(month, _date);
     //獲取此月班表
     return this.firestore.collection("MonthlyData")
-    .doc(month)
-    .collection("shift",query=>{
-      return query.where("date","==",_date);
-    }).get().pipe(
-      map(data=>{
-        let result = [];
-        let length = data.docs.length;
-        for(let i=0;i<length;i++){          
-          result.push(data.docs[i].data());
-        }
-        return result;
-      })
-    );
+      .doc(month)
+      .collection("shift",query=>{
+        return query.where("date","==",_date);
+      }).get().pipe(
+        map(data=>{
+          let result = [];
+          let length = data.docs.length;
+          for(let i=0;i<length;i++){          
+            result.push(data.docs[i].data());
+          }
+          return result;
+        })
+      );
   }
   
   getSingleShift(date,shift_title,site){

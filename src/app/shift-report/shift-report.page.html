@@ -1,0 +1,24 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      發分登記
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <!-- 登入卡片 -->
+  <app-login-card *ngIf="!userService.user.name"></app-login-card>
+
+
+  <!-- 已經登入 -->
+  <ion-item *ngIf="userService.user.name">
+    
+
+  </ion-item>
+
+</ion-content>
