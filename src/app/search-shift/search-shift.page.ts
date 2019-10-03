@@ -130,8 +130,6 @@ export class SearchShiftPage implements OnInit {
   onSelectDate(){
     //處理星期幾
     this.displayDay = '星期'+'日一二三四五六'.charAt(new Date(this.myDate).getDay());
-    console.log(this.displayDay);
-    
 
     this.shiftService.getShiftByDate(this.myDate).subscribe(response=>{
       this.myDateShift = response;

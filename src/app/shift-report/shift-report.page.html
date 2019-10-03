@@ -17,8 +17,39 @@
 
   <!-- 已經登入 -->
   <ion-item *ngIf="userService.user.name">
-    
+    <ion-list>
+      <ion-item>
+        <!--<ion-label>班表時間</ion-label>-->
+        <ion-datetime
+            placeholder="選擇班表時間"
+            displayFormat="YYYY/MM/DD"
+            [(ngModel)]="date" 
+            (ionChange)="onSelectDate()"
+            cancelText="取消"
+            doneText="确定">
+        </ion-datetime>
+        <ion-label>&nbsp;&nbsp;{{ displayDay }}</ion-label>
+      </ion-item>
 
+      <ion-item>
+          <!--<ion-label>班表時間</ion-label>-->
+          <ion-select
+            [interfaceOptions]="'customActionSheetOptions'" 
+            interface="action-sheet" 
+            mode="md"
+            placeholder="選擇班次"
+            [(ngModel)]="shift_title"
+            cancelText="取消"
+            doneText="确定">
+            <ion-select-option 
+                *ngFor="let _data of shift_titleData"
+                [value]="_data">
+                {{ _data }}
+            </ion-select-option>
+          </ion-select>
+          <ion-label>&nbsp;&nbsp;{{ displayDay }}</ion-label>
+        </ion-item>
+      </ion-list>
   </ion-item>
 
 </ion-content>
