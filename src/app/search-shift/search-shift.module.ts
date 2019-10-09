@@ -6,7 +6,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 import { SearchShiftPage } from './search-shift.page';
-import { LoginCardComponent } from '../login-card/login-card.component'
+import { LoginCardModule } from '../login-card/login-card.modules';
 
 const routes: Routes = [
   {
@@ -20,11 +20,11 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
+    LoginCardModule,
     RouterModule.forChild(routes)
   ],
   declarations: [
-    SearchShiftPage,
-    LoginCardComponent
+    SearchShiftPage
   ]
 })
 export class SearchShiftPageModule {}

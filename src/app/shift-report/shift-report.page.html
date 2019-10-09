@@ -6,6 +6,11 @@
     <ion-title>
       發分登記
     </ion-title>
+    <ion-buttons *ngIf="userService.user.name" slot="primary" (click)="checkResport()">    
+        <ion-button>
+          登記
+        </ion-button>           
+      </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -16,8 +21,12 @@
 
 
   <!-- 已經登入 -->
-  <ion-item *ngIf="userService.user.name">
+  <div *ngIf="userService.user.name">
     <ion-list>
+      <ion-list-header>
+        班次
+      </ion-list-header>
+      <!-- date 日期 -->
       <ion-item>
         <!--<ion-label>班表時間</ion-label>-->
         <ion-datetime
@@ -31,25 +40,117 @@
         <ion-label>&nbsp;&nbsp;{{ displayDay }}</ion-label>
       </ion-item>
 
+      <!-- shift_title 班次 -->
       <ion-item>
-          <!--<ion-label>班表時間</ion-label>-->
-          <ion-select
-            [interfaceOptions]="'customActionSheetOptions'" 
-            interface="action-sheet" 
-            mode="md"
-            placeholder="選擇班次"
-            [(ngModel)]="shift_title"
-            cancelText="取消"
-            doneText="确定">
-            <ion-select-option 
-                *ngFor="let _data of shift_titleData"
-                [value]="_data">
-                {{ _data }}
-            </ion-select-option>
-          </ion-select>
-          <ion-label>&nbsp;&nbsp;{{ displayDay }}</ion-label>
-        </ion-item>
+        <ion-select
+          [interfaceOptions]="'customActionSheetOptions'" 
+          interface="action-sheet" 
+          mode="md"
+          placeholder="選擇班次"
+          [(ngModel)]="shift_title"
+          cancelText="取消"
+          doneText="确定">
+          <ion-select-option 
+              *ngFor="let _data of shift_titleData"
+              [value]="_data">
+              {{ _data }}
+          </ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <!-- site 地點 -->
+      <ion-item>
+        <ion-select
+          [interfaceOptions]="'customActionSheetOptions'" 
+          interface="action-sheet" 
+          mode="md"
+          placeholder="選擇地點"
+          [(ngModel)]="site"
+          cancelText="取消"
+          doneText="确定">
+          <ion-select-option 
+              *ngFor="let _site of siteData"
+              [value]="_site">
+              {{ _site }}
+          </ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-list-header>
+        分發統計
+      </ion-list-header>
+
+      <!-- tracts 印刷品和電子檔  -->
+      <ion-item>
+        <ion-label position="stacked">印刷品和電子檔</ion-label>
+        <ion-input
+          inputmode="numeric"
+          placeholder="請輸入印刷品和電子檔數量"
+          [(ngModel)]="report.tracts">
+        </ion-input>
+      </ion-item>
+
+      <!-- videos 播放影片  -->
+      <ion-item>
+        <ion-label position="stacked">播放影片</ion-label>
+        <ion-input
+          inputmode="numeric"
+          placeholder="請輸入播放影片數量"
+          [(ngModel)]="report.videos">
+        </ion-input>
+      </ion-item>
+
+      <!-- scriptures 分享經文 -->
+      <ion-item>
+        <ion-label position="stacked">分享經文</ion-label>
+        <ion-input
+          inputmode="numeric"
+          placeholder="請輸入分享經文數量"
+          [(ngModel)]="report.scriptures">
+        </ion-input>
+      </ion-item>
+
+      <!-- return_visits 續訪數目 -->
+      <ion-item>
+        <ion-label position="stacked">續訪數目</ion-label>
+        <ion-input
+          inputmode="numeric"
+          placeholder="請輸入續訪數目"
+          [(ngModel)]="report.return_visits">
+        </ion-input>
+      </ion-item>
+
+      <!-- agree_visit 同意拜訪 -->
+      <ion-item>
+        <ion-label position="stacked">同意拜訪</ion-label>
+        <ion-input
+          inputmode="numeric"
+          placeholder="請輸入同意拜訪數量"
+          [(ngModel)]="report.agree_visit">
+        </ion-input>
+      </ion-item>
+
+      <!-- attendance 參與人次  -->
+      <ion-item>
+        <ion-label position="stacked">參與人次</ion-label>
+        <ion-input
+          inputmode="numeric"
+          placeholder="請輸入參與人次"
+          [(ngModel)]="report.attendance">
+        </ion-input>
+      </ion-item>
+
+      <!-- experience 如果良好的經驗，可以分享嗎？(請記下傳道員姓名)  -->
+      <ion-item>
+        <ion-label position="stacked">如果良好的經驗，可以分享嗎？(請記下傳道員姓名)</ion-label>
+        <ion-input
+          inputmode="text"
+          placeholder="請輸入傳道員姓名"
+          [(ngModel)]="report.experience">
+        </ion-input>
+      </ion-item>
+
       </ion-list>
-  </ion-item>
+    </div>
 
 </ion-content>

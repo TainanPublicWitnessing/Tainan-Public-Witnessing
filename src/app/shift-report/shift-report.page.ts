@@ -1,6 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import {ShiftService} from "../service/shift.service";
-import {UserService} from "../service/user.service";
+
+import { ActivatedRoute } from '@angular/router';
+import { ShiftService } from "../service/shift.service";
+import { UserService } from "../service/user.service";
+import { SettingsService } from "../service/settings.service";
+import { StatisticsService } from "../service/statistics.service";
+
+import { AlertController } from '@ionic/angular';
+
 import { User } from '../structures/User';
 
 @Component({
@@ -13,40 +20,73 @@ export class ShiftReportPage implements OnInit {
   /** 
    * Variable 
    * */
+  //修改或是新的提交
+  public pageMode = "";
+  //display mode
+  shiftId = "";
+
+  //edit mdoe
   public user:User;
 
-  //shift report data
+    //shift report data
   public name:string; //登入時設定
-    //搜尋此使用者的今天的班次
+      //搜尋此使用者的今天的班次
   public date:Date;
   public shift_title:string;
   public site:string;
-    //使用者報告
-  public report:Array<any>;
-    //登記時間
+      //使用者報告
+  public report = {
+    "tracts":0,
+    "videos":0,
+    "scriptures":0,
+    "return_visits":0,
+    "agree_visit":0,
+    "attendance":0,
+    "experience":""
+  };
+      //登記時間
   time = new Date();
 
   //interface
   public displayDay:string;
   public shift_titleData = ['早上','中午','下午'];
+  public siteData = [];
 
   constructor(
+    private activatedRoute: ActivatedRoute,
     public shiftService:ShiftService,
-    public userService:UserService
+    public userService:UserService,
+    public settingsService:SettingsService,
+    public statisticsService:StatisticsService,
+    public alertController: AlertController,
   ) { }
 
   ngOnInit() {
-    //測試
-    this.time = new Date("2019-10-07");
-    this.time.setHours(12,3,5);
-    //抓取使用者
-    this.userService.mess.subscribe(response=>{
-      this.user = response;
-      this.name = response.name.toString();
-      this.getUserTodayShift(this.user.name);
-    })
+    //設定頁面state{displey, edit}
+    this.shiftId = this.activatedRoute.snapshot.paramMap.get('shiftId');
+    if(this.shiftId == null){
+      this.pageMode = "edit";
 
-    //處理報告資料
+      //測試
+      //this.time = new Date("2019-10-07");
+      //this.time.setHours(12,3,5);
+      //抓取使用者
+      this.userService.mess.subscribe(response=>{
+        this.user = response;
+        this.name = response.name.toString();
+        this.getUserTodayShift(this.user.name);
+      })
+      //抓取擺攤地點
+      this.settingsService.getSites().subscribe(response=>{
+        this.siteData = response;
+        console.log(this.siteData);
+      })
+
+    }else{
+      this.pageMode = "display";
+
+
+    }
   }
 
   /**
@@ -77,10 +117,103 @@ export class ShiftReportPage implements OnInit {
     });
   }
 
+  getShiftReport(){
+    
+  }
+
   //當選擇日期，顯示此日期的星期
   onSelectDate(){
     //處理星期幾
     this.displayDay = '星期'+'日一二三四五六'.charAt(new Date(this.date).getDay());
 
+  }
+
+  //提交表單
+  onSubmit(){
+    //檢查提交資料
+    const result = {
+      "name":           this.name,
+      "date":           this.date,
+      "shift_title":    this.shift_title,
+      "site":           this.site,
+      "create_on":      "",
+      "report":{
+        "tracts":       this.report.tracts,
+        "videos":       this.report.videos,
+        "scriptures":   this.report.scriptures,
+        "return_visits":this.report.return_visits,
+        "agree_visit":  this.report.agree_visit,
+        "attendance":   this.report.attendance,
+        "experience":   this.report.experience
+      }
+    };
+    this.statisticsService.setReport(result);
+  }
+
+  //提交時，檢查提交資料是否有誤
+  checkResport(){
+    //檢查班次
+    if(this.date == undefined || this.shift_title == undefined || this.site == undefined){
+      this.shiftDataConfirm();
+    }else if(this.report.attendance <= 0){
+      this.attendanceConfirm();
+    }else{
+      this.reportConfirm();
+    }
+  }
+
+  //提醒需填寫班次資料
+  async shiftDataConfirm(){
+    const alert = await this.alertController.create({
+      header: '提醒',
+      message: '請填寫班次的資料喔!',
+      buttons: [
+        {
+          text: '好的!'
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+
+  //提醒需填寫餐與人次
+  async attendanceConfirm(){
+    const alert = await this.alertController.create({
+      header: '提醒',
+      message: '請填寫參與人次喔!',
+      buttons: [
+        {
+          text: '好的!'
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+
+
+  //確認提交 alert
+  async reportConfirm() {
+    const alert = await this.alertController.create({
+      header: '提交',
+      message: '確認要提交分發登記?',
+      buttons: [
+        {
+          text: '修改',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: (blah) => {
+          }
+        }, {
+          text: '確認',
+          handler: () => {
+            this.onSubmit();
+          }
+        }
+      ]
+    });
+
+    await alert.present();
   }
 }

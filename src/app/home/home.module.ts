@@ -6,13 +6,14 @@ import { RouterModule } from '@angular/router';
 
 import { HomePage } from './home.page';
 
-import {LoginCardComponent} from "../login-card/login-card.component";
+import { LoginCardModule } from '../login-card/login-card.modules';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
+    LoginCardModule,
     RouterModule.forChild([
       {
         path: '',
@@ -21,8 +22,7 @@ import {LoginCardComponent} from "../login-card/login-card.component";
     ])
   ],
   declarations:[
-    HomePage,
-    LoginCardComponent
+    HomePage
   ]
 })
 export class HomePageModule{}

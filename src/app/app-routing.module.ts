@@ -17,7 +17,10 @@ const routes: Routes = [
   },
   { path: 'search-shift', loadChildren: './search-shift/search-shift.module#SearchShiftPageModule' },
   { path: 'member-management', loadChildren: './member-management/member-management.module#MemberManagementPageModule' },
-  { path: 'personal-information/:id', loadChildren: './personal-information/personal-information.module#PersonalInformationPageModule' },  { path: 'shift-editor/:date/:shift_title/:site', loadChildren: './shift-editor/shift-editor.module#ShiftEditorPageModule' },  { path: 'shift-report', loadChildren: './shift-report/shift-report.module#ShiftReportPageModule' }
+  { path: 'personal-information/:id', loadChildren: './personal-information/personal-information.module#PersonalInformationPageModule' },
+  { path: 'shift-editor/:date/:shift_title/:site', loadChildren: './shift-editor/shift-editor.module#ShiftEditorPageModule' },
+  { path: 'shift-report', loadChildren: './shift-report/shift-report.module#ShiftReportPageModule' },
+  { path: 'shift-report/:shiftId', loadChildren: './shift-report/shift-report.module#ShiftReportPageModule' }
 
 ];
 

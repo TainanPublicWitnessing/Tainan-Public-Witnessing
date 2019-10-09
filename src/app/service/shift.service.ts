@@ -167,7 +167,6 @@ export class ShiftService{
     //add to firestore
     
     for(let shift of SHiftArray){
-      console.log();
      this.firestore.collection("MonthlyData")
       .doc("201910")
       .collection("shift")
