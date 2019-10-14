@@ -64,28 +64,42 @@ export class ShiftReportPage implements OnInit {
   ngOnInit() {
     //設定頁面state{displey, edit}
     this.shiftId = this.activatedRoute.snapshot.paramMap.get('shiftId');
+    
+    //抓取擺攤地點
+    this.settingsService.getSites().subscribe(response=>{
+      this.siteData = response;
+      console.log(this.siteData);
+    })
+    //抓取使用者
+    this.userService.mess.subscribe(response=>{
+      this.user = response;
+      this.name = response.name.toString();
+      this.getUserTodayShift(this.user.name);
+    })
+
     if(this.shiftId == null){
       this.pageMode = "edit";
 
       //測試
       //this.time = new Date("2019-10-07");
       //this.time.setHours(12,3,5);
-      //抓取使用者
-      this.userService.mess.subscribe(response=>{
-        this.user = response;
-        this.name = response.name.toString();
-        this.getUserTodayShift(this.user.name);
-      })
-      //抓取擺攤地點
-      this.settingsService.getSites().subscribe(response=>{
-        this.siteData = response;
-        console.log(this.siteData);
-      })
-
+      
+      
     }else{
       this.pageMode = "display";
+      //取得日期和id
+      const data = this.shiftId.split('&');
+      const _date = data[0];
+      const _id = data[1]; 
 
-
+      this.statisticsService.getReportById(_date, _id).subscribe(response=>{
+        this.name = response.name;
+        this.date = response.date;
+        this.shift_title = response.shift_title;
+        this.site = response.site;
+        this.report = response.report;
+        console.log(response);
+      });
     }
   }
 
@@ -147,6 +161,7 @@ export class ShiftReportPage implements OnInit {
         "experience":   this.report.experience
       }
     };
+    console.log(result);
     this.statisticsService.setReport(result);
   }
 

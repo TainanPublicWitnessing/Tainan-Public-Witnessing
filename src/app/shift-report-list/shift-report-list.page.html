@@ -1,0 +1,64 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      分發登記列表
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <!-- 登記分發清單列表 -->
+  <ion-list>
+    <div *ngFor="let dateReprots of reportData">
+      <div *ngIf="dateReprots.length != 0">
+        <!-- 顯示日期 -->
+        <ion-list-header> {{ dateReprots[0].date }} </ion-list-header>
+        <!-- 此日登記列表 -->
+        <ion-item *ngFor="let report of dateReprots" routerLink="/shift-report/{{report.date}}&{{report.id}}" routerDirection="forward">
+        <ion-grid>
+          <ion-row>
+            <ion-label>
+            <!-- 提交人姓名 -->
+            <ion-col>{{ report.name }}</ion-col>
+            <!-- 提交時間 -->
+            <ion-col>{{ report.create_on.toMillis() | date:'HH時mm分ss秒'}}</ion-col> 
+            </ion-label>
+        </ion-row>
+        <ion-row>
+
+          <!-- 時段 -->
+          <ion-chip *ngIf="report.shift_title == '早上'" color="tertiary" outline=true>
+            <ion-label>{{ report.shift_title }}</ion-label>
+          </ion-chip>
+          <ion-chip *ngIf="report.shift_title == '中午'" color="secondary" outline=true>
+              <ion-label>{{ report.shift_title }}</ion-label>
+          </ion-chip> 
+          <ion-chip *ngIf="report.shift_title == '下午'" color="primary" outline=true>
+              <ion-label>{{ report.shift_title }}</ion-label>
+          </ion-chip>
+
+          <!-- 地點 -->
+          <ion-chip color="primary" outline=true>
+            <ion-icon name="pin"></ion-icon>
+            <ion-label>{{ report.site }}</ion-label>
+          </ion-chip>
+
+          </ion-row>
+      </ion-grid>
+        </ion-item>
+      </div>
+    </div>
+  </ion-list>
+
+  <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
+      <ion-infinite-scroll-content
+        loadingSpinner="bubbles"
+        loadingText="載入資料">
+      </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+
+</ion-content>

@@ -31,9 +31,40 @@ export class StatisticsService {
 
   /**
    * 獲取分發登記資料
-   * @param _reportData 月份/ID 201910/"id"
+   * @param _reportDate 日期
+   * @param _reportId   id
    */
-  getReportById(_reportData){
+  getReportById(_reportDate, _reportId){
+    const _date = new Date(_reportDate);
+    const dbMonth = this.datepipe.transform(_date, "yyyyMM");
 
+    return this.firestore.collection("Statistics").doc("ShiftReport").collection(dbMonth)
+      .doc(_reportId).get().pipe(
+        map(data=>{
+          return data.data();
+        })
+      );
+  }
+
+
+  getReportByDate(_date){
+    //設定月份格式
+    const dbMonth = this.datepipe.transform(_date,"yyyyMM")
+    const dbDate = this.datepipe.transform(_date, "yyyy-MM-dd");
+
+    return this.firestore.collection("Statistics").doc("ShiftReport").collection(dbMonth,query=>{
+      return query.where("date","==",dbDate);
+    }).get().pipe(
+        map(data=>{
+          let result = [];
+          let length = data.docs.length;
+          for(let i=0;i<length;i++){
+            let info = data.docs[i].data();
+            info.id = data.docs[i].id;      
+            result.push(info);
+          }
+          return result;
+        })
+      );
   }
 }

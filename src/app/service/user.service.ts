@@ -138,10 +138,6 @@ export class UserService{
     );
   }
 
-  getUser():Observable<User>{
-    return this.mess.asObservable();
-  }
-
 
   /* 以下為臨時用 */
   
