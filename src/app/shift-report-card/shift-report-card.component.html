@@ -1,0 +1,33 @@
+<ion-card>
+  <div *ngFor="let shiftTitle of todayShift">
+    <ion-list *ngIf="shiftTitle.length > 0">
+      <ion-header>
+        <!-- 時段 -->
+        <ion-chip *ngIf="shiftTitle[0].shift_title == '早上'" color="tertiary" outline=true>
+            <ion-label>{{ shiftTitle[0].shift_title }}</ion-label>
+          </ion-chip>
+          <ion-chip *ngIf="shiftTitle[0].shift_title == '中午'" color="secondary" outline=true>
+              <ion-label>{{ shiftTitle[0].shift_title }}</ion-label>
+          </ion-chip> 
+          <ion-chip *ngIf="shiftTitle[0].shift_title == '下午'" color="primary" outline=true>
+              <ion-label>{{ shiftTitle[0].shift_title }}</ion-label>
+          </ion-chip>
+      </ion-header>
+      <div *ngFor="let shift of todayShift[0]">
+        <ion-item *ngIf="shift.is_report_exist" class="shift_report_exist">
+          <ion-chip color="primary" outline=true>
+            <ion-icon name="pin"></ion-icon>
+            <ion-label>{{ shift.site }}</ion-label>
+          </ion-chip>
+        </ion-item>
+
+        <ion-item *ngIf="!shift.is_report_exist" class="shift_report_not_exist">
+            <ion-chip color="primary" outline=true>
+              <ion-icon name="pin"></ion-icon>
+              <ion-label>{{ shift.site }}</ion-label>
+            </ion-chip>
+          </ion-item>
+      </div>
+    </ion-list>
+  </div>
+</ion-card>

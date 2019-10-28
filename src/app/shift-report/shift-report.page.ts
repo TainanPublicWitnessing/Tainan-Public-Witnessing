@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 
 import { ActivatedRoute } from '@angular/router';
 import { ShiftService } from "../service/shift.service";
+import { StatisticsService } from "../service/statistics.service";
 import { UserService } from "../service/user.service";
 import { SettingsService } from "../service/settings.service";
-import { StatisticsService } from "../service/statistics.service";
+
 
 import { AlertController } from '@ionic/angular';
 
@@ -74,6 +75,7 @@ export class ShiftReportPage implements OnInit {
     this.userService.mess.subscribe(response=>{
       this.user = response;
       this.name = response.name.toString();
+      console.log(this.user);
       this.getUserTodayShift(this.user.name);
     })
 
@@ -83,7 +85,11 @@ export class ShiftReportPage implements OnInit {
       //測試
       //this.time = new Date("2019-10-07");
       //this.time.setHours(12,3,5);
-      
+      if(this.user == undefined){
+        this.user = this.userService.user;
+        this.name = this.user.name.toString();
+        this.getUserTodayShift(this.user.name);
+      }
       
     }else{
       this.pageMode = "display";

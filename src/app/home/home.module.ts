@@ -7,6 +7,7 @@ import { RouterModule } from '@angular/router';
 import { HomePage } from './home.page';
 
 import { LoginCardModule } from '../login-card/login-card.modules';
+import { ShiftReportCardModule } from '../shift-report-card/shift-report-card.module';
 
 @NgModule({
   imports: [
@@ -14,6 +15,7 @@ import { LoginCardModule } from '../login-card/login-card.modules';
     FormsModule,
     IonicModule,
     LoginCardModule,
+    ShiftReportCardModule,
     RouterModule.forChild([
       {
         path: '',
