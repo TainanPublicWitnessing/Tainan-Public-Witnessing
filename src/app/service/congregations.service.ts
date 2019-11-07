@@ -20,19 +20,13 @@ export class CongregationsService{
   /* requests */
   
   getCongregations(){
-    this.firestore.collection("Congregations",query=>{
-      return query.orderBy("name");
-    }).get().pipe(
+    this.firestore.collection("Settings").doc("Cangregations").get().pipe(
       map(data=>{
-        let result = [];
-        let length = data.docs.length;
-        for(let i=0;i<length;i++){
-          result[i] = data.docs[i].data();
-        }
-        return result;
+        return data.data().congregations;
       })
     ).subscribe(response=>{
       this.congregations = response;
+      console.log(this.congregations);
     });
   }
 }

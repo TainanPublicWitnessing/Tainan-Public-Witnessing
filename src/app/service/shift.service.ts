@@ -132,13 +132,13 @@ export class ShiftService{
       date:string;
       day:string;
       member:Array<string>;    
-      shift_title:string
+      shift_title:string;
       site:string;
     }    
 
 
-    this.bigShiftString = "2019/10/26,安平西門國小,早上,週六,陳東君,陳美瑩,陳錦蘭,吳怜瑩|2019/10/26,安平西門國小,中午,週六,田頭隼人,田頭思潔,柯麗郁,黃稻珍|2019/10/26,安平西門國小,下午,週六,任宥澤,任亦彤,張惠真,康珍妮|2019/10/26,安平樹屋停車場,中午,週六,李信寬,林延清,謝亞美,劉青芳|2019/10/26,安平樹屋停車場,下午,週六,王雪玲,譚金桂,陳淑珍(東區東區),林建成";
-    
+    this.bigShiftString = "";
+
     let SHiftArray = [];
   
     this.middleSHift = this.bigShiftString.split("|");
@@ -168,7 +168,7 @@ export class ShiftService{
     
     for(let shift of SHiftArray){
      this.firestore.collection("MonthlyData")
-      .doc("201910")
+      .doc("201911")
       .collection("shift")
       .doc(sha256(shift.date + shift.shift_title + shift.site)).set(shift);
     }
@@ -177,7 +177,7 @@ export class ShiftService{
 
   //轉換月班表到個人班表
   resetShift(){
-    let month = "201910";
+    let month = "201911";
     
     this.firestore.collection("MonthlyData").doc(month).collection("shift").get().pipe(
       map(data=>{
