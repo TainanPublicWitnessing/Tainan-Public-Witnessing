@@ -4,6 +4,8 @@ import {map} from "rxjs/operators";
 
 import {AngularFirestore} from "@angular/fire/firestore";
 
+import { DatePipe } from '@angular/common';
+
 import {sha256} from "js-sha256/src/sha256.js";
 import {User} from "../structures/User";
 
@@ -13,7 +15,8 @@ import {User} from "../structures/User";
 export class UserService{
 
   constructor(
-    private firestore:AngularFirestore
+    private firestore:AngularFirestore,
+    private datepipe: DatePipe
   ){}
   
   /* variables */
@@ -71,6 +74,52 @@ export class UserService{
         return data.data().primary_keys;
       })
     );
+  }
+
+  addPersonalShift(name,date,shift_title,site){
+    let sMonth = this.datepipe.transform(date, "yyyyMM");
+    let days = ["週日","週一","週二","週三","週四","週五","週六"];
+    let day = days[(new Date(date)).getDay()];
+
+    let DB = this.firestore.collection("User").doc(sha256(name)).collection("MonthlyData").doc(sMonth);
+    DB.get().pipe(
+      map(data=>{
+        return data.get("personal_shift");
+      })
+    ).subscribe(response=>{
+      if(!response.some(function(a){
+        return a.date == this;
+      },date)){
+        response.push({
+          date:date,
+          day:day,
+          shift_title:shift_title,
+          site:site
+        });
+        response.sort(function(a,b){
+          return a.date.localeCompare(b.date);
+        });
+        DB.set({personal_shift:response});
+      }
+    });
+  }
+
+  deletePersonalShift(name,date){
+    let sMonth = this.datepipe.transform(date, "yyyyMM");
+    let DB = this.firestore.collection("User").doc(sha256(name)).collection("MonthlyData").doc(sMonth);
+    DB.get().pipe(
+      map(data=>{
+        return data.get("personal_shift");
+      })
+    ).subscribe(response=>{
+      let index = response.findIndex(function(a){
+        return a.date == this;
+      },date);
+      if(index != -1){
+        response.splice(index,1);
+        DB.set({personal_shift:response});
+      }
+    });
   }
   
   login(id,password){

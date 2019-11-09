@@ -35,6 +35,7 @@ export class SearchShiftPage implements OnInit {
   /** 日期 */
   //查詢日期斑表
   public myDate;
+  public bardate;  //YYYY-MM-DD
   //查詢日期-星期幾
   public displayDay;
   //日期班表
@@ -130,7 +131,8 @@ export class SearchShiftPage implements OnInit {
   onSelectDate(){
     //處理星期幾
     this.displayDay = '星期'+'日一二三四五六'.charAt(new Date(this.myDate).getDay());
-
+    this.bardate = this.datePipe.transform(this.myDate,"yyyy-MM-dd");
+    console.log(this.myDate,this.bardate);
     this.shiftService.getShiftByDate(this.myDate).subscribe(response=>{
       this.myDateShift = response;
       console.log(this.myDateShift);

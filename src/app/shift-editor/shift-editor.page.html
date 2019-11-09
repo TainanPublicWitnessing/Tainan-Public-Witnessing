@@ -17,13 +17,12 @@
   <ion-list>
     <ion-item *ngFor="let member of members;let index = index;">
     
-      <ion-input [(ngModel)]="members[index]" (ionChange)="onSelectChange(members[index],index)"></ion-input>
+      <ion-input id="ion-input" [(ngModel)]="members[index]" (ionChange)="onSelectChange(index)"></ion-input>
       
       <ion-select 
         [interfaceOptions]="'customActionSheetOptions'" 
         interface="action-sheet" 
         mode="md"
-        (ionChange)="onSelectChange(members[index],index)"
         [(ngModel)]="members[index]">
         
         <ion-select-option *ngFor="let member_name of member_select_options[index]">

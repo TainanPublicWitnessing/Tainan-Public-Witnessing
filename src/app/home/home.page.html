@@ -10,7 +10,6 @@
 </ion-header>
 
 <ion-content>
-    <ion-button routerLink="/shift-editor/2019-09-23/中午/成大醫院" color="primary">Import</ion-button>
     <!-- 歡迎卡片 -->
     <ion-card *ngIf="!userService.user.name" class="welcome-card">
       <img src="/assets/Home_Card_Picture.jpg" alt="" />
@@ -43,7 +42,7 @@
           <ion-card-title>想要做什麼呢?</ion-card-title>
         </ion-card-header>
         <ion-card-content>
-          <ion-button expand="block"  routerLink="/shift-editor/2019-09-23/中午/成大醫院" (click)="openSideMenu()">
+          <ion-button expand="block" (click)="openSideMenu()">
             開始瀏覽
           </ion-button>
         </ion-card-content>

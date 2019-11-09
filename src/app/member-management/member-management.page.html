@@ -18,13 +18,12 @@
     (ionChange)="onChangeCongregation()"
     name="congregation"
     placeholder="請選擇會眾"
-    class="my-input"
     cancelText="取消">
   
     <ion-select-option 
       *ngFor="let congregation of congregationsService.congregations"
-      [value]="congregation.name">
-      {{congregation.name}}
+      [value]="congregation">
+      {{congregation}}
     </ion-select-option>
     
   </ion-select>

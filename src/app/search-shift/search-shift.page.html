@@ -189,13 +189,13 @@
         <ion-item-group *ngFor="let data of site">
             <ion-item *ngIf="data!=null" >
                 <ion-chip *ngIf="data.shift_title == '早上'" color="tertiary" outline=true>
-                    <ion-label>{{ data.shift_title }}</ion-label>
+                    <ion-label [routerLink]="['/shift-editor',bardate,data.shift_title,Site[i]]">{{ data.shift_title }}</ion-label>
                 </ion-chip>
                 <ion-chip *ngIf="data.shift_title == '中午'" color="secondary" outline=true>
-                    <ion-label>{{ data.shift_title }}</ion-label>
+                    <ion-label [routerLink]="['/shift-editor',bardate,data.shift_title,Site[i]]">{{ data.shift_title }}</ion-label>
                 </ion-chip> 
                 <ion-chip *ngIf="data.shift_title == '下午'" color="primary" outline=true>
-                    <ion-label>{{ data.shift_title }}</ion-label>
+                    <ion-label [routerLink]="['/shift-editor',bardate,data.shift_title,Site[i]]">{{ data.shift_title }}</ion-label>
                 </ion-chip>   
                 <ion-grid>
                     <ion-row>

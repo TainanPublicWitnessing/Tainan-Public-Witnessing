@@ -38,9 +38,11 @@ export class ShiftEditorPage implements OnInit {
     this.shiftService.getSingleShift(this.date,this.shift_title,this.site).subscribe(response=>{
       this.members = response.members;
       this.origin_members = [...this.members];
+      /*
       for(let i=0;i<4;i++){
         this.member_select_options.push([this.members[i]]);
       }
+      */
     });
 
     this.userService.getAllUsersName().subscribe(response=>{
@@ -51,15 +53,33 @@ export class ShiftEditorPage implements OnInit {
     //this.shiftService.resetShift();
   }
   
-  onSelectChange(input,index){
+  onSelectChange(index){
     this.members[index] = this.members[index].trim();
     this.member_select_options[index] = this.member_names.filter(function(name){
       return name.includes(this);
-    },input);
+    },this.members[index]);
   }
 
   edit(){
     console.log(this.origin_members);
     console.log(this.members);
+    let flag = true;
+    for(let member of this.members){
+      flag = this.member_names.includes(member);
+    }
+    if(flag){
+      for(let i=0;i<4;i++){
+        if(this.members[i] != this.origin_members[i]){
+          if(this.origin_members[i] != ""){
+            this.userService.deletePersonalShift(this.origin_members[i],this.date);
+          }
+          if(this.members[i] != ""){
+            this.userService.addPersonalShift(this.members[i],this.date,this.shift_title,this.site);
+          }
+          this.origin_members = [...this.members];
+          this.shiftService.setShiftByDate(this.date,this.shift_title,this.site,this.members)
+        }
+      }
+    }
   }
 }
