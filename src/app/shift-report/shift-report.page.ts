@@ -10,6 +10,8 @@ import { SettingsService } from "../service/settings.service";
 import { AlertController } from '@ionic/angular';
 
 import { User } from '../structures/User';
+import { DatePipe } from '@angular/common';
+import { database } from 'firebase';
 
 @Component({
   selector: 'app-shift-report',
@@ -76,19 +78,21 @@ export class ShiftReportPage implements OnInit {
       this.user = response;
       this.name = response.name.toString();
       console.log(this.user);
-      this.getUserTodayShift(this.user.name);
+      this.getUserTodayShift(this.name);
+
+      
     })
 
     if(this.shiftId == null){
       this.pageMode = "edit";
-
+      
       //測試
-      //this.time = new Date("2019-10-07");
+      //this.time = new Date("2019-11-11");
       //this.time.setHours(12,3,5);
       if(this.user == undefined){
         this.user = this.userService.user;
         this.name = this.user.name.toString();
-        this.getUserTodayShift(this.user.name);
+        this.getUserTodayShift(this.name);
       }
       
     }else{
@@ -107,6 +111,7 @@ export class ShiftReportPage implements OnInit {
         console.log(response);
       });
     }
+    
   }
 
   /**
@@ -116,6 +121,7 @@ export class ShiftReportPage implements OnInit {
   //獲取使用者當月班表
   getUserTodayShift(_username){
     let userShift = [];
+    console.log(this.time);
     this.shiftService.getMonthlyShiftByUser(_username, this.time).subscribe(response=>{
       userShift = response;
       console.log(userShift);

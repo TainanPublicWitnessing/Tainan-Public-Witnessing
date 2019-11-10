@@ -65,6 +65,7 @@ export class SearchShiftPage implements OnInit {
     console.log(this.userService.user.name);
     //處理日期格式
     let newMonth = new Date(this.myMonth);
+    console.log(newMonth);
     let myMonthString = this.datePipe.transform(newMonth,"yyyyMM");
     console.log(myMonthString);
 
