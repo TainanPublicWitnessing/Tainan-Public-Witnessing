@@ -27,6 +27,7 @@ export class ShiftReportListPage implements OnInit {
   ngOnInit() {
     //取得現在時間
     const curDate = new Date(Date.now());
+    curDate.setDate(curDate.getDate() + 1);
     this.latestDate = curDate;
 
     //取得前七天的資料
