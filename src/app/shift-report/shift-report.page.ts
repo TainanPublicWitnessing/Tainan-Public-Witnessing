@@ -75,11 +75,14 @@ export class ShiftReportPage implements OnInit {
     })
     //抓取使用者
     this.userService.mess.subscribe(response=>{
-      this.user = response;
-      this.name = response.name.toString();
-      console.log(this.user);
-      this.getUserTodayShift(this.name);
-
+      console.log(response);
+      if(response.name){
+        this.user = response;
+        this.name = response.name.toString();
+        console.log(this.user); 
+        this.getUserTodayShift(this.name);
+      }
+      
       
     })
 
@@ -89,11 +92,13 @@ export class ShiftReportPage implements OnInit {
       //測試
       //this.time = new Date("2019-11-11");
       //this.time.setHours(12,3,5);
-      if(this.user == undefined){
-        this.user = this.userService.user;
-        this.name = this.user.name.toString();
-        this.getUserTodayShift(this.name);
-      }
+      if(this.userService.user.name){
+        if(this.user == undefined){
+          this.user = this.userService.user;
+          this.name = this.userService.user.name.toString();
+          this.getUserTodayShift(this.name);
+        }
+      }      
       
     }else{
       this.pageMode = "display";
