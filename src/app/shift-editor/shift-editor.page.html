@@ -15,17 +15,18 @@
   </ion-item>
   
   <ion-list>
-    <ion-item *ngFor="let member of members;let index = index;">
+    <ion-item *ngFor="let member of members;let index = index;trackBy:trackByIndex">
     
-      <ion-input id="ion-input" [(ngModel)]="members[index]" (ionChange)="onSelectChange(index)"></ion-input>
+      <ion-input id="ion-input" [(ngModel)]="members[index]" ></ion-input>
       
       <ion-select 
         [interfaceOptions]="'customActionSheetOptions'" 
         interface="action-sheet" 
         mode="md"
-        [(ngModel)]="members[index]">
+        [(ngModel)]="members[index]"
+        (ionChange)="onSelectChange(index)">
         
-        <ion-select-option *ngFor="let member_name of member_select_options[index]">
+        <ion-select-option *ngFor="let member_name of member_select_options[index] | slice:1">
           {{member_name}}
         </ion-select-option>
         

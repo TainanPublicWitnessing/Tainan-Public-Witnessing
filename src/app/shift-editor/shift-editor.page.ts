@@ -1,5 +1,5 @@
 import {Component,OnInit} from "@angular/core";
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute,Router} from '@angular/router';
 
 import {ShiftService} from "../service/shift.service";
 import {UserService} from "../service/user.service";
@@ -7,12 +7,13 @@ import {UserService} from "../service/user.service";
 @Component({
   selector: "app-shift-editor",
   templateUrl: "./shift-editor.page.html",
-  styleUrls: ["./shift-editor.page.scss"],
+  styleUrls: ["./shift-editor.page.scss"]
 })
 export class ShiftEditorPage implements OnInit {
 
   constructor(
     private activatedRoute: ActivatedRoute,
+    private router: Router,
     public shiftService:ShiftService,
     public userService:UserService
   ){}
@@ -53,19 +54,27 @@ export class ShiftEditorPage implements OnInit {
     //this.shiftService.resetShift();
   }
   
+  trackByIndex(index,item){
+    return index;
+  }
+
   onSelectChange(index){
     this.members[index] = this.members[index].trim();
     this.member_select_options[index] = this.member_names.filter(function(name){
       return name.includes(this);
     },this.members[index]);
+    //this.member_select_options[index].push("");
+    
+    setTimeout(()=>{
+      this.member_select_options[index].unshift("");
+    },250);
+    
   }
 
   edit(){
-    console.log(this.origin_members);
-    console.log(this.members);
     let flag = true;
     for(let member of this.members){
-      flag = this.member_names.includes(member);
+      flag = flag && (this.member_names.includes(member) || member == "");
     }
     if(flag){
       for(let i=0;i<4;i++){
@@ -77,9 +86,13 @@ export class ShiftEditorPage implements OnInit {
             this.userService.addPersonalShift(this.members[i],this.date,this.shift_title,this.site);
           }
           this.origin_members = [...this.members];
-          this.shiftService.setShiftByDate(this.date,this.shift_title,this.site,this.members)
+          this.shiftService.setShiftByDate(this.date,this.shift_title,this.site,this.members);
         }
       }
+      alert("修改成功");
+      this.router.navigate(["home"]);
+    }else{
+      alert("輸入錯誤");
     }
   }
 }
