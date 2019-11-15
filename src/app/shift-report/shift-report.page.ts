@@ -82,8 +82,6 @@ export class ShiftReportPage implements OnInit {
         console.log(this.user); 
         this.getUserTodayShift(this.name);
       }
-      
-      
     })
 
     if(this.shiftId == null){

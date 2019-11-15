@@ -1,5 +1,5 @@
 import {Injectable} from "@angular/core";
-import {Observable,Subject } from "rxjs";
+import {Observable,Subject, BehaviorSubject } from "rxjs";
 import {map} from "rxjs/operators";
 
 import {AngularFirestore} from "@angular/fire/firestore";
@@ -24,6 +24,10 @@ export class UserService{
 
   all_users_name = [];
   user:User = new User();
+
+  //新的架構，之後都使用BehaviorSubject
+  public user$:BehaviorSubject<User> = new BehaviorSubject<User>(undefined);
+
   public mess = new Subject<User>();
 
   /* requests */
@@ -129,6 +133,7 @@ export class UserService{
           this.user.name = data.data().name;
           this.user.congregation = data.data().congregation;
           this.user.authority = data.data().authority;
+          this.user$.next(this.user);
           this.mess.next(this.user);
           return true;
         }else{

@@ -47,7 +47,9 @@ export class ShiftService{
 
   //獲取使用者此月班表
   getMonthlyShiftByUser(user, month){
+    console.log("getMonthlySHiftByUser:",user,month);
     let dbMonth = this.datepipe.transform(month, "yyyyMM")
+    console.log(dbMonth);
     //獲取此月班表
     return this.firestore
       .collection("User")
@@ -57,6 +59,7 @@ export class ShiftService{
       .get().pipe(
         map(data=>{
           console.log(data);
+          console.log(data.data());
           return data.get("personal_shift");
         })
       );

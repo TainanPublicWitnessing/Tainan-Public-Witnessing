@@ -17,7 +17,7 @@ export class SearchShiftPage implements OnInit {
   public ShiftDisplay = "person";
   /** 個人班表 */
   //查詢月份
-  public myMonth = new Date("YYYY/MM");
+  public myMonth = new Date();
   //查詢月份班表
   public myMonthShift:Array<any>;
 
@@ -49,8 +49,8 @@ export class SearchShiftPage implements OnInit {
     private datePipe: DatePipe
   ) { }
 
-  ngOnInit(){
-    //this.shiftService.resetShift();
+  ngOnInit(){    
+    
   }
 
   improtshift(){
@@ -66,15 +66,8 @@ export class SearchShiftPage implements OnInit {
     //處理日期格式
     let newMonth = new Date(this.myMonth);
     console.log(newMonth);
-    let myMonthString = this.datePipe.transform(newMonth,"yyyyMM");
-    console.log(myMonthString);
 
-    /*this.shiftService.getShiftByMonth(this.myMonth.toString().replace('-','')).subscribe(response=>{
-      this.myMonthShift = response;
-      console.log(this,this.myMonthShift);
-    });*/
-
-    this.shiftService.getMonthlyShiftByUser(this.userService.user.name, myMonthString).subscribe(response=>{
+    this.shiftService.getMonthlyShiftByUser(this.userService.user.name, newMonth).subscribe(response=>{
       this.myMonthShift = response;
       this.myMonthShift.sort( (a , b) => (a.date > b.date)?1 : (b.date >a.date)?-1 : 0 );
       console.log(this.myMonthShift);
