@@ -20,8 +20,8 @@ export class StatisticsService {
   //寫入分發登記資料
   setReport(_report){
     //設定提交時間
-    _report.create_on = new Date();
-    const dbMonth = this.datepipe.transform(_report.create_on,"yyyyMM");
+    //_report.create_on = new Date();
+    const dbMonth = this.datepipe.transform(_report.date,"yyyyMM");
     _report.date = this.datepipe.transform(_report.date, "yyyy-MM-dd");
     const docId = sha256(_report.date + _report.shift_title + _report.site);
     //寫入發分登記資料

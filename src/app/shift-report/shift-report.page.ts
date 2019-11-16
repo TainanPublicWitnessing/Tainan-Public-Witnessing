@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ShiftService } from "../service/shift.service";
 import { StatisticsService } from "../service/statistics.service";
 import { UserService } from "../service/user.service";
@@ -57,6 +57,7 @@ export class ShiftReportPage implements OnInit {
 
   constructor(
     private activatedRoute: ActivatedRoute,
+    private router: Router,
     public shiftService:ShiftService,
     public userService:UserService,
     public settingsService:SettingsService,
@@ -178,6 +179,7 @@ export class ShiftReportPage implements OnInit {
     };
     console.log(result);
     this.statisticsService.setReport(result);
+    this.router.navigate(["home"]);
   }
 
   //提交時，檢查提交資料是否有誤
