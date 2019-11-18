@@ -1,1 +1,1 @@
-firebase deploy --only hosting:tainan-public-witnessing-ionic
+firebase deploy --only hosting:tainan-public-witnessing

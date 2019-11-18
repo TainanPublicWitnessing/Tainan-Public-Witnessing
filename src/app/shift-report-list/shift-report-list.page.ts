@@ -30,14 +30,16 @@ export class ShiftReportListPage implements OnInit {
     curDate.setDate(curDate.getDate() + 1);
     this.latestDate = curDate;
 
+    //console.log(this.latestDate);
+
     //取得前七天的資料
     for(var i=0; i<7; i++){
       this.latestDate.setDate(this.latestDate.getDate() - 1);
-      console.log(this.latestDate);
+      //console.log(this.latestDate);
 
       this.statisticsService.getReportByDate(this.latestDate).subscribe(response=>{
         this.reportData[ this.reportData.length ] = response;
-      })
+      });
     }
 
     console.log(this.reportData);

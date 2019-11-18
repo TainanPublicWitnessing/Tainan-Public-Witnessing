@@ -1,7 +1,7 @@
 export class User{
-  id: String;
-  name: String;
-  congregation: String;
-  authority: String;
-  token: String;
+  id: string;
+  name: string;
+  congregation: string;
+  authority: string;
+  token: string;
 }

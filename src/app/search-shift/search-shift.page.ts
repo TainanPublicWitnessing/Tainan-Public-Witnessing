@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {Router} from '@angular/router';
 import { DatePipe } from '@angular/common';
 
 import {UserService} from "../service/user.service";
@@ -46,6 +47,7 @@ export class SearchShiftPage implements OnInit {
   constructor(
     public shiftService:ShiftService,
     public userService:UserService,
+    private router: Router,
     private datePipe: DatePipe
   ) { }
 
@@ -160,6 +162,12 @@ export class SearchShiftPage implements OnInit {
     this.myDateShift = result;
     console.log(this.myDateShift);
 
+  }
+
+  gotoShiftEditor(date,shift_title,site){
+    if(["administrator","manager"].includes(this.userService.user.authority)){
+      this.router.navigate(['/shift-editor',date,shift_title,site]);
+    }
   }
 
 }
