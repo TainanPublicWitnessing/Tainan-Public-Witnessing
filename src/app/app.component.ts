@@ -1,5 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { ToolbarService } from "./toolbar/toolbar.service";
+import { SidenavService } from "./sidenav/sidenav.service";
 
 @Component({
   selector: 'app-root',
@@ -9,15 +10,21 @@ import { ToolbarService } from "./toolbar/toolbar.service";
 export class AppComponent {
 
   constructor(
-    private toolbarService: ToolbarService
+    private toolbarService: ToolbarService,
+    private sidenavService: SidenavService
   ){
-    /* subscribe events */
+    /** subscribe events */
 
-    this.toolbarService.menuIconClick.subscribe(next=>{
+    this.toolbarService.clickMenuIcon.subscribe(next=>{
       this.sidenav.toggle();
+    });
+
+    this.sidenavService.clickLinkButton.subscribe(next=>{
+      this.sidenav.close();
     });
   }
 
-  /* DOM */
+  /** DOM */
+
   @ViewChild("sidenav",{static:false}) sidenav;
 }

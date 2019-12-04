@@ -4,11 +4,11 @@ import { Subject } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class ToolbarService {
+export class SidenavService {
 
   constructor(){}
 
-  /* event */
-  
-  public clickMenuIcon = new Subject();
+  /** events */
+
+  public clickLinkButton = new Subject();
 }

@@ -18,7 +18,7 @@ export class ToolbarComponent implements OnInit {
   /* event */
 
   menuIconClick(){
-    this.toolbarService.menuIconClick.next();
+    this.toolbarService.clickMenuIcon.next();
   }
 
 }
