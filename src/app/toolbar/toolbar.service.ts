@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
+import { Subject, BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +8,13 @@ export class ToolbarService {
 
   constructor(){}
 
-  /* event */
+  /** events */
   
   public clickMenuIcon = new Subject();
+  public clickSubmitButton = new Subject();
+
+  /** variables */
+
+  public title = new BehaviorSubject("");
+  public showSubmitButton = new BehaviorSubject(false);
 }

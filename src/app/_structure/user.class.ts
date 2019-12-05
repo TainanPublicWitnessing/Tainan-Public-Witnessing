@@ -53,4 +53,10 @@ export class User{
     this.position = "";
     this.sex = "";
   }
+
+  public validation(ids,authoritys,congregations){
+    if(!this.code){
+      return false;
+    }
+  }
 }

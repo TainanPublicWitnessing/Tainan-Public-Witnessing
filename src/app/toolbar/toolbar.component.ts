@@ -12,13 +12,29 @@ export class ToolbarComponent implements OnInit {
     private toolbarService: ToolbarService
   ){}
 
-  ngOnInit() {
+  ngOnInit(){
+    this.toolbarService.title.subscribe(next=>{
+      this.title = next;
+    });
+
+    this.toolbarService.showSubmitButton.subscribe(next=>{
+      this.showSubmitButton = next;
+    });
   }
+
+  /** variables */
+
+  title: string;
+  showSubmitButton: boolean;
 
   /* event */
 
-  menuIconClick(){
+  clickMenuIcon(){
     this.toolbarService.clickMenuIcon.next();
+  }
+
+  clickSubmitButton(){
+    this.toolbarService.clickSubmitButton.next();
   }
 
 }

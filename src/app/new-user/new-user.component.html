@@ -1,1 +1,23 @@
-<p>new-user works!</p>
+<form [formGroup]="new_user_form">
+  <mat-form-field>
+    <mat-label>姓名</mat-label>
+    <input matInput formControlName="name">
+    <mat-error *ngIf="new_user_form.controls.name.hasError('required')">不可空白</mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>帳號</mat-label>
+    <input matInput placeholder="預設為姓名" formControlName="id">
+    <mat-error *ngIf="new_user_form.controls.id.hasError('required')">不可空白</mat-error>
+    <!-- <mat-error *ngIf="">不可重覆</mat-error> -->
+  </mat-form-field>
+
+  <mat-form-field>
+      <mat-label>會眾</mat-label>
+      <mat-select formControlName="congregation">
+        <mat-option value="A">A</mat-option>
+        <mat-option value="C">B</mat-option>
+      </mat-select>
+      <mat-error *ngIf="new_user_form.controls.congregation.hasError('required')">不可空白</mat-error>
+    </mat-form-field>
+</form>

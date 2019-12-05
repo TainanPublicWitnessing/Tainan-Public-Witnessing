@@ -1,3 +1,11 @@
-<button mat-button (click)="menuIconClick()">
-  <mat-icon>menu</mat-icon>
-</button>
+<mat-toolbar>
+  <button mat-button (click)="clickMenuIcon()">
+    <mat-icon>menu</mat-icon>
+  </button>
+
+  <span>{{title}}</span>
+
+  <span class="spacer"></span>
+
+  <button mat-button *ngIf="showSubmitButton" (click)="clickSubmitButton()">確定</button>
+</mat-toolbar>

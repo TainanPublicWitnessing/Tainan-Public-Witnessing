@@ -18,7 +18,7 @@ export class SidenavComponent implements OnInit {
   ngOnInit() {
   }
 
-  /** routing functions */
+  /** routing function */
   routingTo(url){
     this.sidenavService.clickLinkButton.next();
     this.router.navigateByUrl(url);
