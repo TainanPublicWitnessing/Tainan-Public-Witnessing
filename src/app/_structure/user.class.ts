@@ -4,27 +4,41 @@ export class User{
 
   code: string;  //random sha code, won't change after register
   id: string;  //unique id map to code
-
-  //value range is given
   authority: string;
   congregation: string;
   identity: string;
   marriage: string;
   position: string;
-  sex: string;
-
-  //value format is given
-  baptize_date: string;  //yyyy-mm-dd  /^(19|20)\d{2}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$/g
-  birth_date: string;  //yyyy-mm-dd  /^$|^(19|20)\d{2}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$/g
-  cellphone: string;  //xxxx-xxx-xxx  /^$|^09\d{2}-\d{3}-\d{3}$/g
-  email: string;  //xxx@xxx.xxx  /^$|^\S+@\S+\.\S+$/g
-  phone: string;  //xx-xxx-xxxx  /^$|^0\d{1,3}-\d{2,4}-\d{4}$/g
-  
-  //no format
+  gender: string;
+  baptize_date: string;  //yyyy-mm-dd
+  birth_date: string;  //yyyy-mm-dd
+  cellphone: string;  
+  email: string;  //xxx@xxx.xxx
+  phone: string;
   address: string;
   name: string;
   note: string;
   language: string;
+
+  validation_status = {
+    code: true,
+    id: true,
+    authority: true,
+    congregation: true,
+    identity: true,
+    marriage: true,
+    position: true,
+    gender: true,
+    baptize_date: true,
+    birth_date: true,
+    cellphone: true,  
+    email: true,
+    phone: true,
+    address: true,
+    name: true,
+    note: true,
+    language: true
+  }
 
   /** functions */
 
@@ -51,12 +65,49 @@ export class User{
     this.note = "";
     this.phone = "";
     this.position = "";
-    this.sex = "";
+    this.gender = "";
   }
 
-  public validation(ids,authoritys,congregations){
+  public validate(options){
     if(!this.code){
-      return false;
+      return "ERROR_CODE";
     }
+    if(!this.name){
+      return "ERROR_NAME";
+    }
+    if(options.ids.includes(this.id)){
+      return "ERROR_ID";
+    }
+    if(!options.authoritys.includes(this.authority)){
+      return "ERROR_AUTHORITY";
+    }
+    if(!options.congregations.includes(this.congregation)){
+      return "ERROR_CONGREGATION";
+    }
+    if(!options.identitys.includes(this.identity)){
+      return "ERROR_IDENTITY";
+    }
+    if(!options.marriages.includes(this.marriage)){
+      return "ERROR_MARRIAGE";
+    }
+    if(!options.positions.includes(this.position)){
+      return "ERROR_POSITION";
+    }
+    if(!options.genders.includes(this.gender)){
+      return "ERROR_GENDER";
+    }
+    if(/^(19|20)\d{2}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$/g.test(this.baptize_date)){
+      return "ERROR_BAPTIZE_DATE";
+    }
+    if(/^$|^(19|20)\d{2}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$/g.test(this.birth_date)){
+      return "ERROR_BIRTH_DATE";
+    }
+    if(/^$|^09\d{8}$/g.test(this.cellphone)){
+      return "ERROR_CELLPHONE";
+    }
+    if(/^$|^\S+@\S+\.\S+$/g.test(this.email)){
+      return "ERROR_EMAIL";
+    }
+    return "SECCESS";
   }
 }

@@ -8,11 +8,9 @@ import { User } from "../_structure/user.class"
 })
 export class UserService {
 
-  constructor() { }
+  constructor(){}
 
   /* variables */
 
   current_user = new BehaviorSubject<User>(new User);
-
-
 }
