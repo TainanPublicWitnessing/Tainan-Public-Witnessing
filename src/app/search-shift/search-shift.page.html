@@ -33,6 +33,9 @@
   <!-- 
       "我的班表"內容 
     -->
+    <!--<ion-button (click)="shiftService.resetShift()">
+        shift reset
+    </ion-button>-->
   <div *ngIf="ShiftDisplay=='person'">
     
     <!-- 登入卡片 -->
@@ -42,6 +45,7 @@
         <ion-item>
             <ion-datetime 
                 placeholder ="選擇月份"
+                max="2020-10-31"
                 displayFormat="YYYY/MM" 
                 value="{{ myMonth }}"
                 [(ngModel)]="myMonth"
@@ -84,6 +88,7 @@
         <ion-datetime
             placeholder="查詢班表月份"
             displayFormat="YYYY/MM"
+            max="2020-10-31"
             [(ngModel)]="seMonth" 
             (ionChange)="onSelectDay()"
             cancelText="取消"
@@ -94,7 +99,8 @@
     <ion-item>
         <ion-select 
         [interfaceOptions]="'customActionSheetOptions'" 
-        interface="action-sheet" 
+        interface="action-sheet"
+        max="2020-10-31"
         mode="md"
         [(ngModel)]="myDay"
         (ionChange)="onSelectDay()"
@@ -155,6 +161,16 @@
                         </ion-row>
                     </ion-grid>
                 </ion-item>
+                <ion-item *ngIf="date.value['黃昏'] != undefined">
+                    <ion-chip color="dark" outline=true>
+                        <ion-label>黃昏</ion-label>
+                    </ion-chip>
+                    <ion-grid>
+                        <ion-row>
+                            <ion-col *ngFor="let name of date.value['黃昏'] | keyvalue">{{ name.value }}</ion-col>
+                        </ion-row>
+                    </ion-grid>
+                </ion-item>
                 
                 </ion-item-group>
             </ion-card>        
@@ -170,7 +186,8 @@
         <ion-datetime
             placeholder="查詢班表時間"
             displayFormat="YYYY/MM/DD"
-            [(ngModel)]="myDate" 
+            [(ngModel)]="myDate"
+            max="2020-10-31"
             (ionChange)="onSelectDate()"
             cancelText="取消"
             doneText="确定">
@@ -196,7 +213,10 @@
                 </ion-chip> 
                 <ion-chip *ngIf="data.shift_title == '下午'" color="primary" outline=true>
                     <ion-label (click)="gotoShiftEditor(bardate,data.shift_title,Site[i])">{{ data.shift_title }}</ion-label>
-                </ion-chip>   
+                </ion-chip>
+                <ion-chip *ngIf="data.shift_title == '黃昏'" color="dark" outline=true>
+                    <ion-label (click)="gotoShiftEditor(bardate,data.shift_title,Site[i])">{{ data.shift_title }}</ion-label>
+                </ion-chip>  
                 <ion-grid>
                     <ion-row>
                         <ion-col *ngFor="let name of data.members">{{ name }}</ion-col>

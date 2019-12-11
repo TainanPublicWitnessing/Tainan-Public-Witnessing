@@ -155,7 +155,8 @@ export class SearchShiftPage implements OnInit {
       let thisSite = {
         "早上" : dataArray.find(x => x.shift_title == "早上" && x.site == _site),
         "中午" : dataArray.find(x => x.shift_title == "中午" && x.site == _site),
-        "下午" : dataArray.find(x => x.shift_title == "下午" && x.site == _site)
+        "下午" : dataArray.find(x => x.shift_title == "下午" && x.site == _site),
+        "黃昏" : dataArray.find(x => x.shift_title == "黃昏" && x.site == _site)
       }
       result.push(Object.values(thisSite));
     }
