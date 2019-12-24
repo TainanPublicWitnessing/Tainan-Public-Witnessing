@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { DatePipe } from "@angular/common";
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -18,17 +19,20 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatMomentDateModule } from "@angular/material-moment-adapter";
+import { MatDialogModule } from '@angular/material/dialog';
 
 /* filebase */
-import {AngularFireModule} from "@angular/fire";
-import {AngularFirestoreModule} from "@angular/fire/firestore";
-import {environment} from "../environments/environment";  //Firebase config
+import { AngularFireModule } from "@angular/fire";
+import { AngularFirestoreModule } from "@angular/fire/firestore";
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { environment } from "../environments/environment";  //Firebase config
 
 /** components */
 import { SidenavComponent } from './sidenav/sidenav.component';
 import { HomeComponent } from './home/home.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
 import { NewUserComponent } from './new-user/new-user.component';
+import { SubmitConfirmDialogComponent } from './submit-confirm-dialog/submit-confirm-dialog.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +40,11 @@ import { NewUserComponent } from './new-user/new-user.component';
     SidenavComponent,
     HomeComponent,
     ToolbarComponent,
-    NewUserComponent
+    NewUserComponent,
+    SubmitConfirmDialogComponent
+  ],
+  entryComponents: [
+    SubmitConfirmDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -57,13 +65,16 @@ import { NewUserComponent } from './new-user/new-user.component';
     MatSelectModule,
     MatDatepickerModule,
     MatMomentDateModule,
+    MatDialogModule,
 
     /** firebase */
     AngularFireModule.initializeApp(environment.firebase),  //import firebase settings
-    AngularFirestoreModule
+    AngularFirestoreModule,
+    AngularFireAuthModule
   ],
   providers: [
-    { provide: MAT_DATE_LOCALE, useValue: 'zh-TW' }
+    { provide: MAT_DATE_LOCALE, useValue: 'zh-TW' },
+    DatePipe
   ],
   bootstrap: [AppComponent]
 })

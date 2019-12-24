@@ -2,6 +2,7 @@ import { Component, ViewChild, OnInit } from '@angular/core';
 import { ToolbarService } from "./toolbar/toolbar.service";
 import { SidenavService } from "./sidenav/sidenav.service";
 import { SettingsService } from "./_service/settings.service";
+import { UserService } from "./_service/user.service";
 
 @Component({
   selector: 'app-root',
@@ -13,7 +14,8 @@ export class AppComponent implements OnInit{
   constructor(
     private toolbarService: ToolbarService,
     private sidenavService: SidenavService,
-    private settingsService: SettingsService
+    private settingsService: SettingsService,
+    private userService:UserService
   ){}
 
   ngOnInit(){
@@ -27,6 +29,7 @@ export class AppComponent implements OnInit{
 
     this.settingsService.loadCongregations();
     this.settingsService.loadAuthoritys();
+    this.userService.loadUserIdMap();
   }
 
   /** DOM */

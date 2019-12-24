@@ -46,8 +46,8 @@ export class SettingsService{
       map(data=>{
         return data.data().congregations;
       })
-    ).subscribe(response=>{
-        this.congregations.next(response);
+    ).subscribe(data=>{
+        this.congregations.next(data);
     });
   }
 
@@ -56,8 +56,8 @@ export class SettingsService{
       map(data=>{
         return data.data();
       })
-    ).subscribe(response=>{
-        this.authoritys.next(response);
+    ).subscribe(data=>{
+        this.authoritys.next(data);
     });
   }
 }
