@@ -2,11 +2,13 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { DatePipe } from "@angular/common";
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-/* angular material */
+/** angular material */
+import { MAT_DATE_LOCALE } from "@angular/material";
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatListModule } from '@angular/material/list';
@@ -15,12 +17,22 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatMomentDateModule } from "@angular/material-moment-adapter";
+import { MatDialogModule } from '@angular/material/dialog';
 
-/* components */
+/* filebase */
+import { AngularFireModule } from "@angular/fire";
+import { AngularFirestoreModule } from "@angular/fire/firestore";
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { environment } from "../environments/environment";  //Firebase config
+
+/** components */
 import { SidenavComponent } from './sidenav/sidenav.component';
 import { HomeComponent } from './home/home.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
 import { NewUserComponent } from './new-user/new-user.component';
+import { SubmitConfirmDialogComponent } from './submit-confirm-dialog/submit-confirm-dialog.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +40,11 @@ import { NewUserComponent } from './new-user/new-user.component';
     SidenavComponent,
     HomeComponent,
     ToolbarComponent,
-    NewUserComponent
+    NewUserComponent,
+    SubmitConfirmDialogComponent
+  ],
+  entryComponents: [
+    SubmitConfirmDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -38,7 +54,7 @@ import { NewUserComponent } from './new-user/new-user.component';
 
     AppRoutingModule,
 
-    /* angular material */
+    /** angular material */
     MatSidenavModule,
     MatToolbarModule,
     MatListModule,
@@ -46,9 +62,20 @@ import { NewUserComponent } from './new-user/new-user.component';
     MatIconModule,
     MatFormFieldModule,
     MatInputModule,
-    MatSelectModule
+    MatSelectModule,
+    MatDatepickerModule,
+    MatMomentDateModule,
+    MatDialogModule,
+
+    /** firebase */
+    AngularFireModule.initializeApp(environment.firebase),  //import firebase settings
+    AngularFirestoreModule,
+    AngularFireAuthModule
   ],
-  providers: [],
+  providers: [
+    { provide: MAT_DATE_LOCALE, useValue: 'zh-TW' },
+    DatePipe
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

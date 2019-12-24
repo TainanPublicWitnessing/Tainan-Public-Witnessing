@@ -1,23 +1,111 @@
 <form [formGroup]="new_user_form">
   <mat-form-field>
-    <mat-label>姓名</mat-label>
-    <input matInput formControlName="name">
+    <mat-label>姓名<span class="red-star">*</span></mat-label>
+    <input matInput formControlName="name" (change)="presetID()">
     <mat-error *ngIf="new_user_form.controls.name.hasError('required')">不可空白</mat-error>
   </mat-form-field>
 
   <mat-form-field>
-    <mat-label>帳號</mat-label>
+    <mat-label>帳號<span class="red-star">*</span></mat-label>
     <input matInput placeholder="預設為姓名" formControlName="id">
     <mat-error *ngIf="new_user_form.controls.id.hasError('required')">不可空白</mat-error>
-    <!-- <mat-error *ngIf="">不可重覆</mat-error> -->
+    <mat-error *ngIf="new_user_form.controls.id.hasError('id_exist')">不可重覆</mat-error>
   </mat-form-field>
 
   <mat-form-field>
-      <mat-label>會眾</mat-label>
-      <mat-select formControlName="congregation">
-        <mat-option value="A">A</mat-option>
-        <mat-option value="C">B</mat-option>
-      </mat-select>
-      <mat-error *ngIf="new_user_form.controls.congregation.hasError('required')">不可空白</mat-error>
-    </mat-form-field>
+    <mat-label>性別<span class="red-star">*</span></mat-label>
+    <mat-select formControlName="gender">
+      <mat-option *ngFor="let gender of options.genders" [value]="gender">{{gender}}</mat-option>
+    </mat-select>
+    <mat-error *ngIf="new_user_form.controls.gender.hasError('required')">不可空白</mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>會眾<span class="red-star">*</span></mat-label>
+    <mat-select formControlName="congregation">
+      <mat-option *ngFor="let congregation of options.congregations" [value]="congregation">{{congregation}}</mat-option>
+    </mat-select>
+    <mat-error *ngIf="new_user_form.controls.congregation.hasError('required')">不可空白</mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>權限<span class="red-star">*</span></mat-label>
+    <mat-select formControlName="authority">
+      <mat-option *ngFor="let authority of options.authoritys | keyvalue" [value]="authority.key">{{authority.value}}</mat-option>
+    </mat-select>
+    <mat-error *ngIf="new_user_form.controls.authority.hasError('required')">不可空白</mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>受浸日期<span class="red-star">*</span></mat-label>
+    <input matInput [matDatepicker]="baptize_date_picker" formControlName="baptize_date">
+    <mat-datepicker-toggle matSuffix [for]="baptize_date_picker"></mat-datepicker-toggle>
+    <mat-datepicker touchUi #baptize_date_picker></mat-datepicker>
+    <mat-error *ngIf="new_user_form.controls.baptize_date.hasError('required')">不可空白</mat-error>
+    <mat-error *ngIf="new_user_form.controls.baptize_date.getError('matDatepickerParse')">格式不正確</mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>身份<span class="red-star">*</span></mat-label>
+    <mat-select formControlName="identity">
+      <mat-option *ngFor="let identity of options.identitys" [value]="identity">{{identity}}</mat-option>
+    </mat-select>
+    <mat-error *ngIf="new_user_form.controls.identity.hasError('required')">不可空白</mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>職務<span class="red-star">*</span></mat-label>
+    <mat-select formControlName="position">
+      <mat-option *ngFor="let position of options.positions" [value]="position">{{position}}</mat-option>
+    </mat-select>
+    <mat-error *ngIf="new_user_form.controls.position.hasError('required')">不可空白</mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>婚姻<span class="red-star">*</span></mat-label>
+    <mat-select formControlName="marriage">
+      <mat-option *ngFor="let marriage of options.marriages" [value]="marriage">{{marriage}}</mat-option>
+    </mat-select>
+    <mat-error *ngIf="new_user_form.controls.marriage.hasError('required')">不可空白</mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>出生日期</mat-label>
+    <input matInput [matDatepicker]="birth_date_picker" formControlName="birth_date">
+    <mat-datepicker-toggle matSuffix [for]="birth_date_picker"></mat-datepicker-toggle>
+    <mat-datepicker touchUi #birth_date_picker></mat-datepicker>
+    <mat-error *ngIf="new_user_form.controls.birth_date.getError('matDatepickerParse')">格式不正確</mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>地址</mat-label>
+    <textarea matInput formControlName="address"></textarea>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>電話</mat-label>
+    <input matInput formControlName="phone">
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>手機</mat-label>
+    <input matInput formControlName="cellphone">
+    <mat-error *ngIf="new_user_form.controls.cellphone.hasError('pattern')">格式不正確</mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>信箱</mat-label>
+    <textarea matInput formControlName="email"></textarea>
+    <mat-error *ngIf="new_user_form.controls.email.hasError('email')">格式不正確</mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>語言</mat-label>
+    <textarea matInput formControlName="language"></textarea>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>備註</mat-label>
+    <textarea matInput formControlName="note"></textarea>
+  </mat-form-field>
 </form>

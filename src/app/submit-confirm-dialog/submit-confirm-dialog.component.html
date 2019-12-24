@@ -1,0 +1,13 @@
+<h1 mat-dialog-title>{{data.title}}</h1>
+<div mat-dialog-content>
+  <p>{{data.message}}</p>
+  <mat-list>
+    <mat-list-item *ngFor="let field of data.fields | keyvalue">
+      {{field.key}} : {{field.value}}
+    </mat-list-item>
+  </mat-list>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="cancel()">取消</button>
+  <button mat-button (click)="confirm()">確定</button>
+</div>

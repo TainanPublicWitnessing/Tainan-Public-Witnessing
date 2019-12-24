@@ -1,0 +1,11 @@
+form{
+  margin-bottom: 64px;
+}
+
+mat-form-field{
+  width: 100%;
+}
+
+.red-star{
+  color: red;
+}
