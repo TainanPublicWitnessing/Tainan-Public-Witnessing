@@ -38,7 +38,7 @@
 
   <mat-form-field>
     <mat-label>受浸日期<span class="red-star">*</span></mat-label>
-    <input matInput [matDatepicker]="baptize_date_picker" formControlName="baptize_date">
+    <input matInput placeholder="yyyy/MM/dd" [matDatepicker]="baptize_date_picker" formControlName="baptize_date">
     <mat-datepicker-toggle matSuffix [for]="baptize_date_picker"></mat-datepicker-toggle>
     <mat-datepicker touchUi #baptize_date_picker></mat-datepicker>
     <mat-error *ngIf="new_user_form.controls.baptize_date.hasError('required')">不可空白</mat-error>
@@ -71,7 +71,7 @@
 
   <mat-form-field>
     <mat-label>出生日期</mat-label>
-    <input matInput [matDatepicker]="birth_date_picker" formControlName="birth_date">
+    <input matInput placeholder="yyyy/MM/dd" [matDatepicker]="birth_date_picker" formControlName="birth_date">
     <mat-datepicker-toggle matSuffix [for]="birth_date_picker"></mat-datepicker-toggle>
     <mat-datepicker touchUi #birth_date_picker></mat-datepicker>
     <mat-error *ngIf="new_user_form.controls.birth_date.getError('matDatepickerParse')">格式不正確</mat-error>

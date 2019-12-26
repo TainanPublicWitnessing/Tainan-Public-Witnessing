@@ -4,7 +4,7 @@ export class User{
 
   /** variables */
 
-  code: string;  //random sha code, won't change after register
+  code: string;  //random sha256 code, won't change after register
   id: string;  //unique id map to code
   authority: string;
   congregation: string;
@@ -24,6 +24,7 @@ export class User{
 
   /** functions */
 
+  //generate random sha256 user code
   public generateCode(){
     this.code = sha256(new Date().toISOString());
   }

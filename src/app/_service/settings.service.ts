@@ -1,7 +1,10 @@
 import { Injectable } from '@angular/core';
+
+/** rxjs */
 import { Observable, BehaviorSubject } from 'rxjs';
 import { map } from "rxjs/operators";
 
+/** firebase */
 import { AngularFirestore } from "@angular/fire/firestore";
 
 
@@ -41,6 +44,7 @@ export class SettingsService{
 
   /** functions */
 
+  //load congregation list from server
   loadCongregations(){
     this.angularFirestore.collection("Settings").doc("Cangregations").get().pipe(
       map(data=>{
@@ -51,6 +55,7 @@ export class SettingsService{
     });
   }
 
+  //load authority list from server
   loadAuthoritys(){
     this.angularFirestore.collection("Settings").doc("Authoritys").get().pipe(
       map(data=>{
