@@ -1,11 +1,9 @@
+/** angular */
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DatePipe } from "@angular/common";
-
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
 
 /** angular material */
 import { MAT_DATE_LOCALE } from "@angular/material";
@@ -28,7 +26,11 @@ import { AngularFirestoreModule } from "@angular/fire/firestore";
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { environment } from "../environments/environment";  //Firebase config
 
+/** modules */
+import { AppRoutingModule } from './app-routing.module';
+
 /** components */
+import { AppComponent } from './app.component';
 import { SidenavComponent } from './sidenav/sidenav.component';
 import { HomeComponent } from './home/home.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
@@ -46,17 +48,16 @@ import { LoginDialogComponent } from './login-dialog/login-dialog.component';
     SubmitConfirmDialogComponent,
     LoginDialogComponent
   ],
-  entryComponents: [
+  entryComponents: [  //dynamic component goes here
     SubmitConfirmDialogComponent,
     LoginDialogComponent
   ],
   imports: [
+    /** angular */
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-
-    AppRoutingModule,
 
     /** angular material */
     MatSidenavModule,
@@ -75,10 +76,13 @@ import { LoginDialogComponent } from './login-dialog/login-dialog.component';
     /** firebase */
     AngularFireModule.initializeApp(environment.firebase),  //import firebase settings
     AngularFirestoreModule,
-    AngularFireAuthModule
+    AngularFireAuthModule,
+
+    /** routing */
+    AppRoutingModule
   ],
   providers: [
-    { provide: MAT_DATE_LOCALE, useValue: 'zh-TW' },
+    { provide: MAT_DATE_LOCALE, useValue: 'zh-TW' },  //for MatMomentDateModule
     DatePipe
   ],
   bootstrap: [AppComponent]

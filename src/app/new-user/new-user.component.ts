@@ -1,16 +1,22 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { DatePipe } from "@angular/common";
+import { Subscription } from "rxjs";
 
+/** angular materials */
 import { MatDialog } from "@angular/material/dialog";
 
+/** structures */
 import { User } from "../_structure/User.class";
 import { UserIdMap } from "../_structure/UserIdMap.class";
+import { ConfirmDialogData } from "../_structure/ConfirmDialogData.class";
 
+/** services */
 import { ToolbarService } from "../toolbar/toolbar.service";
 import { SettingsService } from "../_service/settings.service";
 import { UserService } from "../_service/user.service"
 
+/** components */
 import { SubmitConfirmDialogComponent } from "../submit-confirm-dialog/submit-confirm-dialog.component";
 
 @Component({
@@ -29,64 +35,73 @@ export class NewUserComponent implements OnInit, OnDestroy {
     private userService: UserService
   ){}
 
-  /** subscribers */
-  private subscribers = {
-    //events
-    clickSubmitButton: null,
-    //variables
-    gender: null,
-    congregation: null,
-    authority: null,
-    identity: null,
-    position: null,
-    marriage: null,
-    user_ids: null
+  /** subscriptions */
+  private subscriptions = {
+    /** events */
+    clickSubmitButton: null as Subscription,
+
+    /** data */
+    gender: null as Subscription,
+    congregation: null as Subscription,
+    authority: null as Subscription,
+    identity: null as Subscription,
+    position: null as Subscription,
+    marriage: null as Subscription,
+    user_ids: null as Subscription
   };
   
 
   ngOnInit(){
-    this.toolbarService.title.next("新增使用者");
+    /** initialize */
 
-    this.toolbarService.showSubmitButton.next(true);
+    this.toolbarService.title.next("新增使用者");  //set page title
+    this.toolbarService.showSubmitButton.next(true);  //show submit button
 
-    this.subscribers.clickSubmitButton = this.toolbarService.clickSubmitButton.subscribe(data=>{
+    /** subscribe events */
+
+    //start submit new user process by clicking submit button
+    this.subscriptions.clickSubmitButton = this.toolbarService.clickSubmitButton.subscribe(data=>{
       this.submitNewUser();
     });
 
-    this.subscribers.gender = this.settingsService.genders.subscribe(data=>{
+    /** subscribe data */
+
+    this.subscriptions.gender = this.settingsService.genders.subscribe(data=>{
       this.options.genders = data;
     });
 
-    this.subscribers.congregation = this.settingsService.congregations.subscribe(data=>{
+    this.subscriptions.congregation = this.settingsService.congregations.subscribe(data=>{
       this.options.congregations = data;
     });
 
-    this.subscribers.authority = this.settingsService.authoritys.subscribe(data=>{
+    this.subscriptions.authority = this.settingsService.authoritys.subscribe(data=>{
       this.options.authoritys = data;
     });
 
-    this.subscribers.identity = this.settingsService.identitys.subscribe(data=>{
+    this.subscriptions.identity = this.settingsService.identitys.subscribe(data=>{
       this.options.identitys = data;
     });
 
-    this.subscribers.position = this.settingsService.positions.subscribe(data=>{
+    this.subscriptions.position = this.settingsService.positions.subscribe(data=>{
       this.options.positions = data;
     });
 
-    this.subscribers.marriage = this.settingsService.marriages.subscribe(data=>{
+    this.subscriptions.marriage = this.settingsService.marriages.subscribe(data=>{
       this.options.marriages = data;
     });
 
-    this.subscribers.user_ids = this.userService.id_map.subscribe((data: UserIdMap)=>{
+    //get user id list
+    this.subscriptions.user_ids = this.userService.id_map.subscribe((data: UserIdMap)=>{
       this.user_ids = data.getUserIds();
     });
   }
 
   ngOnDestroy(){
-    this.toolbarService.showSubmitButton.next(false);
+    this.toolbarService.showSubmitButton.next(false);  //hide submit button
     
-    for(let index in this.subscribers){
-      this.subscribers[index].unsubscribe();
+    /** unsubscribe */
+    for(let index in this.subscriptions){
+      this.subscriptions[index].unsubscribe();
     }
   }
 
@@ -95,7 +110,7 @@ export class NewUserComponent implements OnInit, OnDestroy {
   new_user = new User();
   user_ids = [];
 
-  //mat-options
+  /** mat-options */
   options = {
     genders: null,
     congregations: null,
@@ -105,24 +120,25 @@ export class NewUserComponent implements OnInit, OnDestroy {
     marriages: null
   }
 
-  //validators
+  /** validators */
+  //check if user id exist or not, id has to be unique
   idValidator = (id: FormControl)=>{
     return this.user_ids.includes(id.value) ? {id_exist: {valid:false}} : null ;
   }
 
-  //form control
+  /** form control */
   new_user_form = this.formBuilder.group({
     name: ["",Validators.required],
     id: ["",[Validators.required,this.idValidator]],
     gender: ["",Validators.required],
     congregation: ["",Validators.required],
     authority: ["",Validators.required],
-    baptize_date: ["",Validators.required],   //matDatepickerParse error by date picker
+    baptize_date: ["",Validators.required],   //if format is wrong, launch matDatepickerParse error by date picker
     identity: ["",Validators.required],
     position: ["",Validators.required],
     marriage: ["",Validators.required],
 
-    birth_date: [""],  //matDatepickerParse error by date picker
+    birth_date: [""],  //if format is wrong, launch matDatepickerParse error by date picker
     address: [""],
     phone: [""],
     cellphone: ["",Validators.pattern(/^09\d{8}$/g)],
@@ -133,30 +149,29 @@ export class NewUserComponent implements OnInit, OnDestroy {
 
   /** events */
 
+  //set user name to user id as default, when user name is changed
   presetID(){
     this.new_user_form.controls.id.setValue(this.new_user_form.controls.name.value);
   }
 
   submitNewUser(){
-    this.new_user_form.markAllAsTouched();
+    this.new_user_form.markAllAsTouched();  //trigger fields that required but not touched yet
 
     if(this.new_user_form.status == "VALID"){
 
-      Object.assign(this.new_user,this.new_user_form.value);
-      this.new_user.generateCode();
+      /** set user object by form input */
+      Object.assign(this.new_user,this.new_user_form.value);  //copy values
+      this.new_user.generateCode();  //generate random sha256 user code
       this.new_user.baptize_date = this.datePipe.transform(this.new_user.baptize_date,"yyyy-MM-dd");
       this.new_user.birth_date = this.datePipe.transform(this.new_user.birth_date,"yyyy-MM-dd");
 
+      /** open confirm dialog */
       this.matDialog.open(SubmitConfirmDialogComponent,{
-        data: {
-          title: "資料確認",
-          message: "",
-          fields: this.new_user
-        }
+        data: new ConfirmDialogData("資料確認","",this.new_user)
       }).afterClosed().subscribe(result=>{
-        if(result){
+        if(result){  //true if confirmed, false if canceled
           this.userService.createUser(this.new_user).then(()=>{
-            this.new_user_form.reset();
+            this.new_user_form.reset();  //clear form for next new user
           });
         }
       });

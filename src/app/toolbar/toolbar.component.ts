@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Subscription } from "rxjs";
+
+/** services */
 import { ToolbarService } from "./toolbar.service";
 
 @Component({
@@ -6,35 +9,53 @@ import { ToolbarService } from "./toolbar.service";
   templateUrl: './toolbar.component.html',
   styleUrls: ['./toolbar.component.css']
 })
-export class ToolbarComponent implements OnInit {
+export class ToolbarComponent implements OnInit, OnDestroy {
 
   constructor(
     private toolbarService: ToolbarService
   ){}
 
+  /** subscirptions */
+  private subscriptions = {
+    title: null as Subscription,
+    showSubmitButton: null as Subscription
+  }
+
   ngOnInit(){
-    this.toolbarService.title.subscribe(next=>{
-      this.title = next;
+
+    /** subscribe data */
+
+    //get current page title
+    this.subscriptions.title = this.toolbarService.title.subscribe(data=>{
+      this.title = data;
     });
 
-    this.toolbarService.showSubmitButton.subscribe(next=>{
-      this.showSubmitButton = next;
+    //get flag of showing submit button or not
+    this.subscriptions.showSubmitButton = this.toolbarService.showSubmitButton.subscribe(data=>{
+      this.showSubmitButton = data;
     });
+  }
+
+  ngOnDestroy(){
+    for(let index in this.subscriptions){
+      this.subscriptions[index].unsubscribe();
+    }
   }
 
   /** variables */
 
-  title: string;
-  showSubmitButton: boolean;
+  title: string;  //page title
+  showSubmitButton: boolean;  //show submit button or not
 
-  /* event */
+  /* events */
 
-  clickMenuIcon(){
+  //launch click menu icon event
+  clickMenuIcon(): void{
     this.toolbarService.clickMenuIcon.next();
   }
 
-  clickSubmitButton(){
+  //launch click submit button event
+  clickSubmitButton(): void{
     this.toolbarService.clickSubmitButton.next();
   }
-
 }

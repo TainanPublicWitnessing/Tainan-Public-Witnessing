@@ -1,15 +1,20 @@
 export class UserIdMap{
-  public id_map: Array<UserIdMapNode>;
 
   constructor(id_map: Array<UserIdMapNode>){
     this.id_map = id_map;
   }
 
-  public getUserIds(){
+  /** variables */
+  id_map: Array<UserIdMapNode>;
+
+  /** functions */
+  getUserIds(){
     let result = [];
     for(let index in this.id_map){
       result.push(this.id_map[index].id);
     }
+
+    //sort before return
     return result.sort((A: string, B: string)=>{
       return A.localeCompare(B);
     });
@@ -17,11 +22,14 @@ export class UserIdMap{
 }
 
 export class UserIdMapNode{
-  public code: string;
-  public id: string;
-
-  constructor(code,id){
+  
+  constructor(code: string,id: string){
     this.code = code;
     this.id = id;
   }
+  
+  /** variables */
+  code: string;
+  id: string;
+
 }

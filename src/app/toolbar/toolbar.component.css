@@ -1,3 +1,4 @@
+/* make sure mat-toolvar + mat-sidenav-container = 100% height */
 mat-toolbar{
   height: 64px;
 }
@@ -8,6 +9,7 @@ button{
   width: 32px;
 }
 
+/* recommend by official tutorial */
 .spacer{
   flex: 1 1 auto;
 }
