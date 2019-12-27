@@ -20,6 +20,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatMomentDateModule } from "@angular/material-moment-adapter";
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 /* filebase */
 import { AngularFireModule } from "@angular/fire";
@@ -33,6 +34,7 @@ import { HomeComponent } from './home/home.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
 import { NewUserComponent } from './new-user/new-user.component';
 import { SubmitConfirmDialogComponent } from './submit-confirm-dialog/submit-confirm-dialog.component';
+import { LoginDialogComponent } from './login-dialog/login-dialog.component';
 
 @NgModule({
   declarations: [
@@ -41,10 +43,12 @@ import { SubmitConfirmDialogComponent } from './submit-confirm-dialog/submit-con
     HomeComponent,
     ToolbarComponent,
     NewUserComponent,
-    SubmitConfirmDialogComponent
+    SubmitConfirmDialogComponent,
+    LoginDialogComponent
   ],
   entryComponents: [
-    SubmitConfirmDialogComponent
+    SubmitConfirmDialogComponent,
+    LoginDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -66,6 +70,7 @@ import { SubmitConfirmDialogComponent } from './submit-confirm-dialog/submit-con
     MatDatepickerModule,
     MatMomentDateModule,
     MatDialogModule,
+    MatAutocompleteModule,
 
     /** firebase */
     AngularFireModule.initializeApp(environment.firebase),  //import firebase settings
