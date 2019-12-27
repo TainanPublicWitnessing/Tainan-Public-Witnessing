@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router} from "@angular/router";
 
+/** services */
 import { SidenavService } from "./sidenav.service";
 
 @Component({
@@ -15,13 +16,12 @@ export class SidenavComponent implements OnInit {
     private sidenavService: SidenavService
   ){}
 
-  ngOnInit() {
-  }
+  ngOnInit(){}
 
-  /** routing function */
-  routingTo(url){
-    this.sidenavService.clickLinkButton.next();
+  /** functions */
+
+  routingTo(url): void{
+    this.sidenavService.clickLinkButton.next();  //launch click link button event
     this.router.navigateByUrl(url);
   }
-
 }

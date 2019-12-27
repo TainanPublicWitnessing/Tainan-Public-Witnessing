@@ -1,7 +1,4 @@
-app-toolbar{
-  height: 64px;
-}
-
+/* make sure mat-toolvar + mat-sidenav-container = 100% height */
 mat-sidenav-container{
   position: absolute;
   top: 64px;

@@ -1,4 +1,6 @@
 form{
+  max-width: 512px;
+  margin: auto;
   margin-bottom: 64px;
 }
 

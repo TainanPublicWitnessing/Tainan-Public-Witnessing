@@ -1,6 +1,9 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 
+/** structures */
+import { ConfirmDialogData } from "../_structure/ConfirmDialogData.class";
+
 @Component({
   selector: 'app-submit-confirm-dialog',
   templateUrl: './submit-confirm-dialog.component.html',
@@ -10,17 +13,18 @@ export class SubmitConfirmDialogComponent implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<SubmitConfirmDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any
+    @Inject(MAT_DIALOG_DATA) public data: ConfirmDialogData
   ){}
 
-  ngOnInit() {
+  ngOnInit(){}
+
+  /** functions */
+
+  cancel(){
+    this.dialogRef.close(false);  //return result as flase
   }
 
-  public cancel(){
-    this.dialogRef.close(false);
-  }
-
-  public confirm(){
-    this.dialogRef.close(true);
+  confirm(){
+    this.dialogRef.close(true);  //return result as true
   }
 }

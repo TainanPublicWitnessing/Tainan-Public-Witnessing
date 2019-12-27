@@ -1,11 +1,9 @@
+/** angular */
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DatePipe } from "@angular/common";
-
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
 
 /** angular material */
 import { MAT_DATE_LOCALE } from "@angular/material";
@@ -27,7 +25,11 @@ import { AngularFirestoreModule } from "@angular/fire/firestore";
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { environment } from "../environments/environment";  //Firebase config
 
+/** modules */
+import { AppRoutingModule } from './app-routing.module';
+
 /** components */
+import { AppComponent } from './app.component';
 import { SidenavComponent } from './sidenav/sidenav.component';
 import { HomeComponent } from './home/home.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
@@ -43,16 +45,15 @@ import { SubmitConfirmDialogComponent } from './submit-confirm-dialog/submit-con
     NewUserComponent,
     SubmitConfirmDialogComponent
   ],
-  entryComponents: [
+  entryComponents: [  //dynamic component goes here
     SubmitConfirmDialogComponent
   ],
   imports: [
+    /** angular */
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-
-    AppRoutingModule,
 
     /** angular material */
     MatSidenavModule,
@@ -70,10 +71,13 @@ import { SubmitConfirmDialogComponent } from './submit-confirm-dialog/submit-con
     /** firebase */
     AngularFireModule.initializeApp(environment.firebase),  //import firebase settings
     AngularFirestoreModule,
-    AngularFireAuthModule
+    AngularFireAuthModule,
+
+    /** routing */
+    AppRoutingModule
   ],
   providers: [
-    { provide: MAT_DATE_LOCALE, useValue: 'zh-TW' },
+    { provide: MAT_DATE_LOCALE, useValue: 'zh-TW' },  //for MatMomentDateModule
     DatePipe
   ],
   bootstrap: [AppComponent]
