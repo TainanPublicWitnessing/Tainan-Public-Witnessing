@@ -15,12 +15,20 @@ export class LoginDialogService {
     private matDialog: MatDialog
   ){}
 
+  /** variables */
+  login_dialog_exist: boolean = false; //make sure login dialog only exist one
+
   openLoginDialog = ()=>{  //has to be arrow function
-    this.matDialog.open(LoginDialogComponent,{
-      width: "75%",
-      height: "275px",
-      maxWidth: "512px",
-      disableClose: true
-    });
+    if(!this.login_dialog_exist){
+      this.login_dialog_exist = true;
+      this.matDialog.open(LoginDialogComponent,{
+        width: "75%",
+        height: "275px",
+        maxWidth: "512px",
+        disableClose: true
+      }).afterClosed().subscribe(()=>{
+        this.login_dialog_exist = false;
+      });
+    }
   }
 }

@@ -1,5 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
+import { Router } from "@angular/router";
 
 /** rxjs */
 import { Subscription } from "rxjs";
@@ -23,7 +24,8 @@ export class LoginDialogComponent implements OnInit, OnDestroy {
   constructor(
     public dialogRef: MatDialogRef<LoginDialogComponent>,
     private formBuilder: FormBuilder,
-    private userService: UserService
+    private userService: UserService,
+    private router: Router
   ){}
 
   /** subscriptions */
@@ -62,7 +64,11 @@ export class LoginDialogComponent implements OnInit, OnDestroy {
 
   /** validators */
   idValidator = (id: FormControl)=>{
-    return this.user_ids.includes(id.value) ? null : {id_not_exist: {valid:false}} ;
+    return ( this.user_ids.includes(id.value) || id.value == "" ) ? null : {id_not_exist: {valid:false}} ;
+  }
+
+  passwordValidator = ()=>{
+    return {password_error: {valid:false}} ;
   }
 
   /** form controls */
@@ -74,10 +80,19 @@ export class LoginDialogComponent implements OnInit, OnDestroy {
   /** functions */
 
   cancel(){
+    this.router.navigateByUrl("home");
     this.dialogRef.close();
   }
 
   confirm(){
-    this.dialogRef.close();
+    this.userService.login(this.login_form.value.id,this.login_form.value.password).then(result=>{
+      if(result){
+        this.dialogRef.close();
+      }else{
+        this.login_form.controls.password.setValidators(this.passwordValidator);
+        this.login_form.controls.password.updateValueAndValidity();
+      }
+    });
+    
   }
 }
