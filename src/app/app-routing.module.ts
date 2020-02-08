@@ -4,11 +4,13 @@ import { Routes, RouterModule } from '@angular/router';
 /* components */
 import { HomeComponent } from "./home/home.component";
 import { NewUserComponent } from "./new-user/new-user.component";
+import { ApiComponent } from './api/api.component';
 
 const routes: Routes = [
   { path: "", redirectTo: "home", pathMatch: "full" },
   { path: "home", component: HomeComponent },
-  { path: "new_user", component: NewUserComponent }
+  { path: "new_user", component: NewUserComponent },
+  { path: "api", component: ApiComponent }
 ];
 
 @NgModule({
