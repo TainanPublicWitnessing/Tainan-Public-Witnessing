@@ -1,6 +1,6 @@
 import { sha256 } from "js-sha256";
 
-export class User{
+export class User {
 
   /** variables */
 

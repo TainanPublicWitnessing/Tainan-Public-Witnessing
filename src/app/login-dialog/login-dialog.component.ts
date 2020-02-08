@@ -84,7 +84,7 @@ export class LoginDialogComponent implements OnInit, OnDestroy {
     this.dialogRef.close();
   }
 
-  confirm(){
+  confirm(){  //not check valid!!!!!!!!
     this.userService.login(this.login_form.value.id,this.login_form.value.password).then(result=>{
       if(result){
         this.dialogRef.close();

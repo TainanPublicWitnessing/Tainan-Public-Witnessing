@@ -9,34 +9,33 @@ import { LoginDialogService } from "../login-dialog/login-dialog.service";
 import { UserService } from "../_service/user.service";
 import { AuthorityService } from "../_service/authority.service";
 
+/** structures */
+import { SubscribeManager } from "../_structure/SubscribeManager.class";
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements OnInit, OnDestroy {
+export class HomeComponent extends SubscribeManager implements OnInit, OnDestroy {
 
   constructor(
     private toolbarService: ToolbarService,
     private loginDialogService: LoginDialogService,
     private userService: UserService,
     private authorityService: AuthorityService
-  ){}
+  ){
+    super();
+  }
 
   /** authoritys */
   authoritys = null;
-
-  /** subscriptions */
-  private subscriptions = {
-    authoritys: null as Subscription
-  }
-  /** subscribers */
 
   ngOnInit(){
     this.toolbarService.title.next("首頁");
     
     /** subscribe authoritys */
-    this.subscriptions.authoritys = this.authorityService.current_authoritys.subscribe(data=>{
+    this.authorityService.current_authoritys.subscribe(data=>{
       if(!data.home){
         this.loginDialogService.openLoginDialog();
       }
