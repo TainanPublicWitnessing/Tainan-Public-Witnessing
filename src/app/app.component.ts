@@ -66,5 +66,5 @@ export class AppComponent extends SubscribeManager implements OnInit, OnDestroy 
   }
 
   /** DOM */
-  @ViewChild("sidenav",{static:false}) sidenav;
+  @ViewChild("sidenav") sidenav;
 }
