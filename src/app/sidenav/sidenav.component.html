@@ -1,2 +1,4 @@
 <button mat-button (click)="routingTo('home')">首頁</button>
-<button mat-button (click)="routingTo('new_user')">新增使用者</button>
+<button mat-button (click)="routingTo('new_user')" *ngIf="authoritys.new_user">新增使用者</button>
+<button mat-button (click)="login()" *ngIf="authoritys.login">登入</button>
+<button mat-button (click)="logout()" *ngIf="authoritys.logout">登出</button>

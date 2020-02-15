@@ -50,18 +50,52 @@ export class UserService {
     });
   }
 
-  createUser(user:User): Promise<void>{  //promiseis for synchronize
-    return this.addUserIdMap(new UserIdMapNode(user.code,user.id)).then(()=>{  //write in user id map
+  createUser(user:User): Promise<void>{  //promise for synchronize
+    return this.addUserIdMap(new UserIdMapNode(user.code,user.id))  //write in user id map
+    .then(()=>{
       //can't use custom object, have to assign to a new empty object
-      return this.angularFirestore.collection("DEV/DEV/Users").doc(user.code).set(Object.assign({},user));  //write in user data
+      this.angularFirestore.collection("DEV/DEV/Users").doc(user.code).set(Object.assign({},user));  //write in user data
     }).then(()=>{
-      return this.angularFireAuth.auth.createUserWithEmailAndPassword(  //create firebase auth user
+      this.angularFireAuth.auth.createUserWithEmailAndPassword(  //create firebase auth user
         user.getFirebaseAuthEmail(),  //user id + @Tainan.Public.Witnessing
         this.datePipe.transform(user.baptize_date,"yyyyMMdd")  //password default as baptize date
       );
     }).then(()=>{
       //will auto signin after create, have to deal with it later
-      return this.angularFireAuth.auth.signOut();
+      this.angularFireAuth.auth.signOut();
     });
+  }
+
+  login(user_id: string,password: string): Promise<boolean>{
+    let code = this.id_map.getValue().getUserCodeById(user_id);
+    console.log(user_id,code,password);
+    
+    return this.angularFireAuth.auth.signInWithEmailAndPassword(User.transformToFirebaseAuthEmail(code),password)
+    .then(
+      ()=>{  //on fulfilled
+        this.angularFirestore.doc("DEV/DEV/Users/" + code).get().pipe(
+          map(data=>{
+            return data.data();
+          })
+        ).subscribe(data=>{
+          this.current_user.next(Object.assign(new User,data));
+        });
+        return true;
+      },
+      ()=>{  //on rejected
+        return false;
+      }
+    );
+  }
+
+  logout(): Promise<void>{
+    this.current_user.next(new User);
+    return this.angularFireAuth.auth.signOut();
+  }
+
+  /** temp */
+  showCurrentUser(){
+    console.log(this.current_user.getValue());
+    console.log(this.angularFireAuth.auth.currentUser);
   }
 }

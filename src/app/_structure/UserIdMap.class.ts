@@ -19,6 +19,12 @@ export class UserIdMap{
       return A.localeCompare(B);
     });
   }
+
+  getUserCodeById(id: string){
+    return this.id_map.find(node=>{
+      return node.id == id;
+    }).code;
+  }
 }
 
 export class UserIdMapNode{

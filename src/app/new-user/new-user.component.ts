@@ -14,7 +14,9 @@ import { ConfirmDialogData } from "../_structure/ConfirmDialogData.class";
 /** services */
 import { ToolbarService } from "../toolbar/toolbar.service";
 import { SettingsService } from "../_service/settings.service";
-import { UserService } from "../_service/user.service"
+import { UserService } from "../_service/user.service";
+import { AuthorityService } from "../_service/authority.service";
+import { LoginDialogService } from "../login-dialog/login-dialog.service";
 
 /** components */
 import { SubmitConfirmDialogComponent } from "../submit-confirm-dialog/submit-confirm-dialog.component";
@@ -32,11 +34,19 @@ export class NewUserComponent implements OnInit, OnDestroy {
     private matDialog: MatDialog,
     private toolbarService: ToolbarService,
     private settingsService: SettingsService,
-    private userService: UserService
+    private userService: UserService,
+    private authorityService: AuthorityService,
+    private loginDialogService: LoginDialogService
   ){}
+
+  /** authoritys */
+  authoritys = null;
 
   /** subscriptions */
   private subscriptions = {
+    /** authoritys */
+    authoritys: null as Subscription,
+
     /** events */
     clickSubmitButton: null as Subscription,
 
@@ -56,6 +66,14 @@ export class NewUserComponent implements OnInit, OnDestroy {
 
     this.toolbarService.title.next("新增使用者");  //set page title
     this.toolbarService.showSubmitButton.next(true);  //show submit button
+
+    /** subscribe authoritys */
+    this.subscriptions.authoritys = this.authorityService.current_authoritys.subscribe(data=>{
+      if(!data.new_user){
+        this.loginDialogService.openLoginDialog();
+      }
+      this.authoritys = data;
+    })
 
     /** subscribe events */
 
