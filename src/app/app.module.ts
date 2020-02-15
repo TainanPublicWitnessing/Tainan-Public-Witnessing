@@ -37,6 +37,7 @@ import { ToolbarComponent } from './toolbar/toolbar.component';
 import { NewUserComponent } from './new-user/new-user.component';
 import { SubmitConfirmDialogComponent } from './submit-confirm-dialog/submit-confirm-dialog.component';
 import { LoginDialogComponent } from './login-dialog/login-dialog.component';
+import { ApiComponent } from './api/api.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { LoginDialogComponent } from './login-dialog/login-dialog.component';
     ToolbarComponent,
     NewUserComponent,
     SubmitConfirmDialogComponent,
-    LoginDialogComponent
+    LoginDialogComponent,
+    ApiComponent
   ],
   entryComponents: [  //dynamic component goes here
     SubmitConfirmDialogComponent,

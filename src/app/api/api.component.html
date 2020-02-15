@@ -1,0 +1,25 @@
+<form [formGroup]="command_form">
+
+  <mat-form-field class="full-width">
+    <mat-label>COMMAND</mat-label>
+    <input matInput formControlName="command" [matAutocomplete]="auto_commands">
+    <mat-autocomplete #auto_commands="matAutocomplete">
+      <mat-option *ngFor="let command of commands" [value]="command">{{command}}</mat-option>
+    </mat-autocomplete>
+    <mat-error *ngIf="command_form.controls.command.hasError('required')">PLEASE ENTER COMMAND</mat-error>
+    <mat-error *ngIf="command_form.controls.command.hasError('syntax_error')">SYNTAX ERROR</mat-error>
+  </mat-form-field>
+
+  <button 
+    mat-raised-button 
+    (click)="runCommand()"
+    class="float-fight">
+    RUN
+  </button>
+
+</form>
+
+<mat-form-field class="full-width">
+  <mat-label>OUTPUT</mat-label>
+  <textarea matInput [value]="output" readonly="true" rows="16"></textarea>
+</mat-form-field>
