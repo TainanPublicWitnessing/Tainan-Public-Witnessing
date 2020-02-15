@@ -6,9 +6,9 @@ import { Subscription } from "rxjs";
 
 /** services */
 import { SidenavService } from "./sidenav.service";
-import { UserService } from "../_service/user.service";
-import { AuthorityService } from "../_service/authority.service";
-import { LoginDialogService } from "../login-dialog/login-dialog.service";
+import { UserService } from "src/app/_services/user.service";
+import { AuthorityService } from "src/app/_services/authority.service";
+import { LoginDialogService } from "src/app/_elements/dialogs/login-dialog/login-dialog.service";
 
 @Component({
   selector: 'app-sidenav',

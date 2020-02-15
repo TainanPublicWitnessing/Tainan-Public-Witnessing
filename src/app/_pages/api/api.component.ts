@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import { ReportService } from '../_service/report.service';
+import { ReportService } from 'src/app/_services/report.service';
 
 @Component({
   selector: 'app-api',

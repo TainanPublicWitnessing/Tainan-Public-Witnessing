@@ -11,8 +11,8 @@ import { AngularFireAuth } from "@angular/fire/auth";
 import { firestore } from "firebase/app";
 
 /** structures */
-import { User } from "../_structure/User.class"
-import { UserIdMap, UserIdMapNode } from "../_structure/UserIdMap.class";
+import { User } from "src/app/_structures/User.class"
+import { UserIdMap, UserIdMapNode } from "src/app/_structures/UserIdMap.class";
 
 @Injectable({
   providedIn: 'root'

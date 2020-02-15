@@ -9,10 +9,10 @@ import { Subscription } from "rxjs";
 import { MatDialogRef } from "@angular/material/dialog";
 
 /** serveices */
-import { UserService } from "../_service/user.service";
+import { UserService } from "src/app/_services/user.service";
 
 /** structures */
-import { UserIdMap } from "../_structure/UserIdMap.class";
+import { UserIdMap } from "src/app/_structures/UserIdMap.class";
 
 @Component({
   selector: 'app-login-dialog',

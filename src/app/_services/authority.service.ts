@@ -8,11 +8,11 @@ import { BehaviorSubject } from 'rxjs';
 import { map } from "rxjs/operators";
 
 /** structures */
-import { AuthorityTable, AuthorityAction } from "../_structure/AuthorityTable.class";
+import { AuthorityTable, AuthorityAction } from "src/app/_structures/AuthorityTable.class";
 
 /** services */
-import { UserService } from "../_service/user.service";
-import { LoginDialogService } from "../login-dialog/login-dialog.service";
+import { UserService } from "src/app/_services/user.service";
+import { LoginDialogService } from "src/app/_elements/dialogs/login-dialog/login-dialog.service";
 
 @Injectable({
   providedIn: 'root'

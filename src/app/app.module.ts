@@ -1,9 +1,9 @@
 /** angular */
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DatePipe } from "@angular/common";
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 /** angular material */
 import { MAT_DATE_LOCALE } from "@angular/material";
@@ -24,20 +24,21 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { AngularFireModule } from "@angular/fire";
 import { AngularFirestoreModule } from "@angular/fire/firestore";
 import { AngularFireAuthModule } from '@angular/fire/auth';
-import { environment } from "../environments/environment";  //Firebase config
+import { environment } from "src/environments/environment";  //Firebase config
 
 /** modules */
-import { AppRoutingModule } from './app-routing.module';
+import { AppRoutingModule } from 'src/app/app-routing.module';
 
 /** components */
-import { AppComponent } from './app.component';
-import { SidenavComponent } from './sidenav/sidenav.component';
-import { HomeComponent } from './home/home.component';
-import { ToolbarComponent } from './toolbar/toolbar.component';
-import { NewUserComponent } from './new-user/new-user.component';
-import { SubmitConfirmDialogComponent } from './submit-confirm-dialog/submit-confirm-dialog.component';
-import { LoginDialogComponent } from './login-dialog/login-dialog.component';
-import { ApiComponent } from './api/api.component';
+import { AppComponent } from 'src/app/app.component';
+import { SidenavComponent } from 'src/app/sidenav/sidenav.component';
+import { ToolbarComponent } from 'src/app/toolbar/toolbar.component';
+import { HomeComponent } from 'src/app/_pages/home/home.component';
+import { NewUserComponent } from 'src/app/_pages/new-user/new-user.component';
+import { ApiComponent } from 'src/app/_pages/api/api.component';
+
+import { SubmitConfirmDialogComponent } from 'src/app/_elements/dialogs/submit-confirm-dialog/submit-confirm-dialog.component';
+import { LoginDialogComponent } from 'src/app/_elements/dialogs/login-dialog/login-dialog.component';
 
 @NgModule({
   declarations: [

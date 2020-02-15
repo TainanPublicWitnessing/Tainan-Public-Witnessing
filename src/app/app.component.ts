@@ -2,14 +2,14 @@ import { Component, ViewChild, OnInit, OnDestroy } from '@angular/core';
 import { combineLatest } from "rxjs";
 
 /** services */
-import { ToolbarService } from "./toolbar/toolbar.service";
-import { SidenavService } from "./sidenav/sidenav.service";
-import { SettingsService } from "./_service/settings.service";
-import { UserService } from "./_service/user.service";
-import { AuthorityService } from "./_service/authority.service";
+import { ToolbarService } from "src/app/toolbar/toolbar.service";
+import { SidenavService } from "src/app/sidenav/sidenav.service";
+import { SettingsService } from "src/app/_services/settings.service";
+import { UserService } from "src/app/_services/user.service";
+import { AuthorityService } from "src/app/_services/authority.service";
 
 /** structures */
-import { SubscribeManager } from "./_structure/SubscribeManager.class";
+import { SubscribeManager } from "src/app/_managers/SubscribeManager.class";
 
 @Component({
   selector: 'app-root',
