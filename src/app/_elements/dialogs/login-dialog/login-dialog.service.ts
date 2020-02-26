@@ -23,7 +23,7 @@ export class LoginDialogService {
       this.login_dialog_exist = true;
       this.matDialog.open(LoginDialogComponent,{
         width: "75%",
-        height: "275px",
+        height: "auto",
         maxWidth: "512px",
         disableClose: true
       }).afterClosed().subscribe(()=>{

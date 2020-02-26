@@ -2,9 +2,6 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Router } from "@angular/router";
 
-/** rxjs */
-import { Subscription } from "rxjs";
-
 /** angular material */
 import { MatDialogRef } from "@angular/material/dialog";
 
@@ -13,6 +10,9 @@ import { UserService } from "src/app/_services/user.service";
 
 /** structures */
 import { UserIdMap } from "src/app/_structures/UserIdMap.class";
+
+/** managers */
+import { SubscribeManager } from "src/app/_managers/SubscribeManager.class";
 
 @Component({
   selector: 'app-login-dialog',
@@ -28,47 +28,18 @@ export class LoginDialogComponent implements OnInit, OnDestroy {
     private router: Router
   ){}
 
-  /** subscriptions */
-  private subscriptions = {
-    user_ids: null as Subscription,
-    user_ids_options: null as Subscription
-  }
-
-  ngOnInit(){
-    
-    /** subscribe data */
-    this.subscriptions.user_ids = this.userService.id_map.subscribe((data: UserIdMap)=>{
-      this.user_ids = data.getUserIds();
-    });
-
-    /** subscribe events */
-    this.subscriptions.user_ids_options = this.login_form.controls.id.valueChanges.subscribe(data=>{
-      this.options.user_ids = this.user_ids.filter(id=>id.includes(data));
-    });
-  }
-
-  ngOnDestroy(){
-    /** unsubscribe */
-    for(let index in this.subscriptions){
-      this.subscriptions[index].unsubscribe();
-    }
-  }
-
-  /** mat ooptions */
-  options = {
-    user_ids: []
-  }
+  /** managers */
+  subscribe_manager: SubscribeManager = new SubscribeManager();
 
   /** variables */
-  user_ids = [];
+  user_ids = [];  //all user id list
+  options = {  //for mat options
+    user_ids: []
+  }
 
   /** validators */
   idValidator = (id: FormControl)=>{
     return ( this.user_ids.includes(id.value) || id.value == "" ) ? null : {id_not_exist: {valid:false}} ;
-  }
-
-  passwordValidator = ()=>{
-    return {password_error: {valid:false}} ;
   }
 
   /** form controls */
@@ -77,22 +48,42 @@ export class LoginDialogComponent implements OnInit, OnDestroy {
     password: ["",Validators.required]
   });
 
+  /** angular life cycle */
+
+  ngOnInit(){
+
+    this.subscribe_manager.pushSubscriptions(
+
+      this.userService.id_map.subscribe((data: UserIdMap)=>{
+        this.user_ids = data.getUserIds();
+      }),
+
+      this.login_form.controls.id.valueChanges.subscribe(data=>{
+        this.options.user_ids = this.user_ids.filter(id=>id.includes(data));
+      })
+
+    );
+  }
+
+  ngOnDestroy(){
+    /** unsubscribe */
+    this.subscribe_manager.unsubscribeAll();
+  }
+
   /** functions */
 
   cancel(){
-    this.router.navigateByUrl("home");
+    //this.router.navigateByUrl("home");
     this.dialogRef.close();
   }
 
   confirm(){  //not check valid!!!!!!!!
-    this.userService.login(this.login_form.value.id,this.login_form.value.password).then(result=>{
+    this.userService.login(this.login_form.value.id, this.login_form.value.password).then(result=>{
       if(result){
         this.dialogRef.close();
       }else{
-        this.login_form.controls.password.setValidators(this.passwordValidator);
-        this.login_form.controls.password.updateValueAndValidity();
+        this.login_form.controls.password.setErrors({password_error: true});
       }
     });
-    
   }
 }

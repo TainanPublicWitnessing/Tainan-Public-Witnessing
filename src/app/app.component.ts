@@ -16,7 +16,7 @@ import { SubscribeManager } from "src/app/_managers/SubscribeManager.class";
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent extends SubscribeManager implements OnInit, OnDestroy {
+export class AppComponent implements OnInit, OnDestroy {
 
   constructor(
     private toolbarService: ToolbarService,
@@ -24,13 +24,17 @@ export class AppComponent extends SubscribeManager implements OnInit, OnDestroy 
     private settingsService: SettingsService,
     private userService: UserService,
     private authorityService: AuthorityService
-  ){
-    super();
-  }
+  ){}
+
+  /** managers */
+  subscribeManager: SubscribeManager = new SubscribeManager();
+
+  /** DOM */
+  @ViewChild("sidenav") sidenav;
 
   ngOnInit(){
     
-    this.subscriptions.push(
+    this.subscribeManager.pushSubscriptions(
       /** subscribe events */
 
       //toggle sidenav by clicking menu icon
@@ -52,6 +56,7 @@ export class AppComponent extends SubscribeManager implements OnInit, OnDestroy 
           authority_table.getAuthoritys(current_user.authority)
         );
       })
+
     );
 
     /** load data */  //some of these might move to other components later
@@ -62,9 +67,6 @@ export class AppComponent extends SubscribeManager implements OnInit, OnDestroy 
   }
 
   ngOnDestroy(){
-    this.unsubscribe();
+    this.subscribeManager.unsubscribeAll();
   }
-
-  /** DOM */
-  @ViewChild("sidenav") sidenav;
 }

@@ -1,6 +1,13 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+
+/** rxjs */
 import { Subscription } from 'rxjs';
+
+/** managers */
+import { SubscribeManager } from "src/app/_managers/SubscribeManager.class";
+
+/** services */
 import { ReportService } from 'src/app/_services/report.service';
 
 @Component({
@@ -20,10 +27,14 @@ export class ApiComponent implements OnInit, OnDestroy {
     "export shift-statistic [yyyyMM]"
   ];
 
+  /** managers */
+  subscribeManager: SubscribeManager = new SubscribeManager();
+
   /** variables */
   command_form = this.formBuilder.group({
     command: ["",Validators.required]
   });
+
   output: string = "";
   commands: string[] = [];
 
@@ -31,8 +42,7 @@ export class ApiComponent implements OnInit, OnDestroy {
   subscriptions: Subscription[] = [];
 
   ngOnInit(){
-    /** subscribes */
-    this.subscriptions.push(
+    this.subscribeManager.pushSubscriptions(
 
       this.command_form.controls.command.valueChanges.subscribe(value=>{
         this.commands = this.COMMANDS.filter(command=>{
@@ -44,10 +54,7 @@ export class ApiComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(){
-    /** unsubscribe */
-    this.subscriptions.forEach(subscription=>{
-      subscription.unsubscribe();
-    });
+    this.subscribeManager.unsubscribeAll();
   }
 
   runCommand(){

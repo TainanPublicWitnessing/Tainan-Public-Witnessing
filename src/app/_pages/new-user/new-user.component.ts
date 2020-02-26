@@ -9,7 +9,6 @@ import { MatDialog } from "@angular/material/dialog";
 /** structures */
 import { User } from "src/app/_structures/User.class";
 import { UserIdMap } from "src/app/_structures/UserIdMap.class";
-import { ConfirmDialogData } from "src/app/_structures/ConfirmDialogData.class";
 
 /** services */
 import { ToolbarService } from "src/app/toolbar/toolbar.service";
@@ -19,7 +18,7 @@ import { AuthorityService } from "src/app/_services/authority.service";
 import { LoginDialogService } from "src/app/_elements/dialogs/login-dialog/login-dialog.service";
 
 /** components */
-import { SubmitConfirmDialogComponent } from "src/app/_elements/dialogs/submit-confirm-dialog/submit-confirm-dialog.component";
+import { SubmitConfirmDialogComponent, ConfirmDialogData } from "src/app/_elements/dialogs/submit-confirm-dialog/submit-confirm-dialog.component";
 
 @Component({
   selector: 'app-new-user',

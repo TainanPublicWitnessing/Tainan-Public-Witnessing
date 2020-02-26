@@ -1,9 +1,13 @@
 import { Subscription } from "rxjs";
 
 export class SubscribeManager{
-  public subscriptions: Array<Subscription> = [];
+  private subscriptions: Subscription[] = [];
 
-  unsubscribe(){
+  pushSubscriptions(...subscriptions: Subscription[]){
+    this.subscriptions.concat(subscriptions);
+  }
+
+  unsubscribeAll(){
     for(let index in this.subscriptions){
       this.subscriptions[index].unsubscribe();
     }

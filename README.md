@@ -1,3 +1,21 @@
+# develop note
+
+## file structures
+
+app/
+  _elements/  (reusable components)
+    dialogs/
+  _managers/  (classes for component composition, manage reusable rules)
+  _pages/  (unique and stable components, show in router-outlet)
+    example/
+      example.component.ts
+      example.component.html
+      example.component.css
+      example.service.ts  (optional)
+      child_component/  (including unique and stable dialog)
+  _services/  (data module services, read data from server)
+  _structures/  (classes for data structures)
+
 # TainanPublicWitnessing
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.2.1.

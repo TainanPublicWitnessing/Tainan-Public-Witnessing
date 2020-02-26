@@ -37,6 +37,7 @@ export class AuthorityService {
       })
     ).subscribe(data=>{
       this.authority_table.next(new AuthorityTable(data));
+      console.log("authority table",this.authority_table.getValue());
     });
   }
 
