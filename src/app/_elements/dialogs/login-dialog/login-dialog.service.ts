@@ -26,7 +26,7 @@ export class LoginDialogService {
         height: "auto",
         maxWidth: "512px",
         disableClose: true
-      }).afterClosed().subscribe(()=>{
+      }).afterClosed().toPromise().then(result=>{
         this.login_dialog_exist = false;
       });
     }
