@@ -1,9 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
-import { Router } from "@angular/router";
 
 /** angular material */
-import { MatDialogRef } from "@angular/material/dialog";
+import { MatDialogRef, MatDialog } from "@angular/material/dialog";
 
 /** serveices */
 import { UserService } from "src/app/_services/user.service";
@@ -22,10 +21,9 @@ import { SubscribeManager } from "src/app/_managers/SubscribeManager.class";
 export class LoginDialogComponent implements OnInit, OnDestroy {
 
   constructor(
-    public dialogRef: MatDialogRef<LoginDialogComponent>,
+    private matDialogRef: MatDialogRef<LoginDialogComponent>,
     private formBuilder: FormBuilder,
-    private userService: UserService,
-    private router: Router
+    private userService: UserService
   ){}
 
   /** managers */
@@ -73,13 +71,13 @@ export class LoginDialogComponent implements OnInit, OnDestroy {
   /** functions */
 
   cancel(){
-    this.dialogRef.close(false);
+    this.matDialogRef.close(false);
   }
 
   confirm(){  //not check valid!!!!!!!!
     this.userService.login(this.login_form.value.id, this.login_form.value.password).then(result=>{
       if(result){
-        this.dialogRef.close(true);
+        this.matDialogRef.close(true);
       }else{
         this.login_form.controls.password.setErrors({password_error: true});
       }

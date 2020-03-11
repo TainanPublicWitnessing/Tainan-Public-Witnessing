@@ -21,7 +21,7 @@ export class SidenavComponent implements OnInit, OnDestroy {
     private router: Router,
     private sidenavService: SidenavService,
     private userService: UserService,
-    private authorityService: AuthorityService,
+    public authorityService: AuthorityService,
     private loginDialogService: LoginDialogService
   ){}
   
@@ -35,7 +35,7 @@ export class SidenavComponent implements OnInit, OnDestroy {
 
   ngOnInit(){
     /** subscribe authoritys */
-    this.subscriptions.authoritys = this.authorityService.current_authoritys.subscribe(data=>{
+    this.subscriptions.authoritys = this.authorityService.$current_authoritys.subscribe(data=>{
       this.authoritys = data;
     })
   }

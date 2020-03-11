@@ -7,9 +7,13 @@ import { SidenavService } from "src/app/sidenav/sidenav.service";
 import { SettingsService } from "src/app/_services/settings.service";
 import { UserService } from "src/app/_services/user.service";
 import { AuthorityService } from "src/app/_services/authority.service";
+import { LoginDialogService } from "src/app/_elements/dialogs/login-dialog/login-dialog.service";
 
 /** structures */
 import { SubscribeManager } from "src/app/_managers/SubscribeManager.class";
+
+/** components */
+import { LoginDialogComponent } from "src/app/_elements/dialogs/login-dialog/login-dialog.component";
 
 @Component({
   selector: 'app-root',
@@ -23,7 +27,8 @@ export class AppComponent implements OnInit, OnDestroy {
     private sidenavService: SidenavService,
     private settingsService: SettingsService,
     private userService: UserService,
-    private authorityService: AuthorityService
+    private authorityService: AuthorityService,
+    private loginDialogService: LoginDialogService
   ){}
 
   /** managers */
@@ -50,9 +55,9 @@ export class AppComponent implements OnInit, OnDestroy {
       //when current user or authority table update, update current authoritys
       combineLatest(
         this.userService.current_user,
-        this.authorityService.authority_table
+        this.authorityService.$authority_table
       ).subscribe(([current_user,authority_table])=>{
-        this.authorityService.current_authoritys.next(
+        this.authorityService.$current_authoritys.next(
           authority_table.getAuthoritys(current_user.authority)
         );
       })
@@ -64,6 +69,9 @@ export class AppComponent implements OnInit, OnDestroy {
     this.settingsService.loadAuthoritys();
     this.userService.loadUserIdMap();
     this.authorityService.loadAuthorityTable();
+
+    /** open login dialog */
+    this.loginDialogService.openLoginDialog();
   }
 
   ngOnDestroy(){

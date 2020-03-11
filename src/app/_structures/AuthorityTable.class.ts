@@ -6,6 +6,11 @@ export class AuthorityTable{
   
   authority_table: Array<AuthorityAction>;
 
+  /**
+   * @description get a list of actions that shows it has access right or not.
+   * @param current_authority string
+   * @returns { "action": true|false, ... }
+   */
   getAuthoritys(current_authority: string){
     let result = {};
     for(let index in this.authority_table){

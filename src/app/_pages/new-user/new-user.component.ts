@@ -14,8 +14,9 @@ import { UserIdMap } from "src/app/_structures/UserIdMap.class";
 import { ToolbarService } from "src/app/toolbar/toolbar.service";
 import { SettingsService } from "src/app/_services/settings.service";
 import { UserService } from "src/app/_services/user.service";
-import { AuthorityService } from "src/app/_services/authority.service";
-import { LoginDialogService } from "src/app/_elements/dialogs/login-dialog/login-dialog.service";
+
+/** managers */
+import { SubscribeManager } from "src/app/_managers/SubscribeManager.class";
 
 /** components */
 import { SubmitConfirmDialogComponent, ConfirmDialogData } from "src/app/_elements/dialogs/submit-confirm-dialog/submit-confirm-dialog.component";
@@ -33,93 +34,65 @@ export class NewUserComponent implements OnInit, OnDestroy {
     private matDialog: MatDialog,
     private toolbarService: ToolbarService,
     private settingsService: SettingsService,
-    private userService: UserService,
-    private authorityService: AuthorityService,
-    private loginDialogService: LoginDialogService
+    private userService: UserService
   ){}
 
-  /** authoritys */
-  authoritys = null;
+  /** managers */
 
-  /** subscriptions */
-  private subscriptions = {
-    /** authoritys */
-    authoritys: null as Subscription,
-
-    /** events */
-    clickSubmitButton: null as Subscription,
-
-    /** data */
-    gender: null as Subscription,
-    congregation: null as Subscription,
-    authority: null as Subscription,
-    identity: null as Subscription,
-    position: null as Subscription,
-    marriage: null as Subscription,
-    user_ids: null as Subscription
-  };
+  subscribeManager: SubscribeManager = new SubscribeManager;
   
-
   ngOnInit(){
     /** initialize */
-
     this.toolbarService.title.next("新增使用者");  //set page title
     this.toolbarService.showSubmitButton.next(true);  //show submit button
 
-    /** subscribe authoritys */
-    this.subscriptions.authoritys = this.authorityService.current_authoritys.subscribe(data=>{
-      if(!data.new_user){
-        this.loginDialogService.openLoginDialog();
-      }
-      this.authoritys = data;
-    })
+    /** subscribes */
+    this.subscribeManager.pushSubscriptions(
 
-    /** subscribe events */
+      //start submit new user process by clicking submit button
+      this.toolbarService.clickSubmitButton.subscribe(data=>{
+        this.submitNewUser();
+      }),
 
-    //start submit new user process by clicking submit button
-    this.subscriptions.clickSubmitButton = this.toolbarService.clickSubmitButton.subscribe(data=>{
-      this.submitNewUser();
-    });
+      /** subscribe data */
 
-    /** subscribe data */
+      this.settingsService.genders.subscribe(data=>{
+        this.options.genders = data;
+      }),
 
-    this.subscriptions.gender = this.settingsService.genders.subscribe(data=>{
-      this.options.genders = data;
-    });
+      this.settingsService.congregations.subscribe(data=>{
+        this.options.congregations = data;
+      }),
+  
+      this.settingsService.authoritys.subscribe(data=>{
+        this.options.authoritys = data;
+      }),
+  
+      this.settingsService.identitys.subscribe(data=>{
+        this.options.identitys = data;
+      }),
+  
+      this.settingsService.positions.subscribe(data=>{
+        this.options.positions = data;
+      }),
+  
+      this.settingsService.marriages.subscribe(data=>{
+        this.options.marriages = data;
+      }),
+  
+      //get user id list
+      this.userService.id_map.subscribe((data: UserIdMap)=>{
+        this.user_ids = data.getUserIds();
+      })
 
-    this.subscriptions.congregation = this.settingsService.congregations.subscribe(data=>{
-      this.options.congregations = data;
-    });
-
-    this.subscriptions.authority = this.settingsService.authoritys.subscribe(data=>{
-      this.options.authoritys = data;
-    });
-
-    this.subscriptions.identity = this.settingsService.identitys.subscribe(data=>{
-      this.options.identitys = data;
-    });
-
-    this.subscriptions.position = this.settingsService.positions.subscribe(data=>{
-      this.options.positions = data;
-    });
-
-    this.subscriptions.marriage = this.settingsService.marriages.subscribe(data=>{
-      this.options.marriages = data;
-    });
-
-    //get user id list
-    this.subscriptions.user_ids = this.userService.id_map.subscribe((data: UserIdMap)=>{
-      this.user_ids = data.getUserIds();
-    });
+    );
   }
 
   ngOnDestroy(){
     this.toolbarService.showSubmitButton.next(false);  //hide submit button
     
     /** unsubscribe */
-    for(let index in this.subscriptions){
-      this.subscriptions[index].unsubscribe();
-    }
+    this.subscribeManager.unsubscribeAll();
   }
 
   /** variables */

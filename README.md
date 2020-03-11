@@ -16,6 +16,43 @@ app/
   _services/  (data module services, read data from server)
   _structures/  (classes for data structures)
 
+## authority
+
+### routing
+
+add canActivate:[AuthorityService] in the path that should check authority
+
+example:
+
+  app-routing.module.ts
+
+    const routes: Routes = [
+      { path: "", redirectTo: "home", pathMatch: "full" },
+      { path: "home", component: HomeComponent },
+      { path: "new_user", component: NewUserComponent, canActivate:[AuthorityService] },
+      { path: "api", component: ApiComponent, canActivate:[AuthorityService] }
+    ];
+
+### html element
+
+inject AuthorityService into component's constructure
+
+use *ngIf="authorityService.checkAuthority(action_name)" to check authority
+
+example:
+
+  example.component.ts
+
+    constructure(
+      private authorityService: AuthorityService
+    ){}
+  
+  example.component.html
+
+    <div *ngIf="authorityService.checkAuthority('example_manager_see_me')">
+      only manager can see me
+    </div>
+
 # TainanPublicWitnessing
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.2.1.

@@ -11,7 +11,7 @@ import { ApiComponent } from 'src/app/_pages/api/api.component';
 
 const routes: Routes = [
   { path: "", redirectTo: "home", pathMatch: "full" },
-  { path: "home", component: HomeComponent, canActivate:[AuthorityService] },
+  { path: "home", component: HomeComponent },
   { path: "new_user", component: NewUserComponent, canActivate:[AuthorityService] },
   { path: "api", component: ApiComponent, canActivate:[AuthorityService] }
 ];
