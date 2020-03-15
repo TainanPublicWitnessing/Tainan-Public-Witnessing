@@ -8,7 +8,7 @@ import { MatDialog } from "@angular/material/dialog";
 
 /** structures */
 import { User } from "src/app/_structures/User.class";
-import { UserIdMap } from "src/app/_structures/UserIdMap.class";
+import { UserIdCodeMap } from "src/app/_structures/UserIdCodeMap.class";
 
 /** services */
 import { ToolbarService } from "src/app/toolbar/toolbar.service";
@@ -81,7 +81,7 @@ export class NewUserComponent implements OnInit, OnDestroy {
       }),
   
       //get user id list
-      this.userService.id_map.subscribe((data: UserIdMap)=>{
+      this.userService.users_id_code_map$.subscribe((data: UserIdCodeMap)=>{
         this.user_ids = data.getUserIds();
       })
 

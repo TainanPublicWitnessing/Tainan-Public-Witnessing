@@ -8,10 +8,12 @@ import { MatDialogRef, MatDialog } from "@angular/material/dialog";
 import { UserService } from "src/app/_services/user.service";
 
 /** structures */
-import { UserIdMap } from "src/app/_structures/UserIdMap.class";
+import { UserIdCodeMap } from "src/app/_structures/UserIdCodeMap.class";
 
 /** managers */
 import { SubscribeManager } from "src/app/_managers/SubscribeManager.class";
+
+import { sha256 } from "js-sha256";
 
 @Component({
   selector: 'app-login-dialog',
@@ -52,7 +54,7 @@ export class LoginDialogComponent implements OnInit, OnDestroy {
 
     this.subscribe_manager.pushSubscriptions(
 
-      this.userService.id_map.subscribe((data: UserIdMap)=>{
+      this.userService.users_id_code_map$.subscribe((data: UserIdCodeMap)=>{
         this.user_ids = data.getUserIds();
       }),
 
@@ -75,7 +77,10 @@ export class LoginDialogComponent implements OnInit, OnDestroy {
   }
 
   confirm(){  //not check valid!!!!!!!!
-    this.userService.login(this.login_form.value.id, this.login_form.value.password).then(result=>{
+    this.userService.login(
+      this.login_form.value.id, 
+      sha256(this.login_form.value.password)
+    ).then(result=>{
       if(result){
         this.matDialogRef.close(true);
       }else{

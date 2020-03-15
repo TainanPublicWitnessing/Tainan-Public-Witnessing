@@ -1,17 +1,17 @@
-export class UserIdMap{
+export class UserIdCodeMap{
 
-  constructor(id_map: Array<UserIdMapNode>){
-    this.id_map = id_map;
+  constructor(users_id_code_map: Array<UserIdCodeMapNode>){
+    this.users_id_code_map = users_id_code_map;
   }
 
   /** variables */
-  id_map: Array<UserIdMapNode>;
+  users_id_code_map: Array<UserIdCodeMapNode>;
 
   /** functions */
   getUserIds(){
     let result = [];
-    for(let index in this.id_map){
-      result.push(this.id_map[index].id);
+    for(let index in this.users_id_code_map){
+      result.push(this.users_id_code_map[index].id);
     }
 
     //sort before return
@@ -21,13 +21,13 @@ export class UserIdMap{
   }
 
   getUserCodeById(id: string){
-    return this.id_map.find(node=>{
+    return this.users_id_code_map.find(node=>{
       return node.id == id;
     }).code;
   }
 }
 
-export class UserIdMapNode{
+export class UserIdCodeMapNode{
   
   constructor(code: string,id: string){
     this.code = code;
