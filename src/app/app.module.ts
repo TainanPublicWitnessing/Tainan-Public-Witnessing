@@ -39,6 +39,7 @@ import { ApiComponent } from 'src/app/_pages/api/api.component';
 
 import { SubmitConfirmDialogComponent } from 'src/app/_elements/dialogs/submit-confirm-dialog/submit-confirm-dialog.component';
 import { LoginDialogComponent } from 'src/app/_elements/dialogs/login-dialog/login-dialog.component';
+import { LineComponent } from './_pages/line/line.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import { LoginDialogComponent } from 'src/app/_elements/dialogs/login-dialog/log
     NewUserComponent,
     SubmitConfirmDialogComponent,
     LoginDialogComponent,
-    ApiComponent
+    ApiComponent,
+    LineComponent
   ],
   entryComponents: [  //dynamic component goes here
     SubmitConfirmDialogComponent,
