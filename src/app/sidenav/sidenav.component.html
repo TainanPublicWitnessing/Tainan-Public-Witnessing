@@ -22,6 +22,12 @@
 </button>
 
 <button mat-button 
+  (click)="routingTo('line')" 
+  *ngIf="authorityService.checkAuthority('/line')">
+  Line
+</button>
+
+<button mat-button 
   (click)="logout()" 
   *ngIf="authorityService.checkAuthority('logout')">
   登出

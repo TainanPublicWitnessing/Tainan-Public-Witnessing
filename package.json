@@ -16,7 +16,7 @@
     "@angular/common": "^9.0.1",
     "@angular/compiler": "^9.0.1",
     "@angular/core": "^9.0.1",
-    "@angular/fire": "^5.2.3",
+    "@angular/fire": "^5.4.2",
     "@angular/forms": "^9.0.1",
     "@angular/material": "^8.2.3",
     "@angular/material-moment-adapter": "^8.2.3",

@@ -2,6 +2,7 @@
 import { NgModule } from '@angular/core';
 import { DatePipe } from "@angular/common";
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -61,9 +62,10 @@ import { LineComponent } from './_pages/line/line.component';
     /** angular */
     BrowserModule,
     FormsModule,
+    HttpClientModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-
+    
     /** angular material */
     MatSidenavModule,
     MatToolbarModule,
@@ -77,14 +79,14 @@ import { LineComponent } from './_pages/line/line.component';
     MatMomentDateModule,
     MatDialogModule,
     MatAutocompleteModule,
-
+    
     /** firebase */
     AngularFireModule.initializeApp(environment.firebase),  //import firebase settings
     AngularFirestoreModule,
     AngularFireAuthModule,
-
+    
     /** routing */
-    AppRoutingModule
+    AppRoutingModule,
   ],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'zh-TW' },  //for MatMomentDateModule

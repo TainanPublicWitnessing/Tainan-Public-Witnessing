@@ -1,0 +1,113 @@
+[debug] [2020-03-15T16:25:28.459Z] ----------------------------------------------------------------------
+[debug] [2020-03-15T16:25:28.463Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\DELL\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js serve --only functions
+[debug] [2020-03-15T16:25:28.464Z] CLI Version:   7.9.0
+[debug] [2020-03-15T16:25:28.464Z] Platform:      win32
+[debug] [2020-03-15T16:25:28.464Z] Node Version:  v10.16.3
+[debug] [2020-03-15T16:25:28.466Z] Time:          Mon Mar 16 2020 00:25:28 GMT+0800 (GMT+08:00)
+[debug] [2020-03-15T16:25:28.466Z] ----------------------------------------------------------------------
+[debug] [2020-03-15T16:25:28.466Z] 
+[debug] [2020-03-15T16:25:28.493Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2020-03-15T16:25:28.495Z] > authorizing via signed-in user
+[debug] [2020-03-15T16:25:28.495Z] [iam] checking project tainan-public-witnessing for permissions ["firebase.projects.get"]
+[debug] [2020-03-15T16:25:28.498Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2020-03-15T16:25:28.499Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ <request body omitted>
+[debug] [2020-03-15T16:25:28.719Z] <<< HTTP RESPONSE 200
+[debug] [2020-03-15T16:25:28.735Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/tainan-public-witnessing:testIamPermissions  
+
+[debug] [2020-03-15T16:25:29.752Z] <<< HTTP RESPONSE 200
+[debug] [2020-03-15T16:25:29.755Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/tainan-public-witnessing  
+ 
+[debug] [2020-03-15T16:25:30.460Z] <<< HTTP RESPONSE 200
+[warn] !  Your requested "node" version "8" doesn't match your global version "10"
+[info] +  functions: Emulator started at http://localhost:5000
+[info] i  functions: Watching "D:\Tainan-Public-Witnessing\functions" for Cloud Functions...
+[debug] [2020-03-15T16:25:33.090Z] [worker-~diagnostic~-005bc52a-46d4-4fe2-9992-2579dd3987d5]: Assigning socketPath: \\?\pipe\D:\Tainan-Public-Witnessing\functions\13820
+[debug] [2020-03-15T16:25:33.092Z] [worker-~diagnostic~-005bc52a-46d4-4fe2-9992-2579dd3987d5]: BUSY
+[debug] [2020-03-15T16:25:34.098Z] [runtime-status] [13820] Functions runtime initialized. {"cwd":"D:\\Tainan-Public-Witnessing\\functions","node_version":"10.16.3"}
+[debug] [2020-03-15T16:25:34.100Z] [runtime-status] [13820] Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"admin_stubs":true,"pubsub_emulator":true}
+[debug] [2020-03-15T16:25:34.107Z] [runtime-status] [13820] Resolved module firebase-admin {"declared":true,"installed":true,"version":"8.10.0","resolution":"D:\\Tainan-Public-Witnessing\\functions\\node_modules\\firebase-admin\\lib\\index.js"}
+[debug] [2020-03-15T16:25:34.110Z] [runtime-status] [13820] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.3.0","resolution":"D:\\Tainan-Public-Witnessing\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2020-03-15T16:25:34.111Z] [runtime-status] [13820] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.3.0","resolution":"D:\\Tainan-Public-Witnessing\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[info] +  functions[helloWorld]: http function initialized (http://localhost:5000/tainan-public-witnessing/us-central1/helloWorld).
+[debug] [2020-03-15T16:25:36.684Z] [worker-~diagnostic~-005bc52a-46d4-4fe2-9992-2579dd3987d5]: exited
+[debug] [2020-03-15T16:25:36.685Z] [worker-~diagnostic~-005bc52a-46d4-4fe2-9992-2579dd3987d5]: FINISHED
+[debug] [2020-03-15T16:25:40.903Z] Accepted request GET /tainan-public-witnessing/us-central1/helloWorld --> helloWorld
+[debug] [2020-03-15T16:25:40.910Z] [worker-helloWorld-bf1607a2-70a6-4129-8aee-9868ccf326c5]: Assigning socketPath: \\?\pipe\D:\Tainan-Public-Witnessing\functions\10204
+[debug] [2020-03-15T16:25:40.911Z] [worker-helloWorld-bf1607a2-70a6-4129-8aee-9868ccf326c5]: BUSY
+[debug] [2020-03-15T16:25:42.178Z] [runtime-status] [10204] Functions runtime initialized. {"cwd":"D:\\Tainan-Public-Witnessing\\functions","node_version":"10.16.3"}
+[debug] [2020-03-15T16:25:42.183Z] [runtime-status] [10204] Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"admin_stubs":true,"pubsub_emulator":true}
+[debug] [2020-03-15T16:25:42.191Z] [runtime-status] [10204] Resolved module firebase-admin {"declared":true,"installed":true,"version":"8.10.0","resolution":"D:\\Tainan-Public-Witnessing\\functions\\node_modules\\firebase-admin\\lib\\index.js"}
+[debug] [2020-03-15T16:25:42.194Z] [runtime-status] [10204] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.3.0","resolution":"D:\\Tainan-Public-Witnessing\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2020-03-15T16:25:42.196Z] [runtime-status] [10204] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.3.0","resolution":"D:\\Tainan-Public-Witnessing\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2020-03-15T16:25:42.901Z] [runtime-status] [10204] Trigger "helloWorld" has been found, beginning invocation!
+[info] i  functions: Beginning execution of "helloWorld"
+[debug] [2020-03-15T16:25:42.903Z] [runtime-status] [10204] triggerDefinition {"httpsTrigger":{},"name":"helloWorld","entryPoint":"helloWorld"}
+[debug] [2020-03-15T16:25:42.903Z] [runtime-status] [10204] Running helloWorld in mode HTTPS
+[debug] [2020-03-15T16:25:42.913Z] [runtime-status] [10204] Attempting to listen to socketPath: \\?\pipe\D:\Tainan-Public-Witnessing\functions\10204
+[debug] [2020-03-15T16:25:42.926Z] [functions] Runtime ready! Sending request!
+[debug] [2020-03-15T16:25:42.945Z] [runtime-status] [10204] Ephemeral server handling GET request
+[debug] [2020-03-15T16:25:42.968Z] [runtime-status] [10204] Ephemeral server survived.
+[info] >  D:\Tainan-Public-Witnessing\node_modules\rxjs\internal\util\hostReportError.js:4
+[info] >      setTimeout(function () { throw err; }, 0);
+[info] >                               ^
+[info] >  
+[info] >  TypeError: Cannot read property 'handle' of undefined
+[debug] [2020-03-15T16:25:43.011Z] [worker-helloWorld-bf1607a2-70a6-4129-8aee-9868ccf326c5]: exited
+[debug] [2020-03-15T16:25:43.011Z] [worker-helloWorld-bf1607a2-70a6-4129-8aee-9868ccf326c5]: FINISHED
+[debug] [2020-03-15T16:26:21.336Z] Accepted request GET /tainan-public-witnessing/us-central1/helloWorld --> helloWorld
+[debug] [2020-03-15T16:26:21.347Z] [worker-helloWorld-98c72e70-aaf7-4d4a-a612-a6ca4ac466f6]: Assigning socketPath: \\?\pipe\D:\Tainan-Public-Witnessing\functions\14952
+[debug] [2020-03-15T16:26:21.347Z] [worker-helloWorld-98c72e70-aaf7-4d4a-a612-a6ca4ac466f6]: BUSY
+[debug] [2020-03-15T16:26:22.317Z] [runtime-status] [14952] Functions runtime initialized. {"cwd":"D:\\Tainan-Public-Witnessing\\functions","node_version":"10.16.3"}
+[debug] [2020-03-15T16:26:22.320Z] [runtime-status] [14952] Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"admin_stubs":true,"pubsub_emulator":true}
+[debug] [2020-03-15T16:26:22.325Z] [runtime-status] [14952] Resolved module firebase-admin {"declared":true,"installed":true,"version":"8.10.0","resolution":"D:\\Tainan-Public-Witnessing\\functions\\node_modules\\firebase-admin\\lib\\index.js"}
+[debug] [2020-03-15T16:26:22.327Z] [runtime-status] [14952] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.3.0","resolution":"D:\\Tainan-Public-Witnessing\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2020-03-15T16:26:22.328Z] [runtime-status] [14952] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.3.0","resolution":"D:\\Tainan-Public-Witnessing\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2020-03-15T16:26:22.791Z] Accepted request GET /tainan-public-witnessing/us-central1/helloWorld --> helloWorld
+[debug] [2020-03-15T16:26:22.802Z] [worker-helloWorld-edcf11dd-afe2-4b8d-ac6c-26a0ee1ba4b8]: Assigning socketPath: \\?\pipe\D:\Tainan-Public-Witnessing\functions\9444
+[debug] [2020-03-15T16:26:22.802Z] [worker-helloWorld-edcf11dd-afe2-4b8d-ac6c-26a0ee1ba4b8]: BUSY
+[debug] [2020-03-15T16:26:22.982Z] [runtime-status] [14952] Trigger "helloWorld" has been found, beginning invocation!
+[info] i  functions: Beginning execution of "helloWorld"
+[debug] [2020-03-15T16:26:22.983Z] [runtime-status] [14952] triggerDefinition {"httpsTrigger":{},"name":"helloWorld","entryPoint":"helloWorld"}
+[debug] [2020-03-15T16:26:22.983Z] [runtime-status] [14952] Running helloWorld in mode HTTPS
+[debug] [2020-03-15T16:26:22.988Z] [runtime-status] [14952] Attempting to listen to socketPath: \\?\pipe\D:\Tainan-Public-Witnessing\functions\14952
+[debug] [2020-03-15T16:26:22.994Z] [functions] Runtime ready! Sending request!
+[debug] [2020-03-15T16:26:23.004Z] [runtime-status] [14952] Ephemeral server handling GET request
+[debug] [2020-03-15T16:26:23.016Z] [runtime-status] [14952] Ephemeral server survived.
+[info] >  D:\Tainan-Public-Witnessing\node_modules\rxjs\internal\util\hostReportError.js:4
+[info] >      setTimeout(function () { throw err; }, 0);
+[info] >                               ^
+[info] >  
+[info] >  TypeError: Cannot read property 'handle' of undefined
+[info] >      at MergeMapSubscriber.project (D:\Tainan-Public-Witnessing\node_modules\@angular\common\bundles\common-http.umd.js:1296:103)
+[info] >      at MergeMapSubscriber._tryNext (D:\Tainan-Public-Witnessing\node_modules\rxjs\internal\operators\mergeMap.js:69:27)
+[info] >      at MergeMapSubscriber._next (D:\Tainan-Public-Witnessing\node_modules\rxjs\internal\operators\mergeMap.js:59:18)
+[info] >      at MergeMapSubscriber.Subscriber.next (D:\Tainan-Public-Witnessing\node_modules\rxjs\internal\Subscriber.js:66:18)
+[info] >      at Observable._subscribe (D:\Tainan-Public-Witnessing\node_modules\rxjs\internal\util\subscribeToArray.js:5:20)
+[info] >      at Observable._trySubscribe (D:\Tainan-Public-Witnessing\node_modules\rxjs\internal\Observable.js:44:25)
+[info] >      at Observable.subscribe (D:\Tainan-Public-Witnessing\node_modules\rxjs\internal\Observable.js:30:22)
+[info] >      at MergeMapOperator.call (D:\Tainan-Public-Witnessing\node_modules\rxjs\internal\operators\mergeMap.js:39:23)
+[info] >      at Observable.subscribe (D:\Tainan-Public-Witnessing\node_modules\rxjs\internal\Observable.js:25:31)
+[info] >      at FilterOperator.call (D:\Tainan-Public-Witnessing\node_modules\rxjs\internal\operators\filter.js:29:23)
+[debug] [2020-03-15T16:26:23.030Z] [worker-helloWorld-98c72e70-aaf7-4d4a-a612-a6ca4ac466f6]: exited
+[debug] [2020-03-15T16:26:23.031Z] [worker-helloWorld-98c72e70-aaf7-4d4a-a612-a6ca4ac466f6]: FINISHED
+[debug] [2020-03-15T16:26:23.826Z] [runtime-status] [9444] Functions runtime initialized. {"cwd":"D:\\Tainan-Public-Witnessing\\functions","node_version":"10.16.3"}
+[debug] [2020-03-15T16:26:23.830Z] [runtime-status] [9444] Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"admin_stubs":true,"pubsub_emulator":true}
+[debug] [2020-03-15T16:26:23.837Z] [runtime-status] [9444] Resolved module firebase-admin {"declared":true,"installed":true,"version":"8.10.0","resolution":"D:\\Tainan-Public-Witnessing\\functions\\node_modules\\firebase-admin\\lib\\index.js"}
+[debug] [2020-03-15T16:26:23.839Z] [runtime-status] [9444] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.3.0","resolution":"D:\\Tainan-Public-Witnessing\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2020-03-15T16:26:23.841Z] [runtime-status] [9444] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.3.0","resolution":"D:\\Tainan-Public-Witnessing\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2020-03-15T16:26:24.614Z] [runtime-status] [9444] Trigger "helloWorld" has been found, beginning invocation!
+[info] i  functions: Beginning execution of "helloWorld"
+[debug] [2020-03-15T16:26:24.616Z] [runtime-status] [9444] triggerDefinition {"httpsTrigger":{},"name":"helloWorld","entryPoint":"helloWorld"}
+[debug] [2020-03-15T16:26:24.618Z] [runtime-status] [9444] Running helloWorld in mode HTTPS
+[debug] [2020-03-15T16:26:24.628Z] [runtime-status] [9444] Attempting to listen to socketPath: \\?\pipe\D:\Tainan-Public-Witnessing\functions\9444
+[debug] [2020-03-15T16:26:24.639Z] [functions] Runtime ready! Sending request!
+[debug] [2020-03-15T16:26:24.658Z] [runtime-status] [9444] Ephemeral server handling GET request
+[debug] [2020-03-15T16:26:24.685Z] [runtime-status] [9444] Ephemeral server survived.
+[info] >  D:\Tainan-Public-Witnessing\node_modules\rxjs\internal\util\hostReportError.js:4
+[info] >      setTimeout(function () { throw err; }, 0);
+[info] >                               ^
+[info] >  
+[debug] [2020-03-15T16:26:24.711Z] [worker-helloWorld-edcf11dd-afe2-4b8d-ac6c-26a0ee1ba4b8]: exited
+[debug] [2020-03-15T16:26:24.712Z] [worker-helloWorld-edcf11dd-afe2-4b8d-ac6c-26a0ee1ba4b8]: FINISHED
+[debug] [2020-03-15T16:28:21.588Z] File D:\Tainan-Public-Witnessing\functions\src\index.ts changed, reloading triggers
