@@ -41,6 +41,7 @@ import { ApiComponent } from 'src/app/_pages/api/api.component';
 import { SubmitConfirmDialogComponent } from 'src/app/_elements/dialogs/submit-confirm-dialog/submit-confirm-dialog.component';
 import { LoginDialogComponent } from 'src/app/_elements/dialogs/login-dialog/login-dialog.component';
 import { LineComponent } from './_pages/line/line.component';
+import { PersonalShiftComponent } from './_pages/personal-shift/personal-shift.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +53,8 @@ import { LineComponent } from './_pages/line/line.component';
     SubmitConfirmDialogComponent,
     LoginDialogComponent,
     ApiComponent,
-    LineComponent
+    LineComponent,
+    PersonalShiftComponent
   ],
   entryComponents: [  //dynamic component goes here
     SubmitConfirmDialogComponent,

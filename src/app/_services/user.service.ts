@@ -28,7 +28,7 @@ export class UserService {
   /* variables */
 
   users_id_code_map$ = new BehaviorSubject<UserIdCodeMap>(new UserIdCodeMap([]));
-  current_user = new BehaviorSubject<User>(new User);
+  current_user$ = new BehaviorSubject<User>(new User);
 
   /** functions */
 
@@ -71,7 +71,7 @@ export class UserService {
           return data.data();
         })
       ).subscribe(data=>{
-        this.current_user.next(Object.assign(new User,data));
+        this.current_user$.next(Object.assign(new User,data));
       });
       return true;
     }).catch(()=>{
@@ -80,7 +80,7 @@ export class UserService {
   }
 
   logout(): Promise<void>{
-    this.current_user.next(new User);
+    this.current_user$.next(new User);
     return this.angularFireAuth.auth.signOut();
   }
 
@@ -160,7 +160,7 @@ export class UserService {
 
   /** temp */
   showCurrentUser(){
-    console.log(this.current_user.getValue());
+    console.log(this.current_user$.getValue());
     console.log(this.angularFireAuth.auth.currentUser);
   }
 }
