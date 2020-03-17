@@ -1,9 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from "@angular/router";
 
-/** rxjs */
-import { Subscription } from "rxjs";
-
 /** services */
 import { SidenavService } from "./sidenav.service";
 import { UserService } from "src/app/_services/user.service";
@@ -24,28 +21,10 @@ export class SidenavComponent implements OnInit, OnDestroy {
     public authorityService: AuthorityService,
     private loginDialogService: LoginDialogService
   ){}
-  
-  /** authoritys */
-  authoritys = null;
 
-  /** subscriptions */
-  private subscriptions = {
-    authoritys: null as Subscription
-  }
+  ngOnInit(){}
 
-  ngOnInit(){
-    /** subscribe authoritys */
-    this.subscriptions.authoritys = this.authorityService.$current_authoritys.subscribe(data=>{
-      this.authoritys = data;
-    })
-  }
-
-  ngOnDestroy(){
-    /** unsubscribe */
-    for(let index in this.subscriptions){
-      this.subscriptions[index].unsubscribe();
-    }
-  }
+  ngOnDestroy(){}
 
   /** functions */
 
