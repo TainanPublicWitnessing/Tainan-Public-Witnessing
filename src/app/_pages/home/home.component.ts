@@ -24,14 +24,4 @@ export class HomeComponent implements OnInit{
   ngOnInit(){
     this.toolbarService.title.next("首頁");
   }
-
-  /** temp */
-
-  current_user(){
-    this.userService.showCurrentUser();
-  }
-
-  authority_table(){
-    console.log(this.authorityService.$authority_table.getValue());
-  }
 }

@@ -19,25 +19,29 @@ export class SettingsService{
 
   /** variables */
 
-  congregations = new BehaviorSubject([]);
-  authoritys = new BehaviorSubject({});
+  congregations$ = new BehaviorSubject([]);
 
-  genders = new Observable(observer=>{
+  authoritys$ = new Observable(observer=>{
+    observer.next(["administrator", "manager", "user"]);
+    observer.complete();
+  });
+
+  genders$ = new Observable(observer=>{
     observer.next(["弟兄","姐妹"]);
     observer.complete();
   });
 
-  identitys = new Observable(observer=>{
-    observer.next(["傳道員","正規先驅"]);
+  identitys$ = new Observable(observer=>{
+    observer.next(["傳道員","正規先驅","特別先驅"]);
     observer.complete();
   });
 
-  positions = new Observable(observer=>{
+  positions$ = new Observable(observer=>{
     observer.next(["---","助理僕人","長老"]);
     observer.complete();
   });
 
-  marriages = new Observable(observer=>{
+  marriages$ = new Observable(observer=>{
     observer.next(["獨身","已婚","離婚"]);
     observer.complete();
   });
@@ -51,18 +55,9 @@ export class SettingsService{
         return data.data().congregations;
       })
     ).subscribe(data=>{
-        this.congregations.next(data);
-    });
-  }
-
-  //load authority list from server
-  loadAuthoritys(){
-    this.angularFirestore.collection("Settings").doc("Authoritys").get().pipe(
-      map(data=>{
-        return data.data();
-      })
-    ).subscribe(data=>{
-        this.authoritys.next(data);
+      this.congregations$.next(data.sort((A: string, B: string)=>{
+        return A.localeCompare(B);
+      }));
     });
   }
 }

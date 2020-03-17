@@ -56,27 +56,27 @@ export class NewUserComponent implements OnInit, OnDestroy {
 
       /** subscribe data */
 
-      this.settingsService.genders.subscribe(data=>{
+      this.settingsService.genders$.subscribe(data=>{
         this.options.genders = data;
       }),
 
-      this.settingsService.congregations.subscribe(data=>{
+      this.settingsService.congregations$.subscribe(data=>{
         this.options.congregations = data;
       }),
   
-      this.settingsService.authoritys.subscribe(data=>{
+      this.settingsService.authoritys$.subscribe(data=>{
         this.options.authoritys = data;
       }),
   
-      this.settingsService.identitys.subscribe(data=>{
+      this.settingsService.identitys$.subscribe(data=>{
         this.options.identitys = data;
       }),
   
-      this.settingsService.positions.subscribe(data=>{
+      this.settingsService.positions$.subscribe(data=>{
         this.options.positions = data;
       }),
   
-      this.settingsService.marriages.subscribe(data=>{
+      this.settingsService.marriages$.subscribe(data=>{
         this.options.marriages = data;
       }),
   
