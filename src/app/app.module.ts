@@ -2,6 +2,7 @@
 import { NgModule } from '@angular/core';
 import { DatePipe } from "@angular/common";
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -39,6 +40,7 @@ import { ApiComponent } from 'src/app/_pages/api/api.component';
 
 import { SubmitConfirmDialogComponent } from 'src/app/_elements/dialogs/submit-confirm-dialog/submit-confirm-dialog.component';
 import { LoginDialogComponent } from 'src/app/_elements/dialogs/login-dialog/login-dialog.component';
+import { LineComponent } from './_pages/line/line.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +51,8 @@ import { LoginDialogComponent } from 'src/app/_elements/dialogs/login-dialog/log
     NewUserComponent,
     SubmitConfirmDialogComponent,
     LoginDialogComponent,
-    ApiComponent
+    ApiComponent,
+    LineComponent
   ],
   entryComponents: [  //dynamic component goes here
     SubmitConfirmDialogComponent,
@@ -59,9 +62,10 @@ import { LoginDialogComponent } from 'src/app/_elements/dialogs/login-dialog/log
     /** angular */
     BrowserModule,
     FormsModule,
+    HttpClientModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-
+    
     /** angular material */
     MatSidenavModule,
     MatToolbarModule,
@@ -75,14 +79,14 @@ import { LoginDialogComponent } from 'src/app/_elements/dialogs/login-dialog/log
     MatMomentDateModule,
     MatDialogModule,
     MatAutocompleteModule,
-
+    
     /** firebase */
     AngularFireModule.initializeApp(environment.firebase),  //import firebase settings
     AngularFirestoreModule,
     AngularFireAuthModule,
-
+    
     /** routing */
-    AppRoutingModule
+    AppRoutingModule,
   ],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'zh-TW' },  //for MatMomentDateModule
