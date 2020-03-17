@@ -16,7 +16,7 @@ const routes: Routes = [
   { path: "new_user", component: NewUserComponent, canActivate:[AuthorityService] },
   { path: "api", component: ApiComponent, canActivate:[AuthorityService] },
   // { path: "line", component: LineComponent, canActivate:[AuthorityService] },
-  { path: "line", component: LineComponent},
+  { path: "line", component: LineComponent}
 ];
 
 @NgModule({

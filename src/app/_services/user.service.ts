@@ -84,60 +84,6 @@ export class UserService {
     return this.angularFireAuth.auth.signOut();
   }
 
-  /** from old DB */
-  getUsersAsCSV(): Promise<string>{
-    let result: string = "address,authority,baptize_date,birth_date,cellphone,congregation,email,identity,language,marriage,name,note,password,phone,position,sex\n";
-    return this.angularFirestore.collection("User").get().toPromise().then(response=>{
-      response.docs.sort((a,b)=>{
-        let aname = a.data().name;
-        let bname = b.data().name;
-        if(!aname || !bname){
-          console.log(a.data(), b.data);
-          return true;
-        } 
-        return aname.localeCompare(bname);
-        // return a.data().name.localeCompare(b.data().name);
-      }).forEach(doc=>{
-        const data = doc.data();
-        result = result.concat(
-          data.address, ",",
-          data.authority, ",",
-          data.baptize_date, ",",
-          data.birth_date, ",",
-          data.cellphone, ",",
-          data.congregation, ",",
-          data.email, ",",
-          data.identity, ",",
-          data.language, ",",
-          data.marriage, ",",
-          data.name, ",",
-          data.note, ",",
-          data.password, ",",
-          data.phone, ",",
-          data.position, ",",
-          data.sex, "\n"
-        );
-      });
-      return result;
-    });
-  }
-
-  transUsers(){
-    return this.angularFirestore.collection("User").get().toPromise().then(response=>{
-      response.forEach(doc=>{
-        const data = doc.data();
-        if(data.name){
-          this.angularFireAuth.auth.createUserWithEmailAndPassword(
-            User.transformToFirebaseAuthEmail(doc.id),
-            data.password
-          ).then(()=>{
-            console.log(data.name)
-          })
-        }
-      });
-    })
-  }
-
   /** temp */
   showCurrentUser(){
     console.log(this.current_user$.getValue());
