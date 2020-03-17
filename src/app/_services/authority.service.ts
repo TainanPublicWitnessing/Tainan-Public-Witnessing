@@ -35,26 +35,27 @@ export class AuthorityService implements CanActivate{
   ){}
 
   /** variables */
-  $authority_table = new BehaviorSubject<AuthorityTable>(new AuthorityTable([]));
-  $current_authoritys = new BehaviorSubject<any>({});
+  current_authoritys$ = new BehaviorSubject<any>({});
+  authority_table$ = new BehaviorSubject<AuthorityTable>(new AuthorityTable([
+    { action: "/new_user", authoritys: [ "administrator" ] },
+    { action: "/user_management", authoritys: [ "administrator" ] },
+    { action: "/api", authoritys: [ "administrator" ] },
+    { action: "/line", authoritys: [ "administrator", "manager", "user" ] },
+    { action: "login", authoritys: [ "" ] },
+    { action: "logout", authoritys: [ "administrator", "manager", "user" ] }
+  ]));
+  
 
   /** functions */
-  loadAuthorityTable(){
-    this.angularFirestore.doc("Settings/AuthorityTable").get().subscribe(data=>{
-      this.$authority_table.next(new AuthorityTable(data.data().authority_table));
-    });
+
+  refreshCurrentAuthoritys(current_authority: string){
+    this.current_authoritys$.next(
+      this.authority_table$.getValue().getAuthoritys(current_authority)
+    );
   }
 
   checkAuthority(action: string): boolean{
-    return this.$current_authoritys.getValue()[action];
-    // console.log(this.$authority_table.getValue().authority_table);
-    // console.log(this.$authority_table.getValue().authority_table.find((A: AuthorityAction)=>{
-    //   return A.action == action;
-    // }));
-    // console.log(this.userService.current_user.getValue().authority);
-    // return this.$authority_table.getValue().authority_table.find((A: AuthorityAction)=>{
-    //   return A.action == action;
-    // })?.authoritys.includes(this.userService.current_user.getValue().authority);
+    return this.current_authoritys$.getValue()[action];
   }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot){

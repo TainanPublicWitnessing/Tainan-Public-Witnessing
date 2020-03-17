@@ -26,9 +26,7 @@ export class ApiComponent implements OnInit, OnDestroy {
 
   /** consts */
   COMMANDS = [
-    "export shift-statistic [yyyyMM]",
-    "export users",
-    "trans users"
+    "export shift-statistic yyyyMM"
   ];
 
   /** managers */
@@ -79,14 +77,12 @@ export class ApiComponent implements OnInit, OnDestroy {
   export(params: string[]){
     switch(params[0]){
       case "shift-statistic": this.exportShiftStatisticAsCSV(params[1]); break;
-      case "users": this.exportUsersAsCSV(); break;
       default: this.syntaxError();
     }
   }
 
   trans(params: string[]){
     switch(params[0]){
-      case "users": this.transUsers(); break;
       default: this.syntaxError();
     }
   }
@@ -95,15 +91,5 @@ export class ApiComponent implements OnInit, OnDestroy {
     this.reportService.getMonthlyStatisticAsCSV(yyyyMM).then(result=>{
       this.output = result;
     });
-  }
-
-  exportUsersAsCSV(){
-    this.userService.getUsersAsCSV().then(result=>{
-      this.output = result;
-    });
-  }
-
-  transUsers(){
-    this.userService.transUsers();
   }
 }

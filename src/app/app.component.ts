@@ -53,22 +53,15 @@ export class AppComponent implements OnInit, OnDestroy {
       }),
 
       //when current user or authority table update, update current authoritys
-      combineLatest(
-        this.userService.current_user,
-        this.authorityService.$authority_table
-      ).subscribe(([current_user,authority_table])=>{
-        this.authorityService.$current_authoritys.next(
-          authority_table.getAuthoritys(current_user.authority)
-        );
+      this.userService.current_user$.subscribe(current_user=>{
+        this.authorityService.refreshCurrentAuthoritys(current_user.authority)
       })
 
     );
 
     /** load data */  //some of these might move to other components later
     this.settingsService.loadCongregations();
-    this.settingsService.loadAuthoritys();
     this.userService.loadUserIdCodeMap();
-    this.authorityService.loadAuthorityTable();
 
     /** open login dialog */
     this.loginDialogService.openLoginDialog();
