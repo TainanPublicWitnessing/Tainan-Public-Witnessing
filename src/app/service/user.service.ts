@@ -145,6 +145,21 @@ export class UserService{
 
 
   /* 以下為臨時用 */
+
+  // refreshMetadata(){
+  //   let usernames = [];
+  //   this.firestore.collection("User").get().subscribe(response=>{
+  //     response.docs.forEach(doc=>{
+  //       let name = doc.data().id;
+  //       if(name){
+  //         usernames.push(name);
+  //       }
+  //     });
+  //     this.firestore.collection("User").doc("metadata").set({
+  //       primary_keys: usernames
+  //     });
+  //   });
+  // }
   
   addUser(){
     this.firestore.collection("User").doc(sha256("黃柔溦")).set({
@@ -173,7 +188,6 @@ export class UserService{
         return data.data().personal_shift;
       })
     ).subscribe(response=>{
-      console.log(response);
       this.firestore.collection("User").doc(sha256("何素碧")).collection("MonthlyData").doc("201910").set({personal_shift:response});
     });
   }
@@ -190,7 +204,6 @@ export class UserService{
       })
     ).subscribe(response=>{
       response.sort();
-      console.log(response);
       this.firestore.collection("User").doc("metadata").set({primary_keys:response});
     });
   }

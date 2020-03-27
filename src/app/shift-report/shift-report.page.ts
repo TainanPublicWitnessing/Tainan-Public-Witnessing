@@ -72,15 +72,12 @@ export class ShiftReportPage implements OnInit {
     //抓取擺攤地點
     this.settingsService.getSites().subscribe(response=>{
       this.siteData = response;
-      console.log(this.siteData);
     })
     //抓取使用者
     this.userService.mess.subscribe(response=>{
-      console.log(response);
       if(response.name){
         this.user = response;
         this.name = response.name.toString();
-        console.log(this.user); 
         this.getUserTodayShift(this.name);
       }
     })
@@ -112,7 +109,6 @@ export class ShiftReportPage implements OnInit {
         this.shift_title = response.shift_title;
         this.site = response.site;
         this.report = response.report;
-        console.log(response);
       });
     }
     
@@ -125,10 +121,8 @@ export class ShiftReportPage implements OnInit {
   //獲取使用者當月班表
   getUserTodayShift(_username){
     let userShift = [];
-    console.log(this.time);
     this.shiftService.getMonthlyShiftByUser(_username, this.time).subscribe(response=>{
       userShift = response;
-      console.log(userShift);
 
       //尋找當天班次
       for(const _shift of userShift){
@@ -138,7 +132,6 @@ export class ShiftReportPage implements OnInit {
           this.date = shiftDate;
           this.shift_title = _shift.shift_title;
           this.site = _shift.site;
-          console.log(this.date +","+ this.shift_title +","+ this.site);
 
           //處理格式
           this.onSelectDate();
@@ -177,7 +170,6 @@ export class ShiftReportPage implements OnInit {
         "experience":   this.report.experience
       }
     };
-    console.log(result);
     this.statisticsService.setReport(result);
     this.router.navigate(["home"]);
   }

@@ -48,7 +48,6 @@ export class ShiftReportCardComponent implements OnInit {
         });
       }
 
-      console.log(this.todayShift);
     });
   }
 

@@ -26,7 +26,6 @@ export class PersonalInformationPage implements OnInit {
 
   /* Events */
   onsubmit(){
-    console.log(this.User);
 
   }
 

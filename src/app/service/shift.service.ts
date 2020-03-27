@@ -47,9 +47,7 @@ export class ShiftService{
 
   //獲取使用者此月班表
   getMonthlyShiftByUser(user, month){
-    console.log("getMonthlySHiftByUser:",user,month);
-    let dbMonth = this.datepipe.transform(month, "yyyyMM")
-    console.log(dbMonth);
+    let dbMonth = this.datepipe.transform(month, "yyyyMM");
     //獲取此月班表
     return this.firestore
       .collection("User")
@@ -58,8 +56,6 @@ export class ShiftService{
       .doc(dbMonth)
       .get().pipe(
         map(data=>{
-          console.log(data);
-          console.log(data.data());
           return data.get("personal_shift");
         })
       );
@@ -70,7 +66,6 @@ export class ShiftService{
     
     //處理月份格式
     let sMonth = this.datepipe.transform(month, "yyyyMM");
-    console.log(sMonth,day);
     //獲取此月此星期班表
     return this.firestore.collection("MonthlyData").doc(sMonth)
     .collection("shift",query =>{
@@ -91,7 +86,6 @@ export class ShiftService{
   getShiftByDate(date){
     let month = this.datepipe.transform(date, "yyyyMM");
     let _date = this.datepipe.transform(date, "yyyy-MM-dd");
-    console.log(month, _date);
     //獲取此月班表
     return this.firestore.collection("MonthlyData")
       .doc(month)
@@ -169,10 +163,8 @@ export class ShiftService{
           this.SmallSHift[7]
         ]
       }      
-      console.log(tempShift);
       SHiftArray.push(tempShift);
     }
-    console.log(SHiftArray);
     
 
     //add to firestore
@@ -224,7 +216,6 @@ export class ShiftService{
         result[name].sort(function(a,b){
           return a.date.localeCompare(b.date);
         });
-        console.log(name,result[name]);
         
         db.doc(sha256(name)).collection("MonthlyData").doc(month).set({personal_shift:result[name]});
       }

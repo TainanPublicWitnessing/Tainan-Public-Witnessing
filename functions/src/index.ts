@@ -12,11 +12,8 @@ export const getCongregations = functions.https.onRequest((request, response) =>
     const db = admin.firestore();
     const docs = 'LineNotify/peter';
     const promise = db.doc(docs).get();
-    console.log(docs);
     promise.then(snapshot=>{
         const data = snapshot.data();
-        console.log('success');
-        console.log(data);
         response.send(data);
     }).catch(error=>{
         console.log('fail');
@@ -30,7 +27,6 @@ export const getCongregations = functions.https.onRequest((request, response) =>
     const db = admin.firestore();
     //獲取今天日期
     const tomorrow = new Date(Date.now() + 1*1000*60*60*24);
-    console.log(tomorrow);
     //處理日期格式 => "yyyMM"
     const year = tomorrow.getFullYear().toString()
     const m = tomorrow.getMonth()+1;
@@ -50,7 +46,6 @@ export const getCongregations = functions.https.onRequest((request, response) =>
         for(let i=0; i<length; i++){          
           result.push(snapshot.docs[i].data());
         }
-        console.log('success');
         const data = sortDateShift(result);
         response.send(data);
     }).catch(error=>{
@@ -61,8 +56,7 @@ export const getCongregations = functions.https.onRequest((request, response) =>
 
  exports.scheduledFunctionCrontab = functions.pubsub.schedule('30 11 * * *')
   .timeZone('Asia/Taipei') // Users can choose timezone - default is America/Los_Angeles
-  .onRun((context) => {
-  console.log('Hi, This is a clock');
+  .onRun(() => {
   return null;
 });
 

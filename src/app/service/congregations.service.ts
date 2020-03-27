@@ -26,7 +26,6 @@ export class CongregationsService{
       })
     ).subscribe(response=>{
       this.congregations = response;
-      console.log(this.congregations);
     });
   }
 }

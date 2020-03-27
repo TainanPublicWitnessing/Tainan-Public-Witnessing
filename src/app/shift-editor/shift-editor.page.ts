@@ -39,20 +39,20 @@ export class ShiftEditorPage implements OnInit {
     this.shiftService.getSingleShift(this.date,this.shift_title,this.site).subscribe(response=>{
       this.members = response.members;
       this.origin_members = [...this.members];
-      /*
-      for(let i=0;i<4;i++){
-        this.member_select_options.push([this.members[i]]);
-      }
-      */
     });
 
     this.userService.getAllUsersName().subscribe(response=>{
-      this.member_names = response.sort();
+      this.member_names = response.sort((a: string, b: string)=>{
+        return a.localeCompare(b);
+      });
     });
-    
-    //this.shiftService.ShiftTextProcess();
-    //this.shiftService.resetShift();
+
+    // this.refreshMetadata();
   }
+
+  // refreshMetadata(){
+  //   this.userService.refreshMetadata();
+  // }
   
   trackByIndex(index,item){
     return index;
@@ -60,10 +60,9 @@ export class ShiftEditorPage implements OnInit {
 
   onSelectChange(index){
     this.members[index] = this.members[index].trim();
-    this.member_select_options[index] = this.member_names.filter(function(name){
-      return name.includes(this);
-    },this.members[index]);
-    //this.member_select_options[index].push("");
+    this.member_select_options[index] = this.member_names.filter((name)=>{
+      return name.includes(this.members[index]);
+    });
     
     setTimeout(()=>{
       this.member_select_options[index].unshift("");
@@ -74,7 +73,10 @@ export class ShiftEditorPage implements OnInit {
   edit(){
     let flag = true;
     for(let member of this.members){
-      flag = flag && (this.member_names.includes(member) || member == "");
+      member = member.trim();
+      if(!(this.member_names.includes(member) || member == "")){
+        flag = false;
+      }
     }
     if(flag){
       for(let i=0;i<4;i++){
@@ -90,7 +92,7 @@ export class ShiftEditorPage implements OnInit {
         }
       }
       alert("修改成功");
-      this.router.navigate(["home"]);
+      this.router.navigate(["search-shift"]);
     }else{
       alert("輸入錯誤");
     }

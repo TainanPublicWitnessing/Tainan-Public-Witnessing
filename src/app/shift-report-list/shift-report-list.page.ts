@@ -42,7 +42,6 @@ export class ShiftReportListPage implements OnInit {
       });
     }
 
-    console.log(this.reportData);
   }
 
 
@@ -50,7 +49,6 @@ export class ShiftReportListPage implements OnInit {
     //取得前七天的資料
     for(var i=0; i<7; i++){
       this.latestDate.setDate(this.latestDate.getDate() - 1);
-      console.log(this.latestDate);
       this.statisticsService.getReportByDate(this.latestDate).subscribe(response=>{
         this.reportData[ this.reportData.length ] = response;
       })

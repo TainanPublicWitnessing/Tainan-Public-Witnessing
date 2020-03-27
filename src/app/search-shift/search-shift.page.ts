@@ -64,15 +64,12 @@ export class SearchShiftPage implements OnInit {
   //"個人班表"選擇月份
   onSelectMonth(){
     this.myMonthShift = [];
-    console.log(this.userService.user.name);
     //處理日期格式
     let newMonth = new Date(this.myMonth);
-    console.log(newMonth);
 
     this.shiftService.getMonthlyShiftByUser(this.userService.user.name, newMonth).subscribe(response=>{
       this.myMonthShift = response;
       this.myMonthShift.sort( (a , b) => (a.date > b.date)?1 : (b.date >a.date)?-1 : 0 );
-      console.log(this.myMonthShift);
     });
       
   }
@@ -81,7 +78,7 @@ export class SearchShiftPage implements OnInit {
     if(this.seMonth != undefined && this.myDay != undefined){
       this.shiftService.getMonthlyShiftByDay(this.seMonth, this.myDay).subscribe(response=>{
         response.sort( (a , b) => (a.date > b.date)?1 : (b.date >a.date)?-1 : 0 )
-        console.log(response);
+        
         //整理資料
         let result = {};
         let curSite = "";
@@ -114,9 +111,7 @@ export class SearchShiftPage implements OnInit {
           }
         }*/
 
-        console.log(result);
         this.myDayShift = result;
-        console.log(this.myDayShift);
       })
 
     }
@@ -128,10 +123,8 @@ export class SearchShiftPage implements OnInit {
     //處理星期幾
     this.displayDay = '星期'+'日一二三四五六'.charAt(new Date(this.myDate).getDay());
     this.bardate = this.datePipe.transform(this.myDate,"yyyy-MM-dd");
-    console.log(this.myDate,this.bardate);
     this.shiftService.getShiftByDate(this.myDate).subscribe(response=>{
       this.myDateShift = response;
-      console.log(this.myDateShift);
       this.sortDateShift(this.myDateShift);
     })
   }
@@ -161,7 +154,6 @@ export class SearchShiftPage implements OnInit {
       result.push(Object.values(thisSite));
     }
     this.myDateShift = result;
-    console.log(this.myDateShift);
 
   }
 
