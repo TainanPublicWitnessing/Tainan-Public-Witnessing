@@ -1,95 +1,43 @@
 @import '../../../material-theme.scss';
 
 
+$search-bar-height: 50px;
+
 :host{
-  display: flex;
-  flex-direction: column;
-  flex-grow: 1;
+  display: grid;
+  grid-template-rows: $search-bar-height auto;
+  overflow: hidden;
 
-  padding: 16px;
-
-  .date-shfit-card{
+  .search-bar{
     display: flex;
-    flex-direction: column;
+    box-shadow: 0px 4px rgba(0, 0, 0, 0.1);
+    z-index: 5;
 
-    hr.style-title {
-      border: 0;
-      height: 1px;
-      width: 100%;
-      background: $dark-grey;
-    }
-
-    hr.shift {
-      border: 0;
-      height: 0.5px;
-      width: 100%;
-      background: $light-grey;
-    }
-
-    .date-shift-title{
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-    }
-
-    .shift-content{
-      display: inline;
-      flex-direction: column;
-
-      .shift-line{
-        display: grid;
-        flex-grow: 1;
-
-        grid-template-columns: auto repeat(4, auto);
-        gap: 2%;
-
-        .moring-chip{
-          display: flex;
-          align-items: center;
-
-          background-color: mat-color($accent, lighter);
-
-          font-size: 12px;
-        }
-
-        .noon-chip{
-          display: flex;
-          align-items: center;
-
-          background-color: mat-color($accent);
-
-          font-size: 12px;
-        }
-
-        .afternoon-chip{
-          display: flex;
-          align-items: center;
-
-          background-color: mat-color($accent, darker);
-
-          font-size: 12px;
-        }
-
-        .member{
-          display: flex;
-          align-items: center;
-          justify-content: center;
-
-          font-size: 14px;
-        }
-      }
-
-    }
-
-
+    overflow: hidden;
   }
 
-  .shift-result{
+  .date-shift-result{
     display: flex;
     flex-direction: column;
     flex-grow: 1;
 
-    overflow: auto;
+    max-height: 100%;
 
+    justify-content: center;
+
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    .date-shift-list{
+      display: grid;
+      flex: 1;
+      grid-template-rows: repeat(auto);
+      gap: 16px;
+
+      max-height: inherit;
+      box-sizing:border-box;
+
+      padding: 16px 16px;
+    }
   }
 }
