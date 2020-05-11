@@ -20,6 +20,8 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatMomentDateModule } from "@angular/material-moment-adapter";
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatCardModule } from '@angular/material/card';
+import { MatChipsModule } from '@angular/material/chips';
 
 /* filebase */
 import { AngularFireModule } from "@angular/fire";
@@ -67,7 +69,7 @@ import { PersonalShiftComponent } from './_pages/personal-shift/personal-shift.c
     HttpClientModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    
+
     /** angular material */
     MatSidenavModule,
     MatToolbarModule,
@@ -81,12 +83,14 @@ import { PersonalShiftComponent } from './_pages/personal-shift/personal-shift.c
     MatMomentDateModule,
     MatDialogModule,
     MatAutocompleteModule,
-    
+    MatCardModule,
+    MatChipsModule,
+
     /** firebase */
     AngularFireModule.initializeApp(environment.firebase),  //import firebase settings
     AngularFirestoreModule,
     AngularFireAuthModule,
-    
+
     /** routing */
     AppRoutingModule,
   ],
