@@ -1,6 +1,9 @@
+@import '../../material-theme.scss';
+
 /* make sure mat-toolvar + mat-sidenav-container = 100% height */
 mat-toolbar{
   height: 64px;
+  background-color: mat-color($primary) !important;
 }
 
 button{

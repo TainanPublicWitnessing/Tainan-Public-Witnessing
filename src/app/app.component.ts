@@ -18,7 +18,7 @@ import { LoginDialogComponent } from "src/app/_elements/dialogs/login-dialog/log
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit, OnDestroy {
 
@@ -38,7 +38,7 @@ export class AppComponent implements OnInit, OnDestroy {
   @ViewChild("sidenav") sidenav;
 
   ngOnInit(){
-    
+
     this.subscribeManager.pushSubscriptions(
       /** subscribe events */
 

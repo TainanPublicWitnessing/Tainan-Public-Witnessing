@@ -1,0 +1,14 @@
+@import '~@angular/material/theming';
+// Include non-theme styles for core.
+@include mat-core();
+
+// Define a theme.
+
+$primary: mat-palette($mat-blue-grey);
+$accent: mat-palette($mat-amber, A200, A100, A400);
+
+$theme: mat-light-theme($primary, $accent);
+$top-header-height: 64px;
+
+$light-grey: #b0b0b0;
+$dark-grey: #6f6f6f;

@@ -1,4 +1,6 @@
+@import '../material-theme.scss';
 /* make sure mat-toolvar + mat-sidenav-container = 100% height */
+
 mat-sidenav-container{
   position: absolute;
   top: 64px;
@@ -12,5 +14,6 @@ mat-sidenav{
 }
 
 mat-sidenav-content{
-  padding: 16px;
+  display: flex;
+  flex-grow: 1;
 }
