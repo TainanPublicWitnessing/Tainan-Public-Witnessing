@@ -3,8 +3,8 @@ import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-personal-shift',
-  templateUrl: './personal-shift.component.html',
-  styleUrls: ['./personal-shift.component.scss']
+  templateUrl: './search-shift.component.html',
+  styleUrls: ['./search-shift.component.scss']
 })
 export class PersonalShiftComponent implements OnInit {
 

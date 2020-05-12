@@ -43,7 +43,7 @@ import { ApiComponent } from 'src/app/_pages/api/api.component';
 import { SubmitConfirmDialogComponent } from 'src/app/_elements/dialogs/submit-confirm-dialog/submit-confirm-dialog.component';
 import { LoginDialogComponent } from 'src/app/_elements/dialogs/login-dialog/login-dialog.component';
 import { LineComponent } from './_pages/line/line.component';
-import { PersonalShiftComponent } from './_pages/personal-shift/personal-shift.component';
+import { PersonalShiftComponent } from './_pages/shift/search-shift/search-shift.component';
 import { DateShiftComponent } from './_elements/component/date-shift/date-shift.component';
 
 @NgModule({

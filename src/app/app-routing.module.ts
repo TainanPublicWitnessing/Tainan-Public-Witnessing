@@ -9,7 +9,7 @@ import { HomeComponent } from "src/app/_pages/home/home.component";
 import { NewUserComponent } from "src/app/_pages/new-user/new-user.component";
 import { ApiComponent } from 'src/app/_pages/api/api.component';
 import { LineComponent } from './_pages/line/line.component';
-import { PersonalShiftComponent } from './_pages/personal-shift/personal-shift.component';
+import { PersonalShiftComponent } from './_pages/shift/search-shift/search-shift.component';
 
 const routes: Routes = [
   { path: "", redirectTo: "home", pathMatch: "full" },
