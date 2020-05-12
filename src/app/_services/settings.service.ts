@@ -21,6 +21,7 @@ export class SettingsService{
 
   congregations$ = new BehaviorSubject([]);
   sites$ = new BehaviorSubject([])
+  shiftTitle$ = new BehaviorSubject([]);
 
   authoritys$ = new Observable(observer=>{
     observer.next(["administrator", "manager", "user"]);
@@ -71,6 +72,16 @@ export class SettingsService{
       this.sites$.next(data.sort((A: string, B: string)=>{
         return A.localeCompare(B);
       }))
+    })
+  }
+
+  loadShiftTitle(){
+    this.angularFirestore.collection("Settings").doc("ShiftTitle").get().pipe(
+      map(data=>{
+        return data.data().shift_title;
+      })
+    ).subscribe(data=>{
+      this.shiftTitle$.next(data);
     })
   }
 }

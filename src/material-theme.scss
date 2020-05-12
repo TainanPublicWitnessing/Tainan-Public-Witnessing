@@ -12,3 +12,6 @@ $top-header-height: 64px;
 
 $light-grey: #b0b0b0;
 $dark-grey: #6f6f6f;
+
+// Include theme styles for Angular Material components.
+@include angular-material-theme($theme);

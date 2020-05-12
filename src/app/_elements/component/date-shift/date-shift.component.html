@@ -1,33 +1,21 @@
-<mat-card class="date-shfit-card">
+<mat-card class="date-shfit-card shift-card-progress-bar" *ngIf="myDateShift">
   <div class="date-shift-title">
-    <div>11 月 5 日 (三)</div>
-    <div>成大園區</div>
+    <div>{{ myDateShift.getDateString() }}</div>
+    <div>{{ myDateShift.site }}</div>
   </div>
   <hr class="style-title">
-  <mat-chip-list class="shift-content">
-    <div class="shift-line">
-      <mat-chip class="moring-chip">早上</mat-chip>
-      <div class="member">蔡元泓一</div>
-      <div class="member">蔡元泓一</div>
-      <div class="member">蔡元泓一</div>
-      <div class="member">蔡元泓一</div>
-    </div>
-    <hr class="shift">
-    <div class="shift-line">
-      <mat-chip class="noon-chip">中午</mat-chip>
-      <div class="member">蔡元泓一</div>
-      <div class="member">蔡元泓一</div>
-      <div class="member">蔡元泓一</div>
-      <div class="member">蔡元泓一</div>
-    </div>
-    <hr class="shift">
-    <div class="shift-line">
-      <mat-chip class="afternoon-chip">下午</mat-chip>
-      <div class="member">蔡元泓一</div>
-      <div class="member">蔡元泓一</div>
-      <div class="member">蔡元泓一</div>
-      <div class="member">蔡元泓一</div>
-    </div>
-  </mat-chip-list>
+  <!-- <mat-progress-bar class="shift-card-progress-bar" mode="indeterminate" *ngIf="isloading"></mat-progress-bar> -->
+  <mat-card-content>
+    <mat-chip-list class="shift-content">
+      <ng-container *ngFor="let shift of shifts$ | async; let index = index; let isLast = last">
+        <div class="shift-line" >
+          <mat-chip class="moring-chip">{{ shift.shift_title }}</mat-chip>
+          <div class="member" *ngFor="let member of shift.members">{{ member }}</div>
+        </div>
+        <hr class="shift" *ngIf="!isLast">
+      </ng-container>
+      </mat-chip-list>
+  </mat-card-content>
+
 
 </mat-card>

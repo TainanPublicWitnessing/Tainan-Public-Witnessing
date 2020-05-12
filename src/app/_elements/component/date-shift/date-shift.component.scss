@@ -1,7 +1,7 @@
 @import '../../../../material-theme.scss';
 
 :host{
-  display: flex;
+  display: inline;
 
   .date-shfit-card{
     display: flex;
@@ -16,7 +16,7 @@
 
     hr.shift {
       border: 0;
-      height: 0.6px;
+      height: 0.8px;
       width: 100%;
       background: $light-grey;
     }
@@ -76,9 +76,7 @@
           font-size: 14px;
         }
       }
-
     }
-
 
   }
 }

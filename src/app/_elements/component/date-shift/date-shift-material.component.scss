@@ -1,0 +1,14 @@
+@import '../../../../material-theme.scss';
+
+.shift-card-progress-bar{
+  .mat-progress-bar-fill::after {
+    background-color: mat-color($accent);
+  }
+
+  .mat-progress-bar-buffer {
+    background: mat-color($accent, 100);
+  }
+}
+
+
+

@@ -22,6 +22,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatCardModule } from '@angular/material/card';
 import { MatChipsModule } from '@angular/material/chips';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 /* filebase */
 import { AngularFireModule } from "@angular/fire";
@@ -87,6 +88,7 @@ import { DateShiftComponent } from './_elements/component/date-shift/date-shift.
     MatAutocompleteModule,
     MatCardModule,
     MatChipsModule,
+    MatProgressBarModule,
 
     /** firebase */
     AngularFireModule.initializeApp(environment.firebase),  //import firebase settings
