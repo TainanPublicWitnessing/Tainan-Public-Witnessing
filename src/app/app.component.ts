@@ -61,6 +61,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
     /** load data */  //some of these might move to other components later
     this.settingsService.loadCongregations();
+    this.settingsService.loadSites();
     this.userService.loadUserIdCodeMap();
 
     /** open login dialog */

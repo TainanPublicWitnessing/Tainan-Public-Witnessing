@@ -20,6 +20,7 @@ export class SettingsService{
   /** variables */
 
   congregations$ = new BehaviorSubject([]);
+  sites$ = new BehaviorSubject([])
 
   authoritys$ = new Observable(observer=>{
     observer.next(["administrator", "manager", "user"]);
@@ -59,5 +60,17 @@ export class SettingsService{
         return A.localeCompare(B);
       }));
     });
+  }
+
+  loadSites(){
+    this.angularFirestore.collection("Settings").doc("Sites").get().pipe(
+      map(data=>{
+        return data.data().sites;
+      })
+    ).subscribe(data=>{
+      this.sites$.next(data.sort((A: string, B: string)=>{
+        return A.localeCompare(B);
+      }))
+    })
   }
 }
