@@ -3,13 +3,15 @@
     <div>{{ myDateShift.getDateString() }}</div>
     <div>{{ myDateShift.site }}</div>
   </div>
-  <hr class="style-title">
-  <!-- <mat-progress-bar class="shift-card-progress-bar" mode="indeterminate" *ngIf="isloading"></mat-progress-bar> -->
+  <hr class="style-title" *ngIf="(shifts$ | async)">
   <mat-card-content>
+    <div class="progress-spinner-content" *ngIf="!(shifts$ | async)">
+      <mat-progress-bar class="shift-card-loading" mode="indeterminate"></mat-progress-bar>
+    </div>
     <mat-chip-list class="shift-content">
       <ng-container *ngFor="let shift of shifts$ | async; let index = index; let isLast = last">
         <div class="shift-line" >
-          <mat-chip class="moring-chip">{{ shift.shift_title }}</mat-chip>
+          <mat-chip [ngClass]="getChipStyle(shift.shift_title)">{{ shift.shift_title }}</mat-chip>
           <div class="member" *ngFor="let member of shift.members">{{ member }}</div>
         </div>
         <hr class="shift" *ngIf="!isLast">

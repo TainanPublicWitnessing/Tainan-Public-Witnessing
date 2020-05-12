@@ -17,18 +17,15 @@ export class DateShiftComponent implements OnInit {
 
   shifts$: BehaviorSubject<IShift[]> = new BehaviorSubject<IShift[]>(null);
 
-  isloading = true;
-
   constructor(
     public settingsService: SettingsService
   ) {}
 
   ngOnInit(): void {
-
     this.settingsService.shiftTitle$.subscribe((shift_title:string[])=>{
       if(shift_title){
-        this.isloading = true;
         this.shiftTitles = shift_title;
+
         if(this.myDateShift){
           //處理不同的班次
           let shifts: IShift[] = [];
@@ -42,18 +39,19 @@ export class DateShiftComponent implements OnInit {
         }
       }
     })
-
-
-    this.shifts$.subscribe((shift: IShift[])=>{
-      console.log(this.shifts$.getValue());
-      if(shift !== null){
-        this.isloading = false;
-      }else{
-        this.isloading = true;
-      }
-      console.log(this.isloading);
-    })
   }
 
+  getChipStyle(shiftTitle: string): string{
+    switch(shiftTitle){
+      case "早上":
+        return "moring-chip";
+      case "中午":
+        return "noon-chip";
+      case "下午":
+        return "afternoon-chip";
+      default:
+        return "moring-chip";
+    }
+  }
 
 }

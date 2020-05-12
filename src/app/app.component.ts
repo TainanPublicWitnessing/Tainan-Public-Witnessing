@@ -1,5 +1,6 @@
 import { Component, ViewChild, OnInit, OnDestroy } from '@angular/core';
-import { combineLatest } from "rxjs";
+import { Observable } from "rxjs";
+
 
 /** services */
 import { ToolbarService } from "src/app/toolbar/toolbar.service";
@@ -60,6 +61,7 @@ export class AppComponent implements OnInit, OnDestroy {
     );
 
     /** load data */  //some of these might move to other components later
+    this.settingsService.waitAllSetting();
     this.settingsService.loadCongregations();
     this.settingsService.loadSites();
     this.settingsService.loadShiftTitle();

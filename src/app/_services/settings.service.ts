@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 
 /** rxjs */
-import { Observable, BehaviorSubject } from 'rxjs';
-import { map } from "rxjs/operators";
+import { Observable, BehaviorSubject, forkJoin } from 'rxjs';
+import { map, } from "rxjs/operators";
 
 /** firebase */
 import { AngularFirestore } from "@angular/fire/firestore";
@@ -19,9 +19,9 @@ export class SettingsService{
 
   /** variables */
 
-  congregations$ = new BehaviorSubject([]);
-  sites$ = new BehaviorSubject([])
-  shiftTitle$ = new BehaviorSubject([]);
+  congregations$ = new BehaviorSubject(null);
+  sites$ = new BehaviorSubject(null)
+  shiftTitle$ = new BehaviorSubject(null);
 
   authoritys$ = new Observable(observer=>{
     observer.next(["administrator", "manager", "user"]);
@@ -49,6 +49,20 @@ export class SettingsService{
   });
 
   /** functions */
+  waitAllSetting(){
+    console.log("test");
+    forkJoin(this.congregations$, this.sites$, this.shiftTitle$).subscribe(res=>{
+      console.log(res);
+    })
+
+    this.congregations$.subscribe(res=>{
+      console.log(res);
+    })
+
+    this.sites$.subscribe(res=>{
+      console.log(res);
+    })
+  }
 
   //load congregation list from server
   loadCongregations(){
