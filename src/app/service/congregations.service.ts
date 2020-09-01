@@ -20,7 +20,7 @@ export class CongregationsService{
   /* requests */
   
   getCongregations(){
-    this.firestore.collection("Settings").doc("Cangregations").get().pipe(
+    this.firestore.collection("Settings").doc("Congregations").get().pipe(
       map(data=>{
         return data.data().congregations;
       })
