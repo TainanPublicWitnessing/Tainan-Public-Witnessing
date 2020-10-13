@@ -45,7 +45,7 @@
         <ion-item>
             <ion-datetime 
                 placeholder ="選擇月份"
-                max="2020-10-31"
+                max="2025-12-31"
                 displayFormat="YYYY/MM" 
                 value="{{ myMonth }}"
                 [(ngModel)]="myMonth"
@@ -88,7 +88,7 @@
         <ion-datetime
             placeholder="查詢班表月份"
             displayFormat="YYYY/MM"
-            max="2020-10-31"
+            max="2025-12-31"
             [(ngModel)]="seMonth" 
             (ionChange)="onSelectDay()"
             cancelText="取消"
@@ -100,7 +100,7 @@
         <ion-select 
         [interfaceOptions]="'customActionSheetOptions'" 
         interface="action-sheet"
-        max="2020-10-31"
+        max="2025-12-31"
         mode="md"
         [(ngModel)]="myDay"
         (ionChange)="onSelectDay()"
@@ -187,7 +187,7 @@
             placeholder="查詢班表時間"
             displayFormat="YYYY/MM/DD"
             [(ngModel)]="myDate"
-            max="2020-10-31"
+            max="2025-12-31"
             (ionChange)="onSelectDate()"
             cancelText="取消"
             doneText="确定">
