@@ -5,6 +5,7 @@ import { SplashScreen } from "@ionic-native/splash-screen/ngx";
 import { StatusBar } from "@ionic-native/status-bar/ngx";
 
 import {NavService} from "./service/nav.service";
+import { UserService } from './service/user.service';
 
 @Component({
   selector: "app-root",
@@ -18,6 +19,7 @@ export class AppComponent implements OnInit{
     private platform: Platform,
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
+    private userService: UserService,
     public navService:NavService
   ){
     this.initializeApp();
@@ -26,6 +28,7 @@ export class AppComponent implements OnInit{
   ngOnInit(){
     //this.navService.getNavLinkByAuthority("administrator");
     this.navService.getNavLinkByAuthority("anyone");
+    this.userService.getUsersIdCodeMap();
   }
 
   initializeApp() {

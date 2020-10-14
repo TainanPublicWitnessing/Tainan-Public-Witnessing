@@ -103,14 +103,14 @@ export class LoginCardComponent implements OnInit{
       this.names = response;
     });
   }
-  
-  login(){
-    this.userService.login(this.login_form.name,this.login_form.password).subscribe(response=>{
-      if(response){  //success
+
+  login() {
+    this.userService.login(this.login_form.name, this.login_form.password).subscribe(response=>{
+      if (response) {  // success
         this.navService.getNavLinkByAuthority(this.userService.user.authority);
-        //this.router.navigate(["index"]);
-      }else{  //fail
-        this.login_form.password = "";
+        // this.router.navigate(["index"]);
+      } else {  // fail
+        this.login_form.password = '';
         this.is_legal.password = false;
       }
     });

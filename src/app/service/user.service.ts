@@ -24,6 +24,7 @@ export class UserService{
 
   all_users_name = [];
   user:User = new User();
+  users_id_code_map: any[];
 
   //新的架構，之後都使用BehaviorSubject
   public user$:BehaviorSubject<User> = new BehaviorSubject<User>(undefined);
@@ -125,18 +126,25 @@ export class UserService{
       }
     });
   }
-  
-  login(id,password){
-    return this.firestore.collection("User").doc(sha256(id)).get().pipe(
-      map(data=>{
-        if(data.data().password == sha256(password)){
+
+  getUsersIdCodeMap = () => {
+    this.firestore.collection('_KEY_MAPS').doc('_USERS_ID_CODE_MAP').get().subscribe(data => {
+      this.users_id_code_map = data.data()['_USERS_ID_CODE_MAP'];
+    });
+  }
+
+  login(id, password){
+    const user = this.users_id_code_map.find(node => node.id === id);
+    return this.firestore.collection('User').doc(user.code).get().pipe(
+      map(data => {
+        if (data.data().password === sha256(password)) {
           this.user.name = data.data().name;
           this.user.congregation = data.data().congregation;
           this.user.authority = data.data().authority;
           this.user$.next(this.user);
           this.mess.next(this.user);
           return true;
-        }else{
+        } else {
           return false;
         }
       })
